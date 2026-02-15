@@ -3,40 +3,41 @@ import React from 'react';
 
 const About: React.FC = () => {
   return (
-    <section id="about" className="py-24 md:py-32 border-t border-slate-100 bg-slate-50/50">
+    <section id="about" className="py-24 md:py-40 border-t border-slate-100 bg-[#fcfcfc]">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <div className="mono text-emerald-600 mb-6 font-bold">01 // THE MISSION</div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight text-slate-900">
-              A collaborative leap towards <span className="text-slate-400">professional excellence.</span>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <div className="relative">
+            <div className="absolute -left-12 -top-12 text-[120px] font-black text-slate-100 -z-10 select-none">01</div>
+            <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-widest">The Mission</div>
+            <h2 className="text-5xl md:text-7xl font-black mb-10 leading-[0.95] tracking-tighter text-slate-900">
+              Forging the <br /> <span className="text-[#005bb7]">NEXT</span> standard.
             </h2>
-            <div className="space-y-6 text-slate-600 text-lg leading-relaxed">
+            <div className="space-y-8 text-slate-600 text-xl font-medium leading-relaxed">
               <p>
-                Synergy Circle is born from the unique collaboration between our leading University Club and the prestigious Business School. We bridge the gap between academic theory and the high-stakes world of startups.
+                Synergy Circle is not just another workshop series. It is a high-octane professional engine designed to transform student founders into industry leaders.
               </p>
               <p>
-                Our focus is simple: <strong className="text-slate-900">Growth.</strong> Whether you have a polished deck or just a whiteboard concept, we provide the mentorship, exposure, and recognition needed to scale your impact.
+                In partnership with the <strong className="text-slate-900 underline decoration-[#005bb7] decoration-4">SLIIT Business School</strong>, we provide the elite resources required for global-scale impact.
               </p>
             </div>
           </div>
           
-          <div className="grid grid-cols-2 gap-4">
-            <div className="glass-card bg-white p-8 rounded-3xl mt-8 shadow-sm">
-              <div className="text-3xl font-bold mb-2 text-slate-900 italic">2 Phases</div>
-              <p className="text-sm text-slate-400 uppercase tracking-widest mono">Program Structure</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="bg-white border border-slate-200 p-10 rounded-3xl shadow-sm hover:border-[#005bb7]/30 transition-all group">
+              <div className="text-5xl font-black mb-4 text-[#005bb7] group-hover:scale-110 origin-left transition-transform">100%</div>
+              <p className="text-xs text-slate-400 uppercase tracking-widest font-black mono">Industry Relevance</p>
             </div>
-            <div className="bg-emerald-500 p-8 rounded-3xl shadow-lg shadow-emerald-500/20">
-              <div className="text-3xl font-bold mb-2 text-white italic">Top 10</div>
-              <p className="text-sm text-white/70 uppercase tracking-widest mono">Finalist Showcase</p>
+            <div className="bg-[#005bb7] p-10 rounded-3xl shadow-2xl shadow-[#005bb7]/20 flex flex-col justify-end min-h-[200px]">
+              <div className="text-4xl font-black mb-2 text-white uppercase italic">Impact</div>
+              <p className="text-xs text-white/70 uppercase tracking-widest font-black mono">Driven Curriculum</p>
             </div>
-            <div className="bg-slate-900 p-8 rounded-3xl shadow-lg">
-              <div className="text-3xl font-bold mb-2 text-white italic">$5K+</div>
-              <p className="text-sm text-slate-400 uppercase tracking-widest mono">Grant Pool</p>
+            <div className="bg-slate-900 p-10 rounded-3xl shadow-2xl">
+              <div className="text-4xl font-black mb-2 text-white">Top 10</div>
+              <p className="text-xs text-slate-400 uppercase tracking-widest font-black mono">Finalist Track</p>
             </div>
-            <div className="glass-card bg-white p-8 rounded-3xl -mt-8 shadow-sm">
-              <div className="text-3xl font-bold mb-2 text-slate-900 italic">Expert</div>
-              <p className="text-sm text-slate-400 uppercase tracking-widest mono">Panel Jury</p>
+            <div className="bg-slate-100 border border-slate-200 p-10 rounded-3xl shadow-sm">
+              <div className="text-4xl font-black mb-2 text-slate-900">Expert</div>
+              <p className="text-xs text-slate-400 uppercase tracking-widest font-black mono">Mentorship</p>
             </div>
           </div>
         </div>

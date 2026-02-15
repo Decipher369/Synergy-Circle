@@ -3,67 +3,56 @@ import React from 'react';
 
 const Phases: React.FC = () => {
   return (
-    <section id="phases" className="py-24 md:py-32">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <div className="mono text-emerald-600 mb-6 font-bold uppercase tracking-[0.2em]">The Journey</div>
-          <h2 className="text-4xl md:text-6xl font-bold text-slate-900">Two Phases. One Goal.</h2>
+    <section id="phases" className="py-24 md:py-40 bg-slate-900 relative overflow-hidden">
+      {/* Decorative text watermark */}
+      <div className="absolute top-0 right-0 text-[300px] font-black text-white/5 select-none pointer-events-none translate-x-1/2">02</div>
+      
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+            <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.4em]">The Architecture</div>
+            <h2 className="text-5xl md:text-8xl font-black text-white leading-none tracking-tighter">Two Stages. <br /> <span className="text-white/30">Total Immersion.</span></h2>
+          </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="group relative bg-white border border-slate-100 p-12 rounded-[40px] hover:border-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-500/5 transition-all duration-500 overflow-hidden">
-             <div className="absolute -top-10 -right-10 w-40 h-40 bg-emerald-500/5 blur-3xl rounded-full group-hover:bg-emerald-500/10 transition-all"></div>
-             
-             <div className="mono text-emerald-600 text-sm font-bold mb-4">PHASE 01</div>
-             <div className="flex justify-between items-start mb-8">
-               <h3 className="text-3xl md:text-4xl font-bold text-slate-900">Business Pitching Workshop</h3>
-               <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100">
-                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                 </svg>
-               </div>
-             </div>
-             <p className="text-slate-500 text-lg mb-8 leading-relaxed">
-               An intensive online masterclass led by industry veterans. Learn the art of storytelling, financial modeling, and the psychological cues of high-stakes pitching.
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="group bg-white/5 border border-white/10 p-12 rounded-[48px] hover:bg-white/10 hover:border-[#005bb7]/50 transition-all duration-500">
+             <div className="mono text-[#005bb7] text-sm font-black mb-8 tracking-[0.3em]">STAGE 01</div>
+             <h3 className="text-4xl font-black text-white mb-8 tracking-tight">The Mastery <br /> Workshops</h3>
+             <p className="text-slate-400 text-lg mb-10 leading-relaxed font-medium">
+               Deep-dive sessions focusing on narrative design, business model integrity, and executive presence.
              </p>
-             <ul className="space-y-3 mb-8">
-               {['Live Interactive Sessions', 'Slide Deck Audits', 'Narrative Structuring', 'Q&A with VCs'].map((item, idx) => (
-                 <li key={idx} className="flex items-center gap-3 text-slate-600">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+             <div className="h-[1px] w-full bg-white/10 mb-10"></div>
+             <ul className="space-y-4 mb-12">
+               {['VC Narrative Design', 'Financial Clarity', 'Psychology of Sales'].map((item, idx) => (
+                 <li key={idx} className="flex items-center gap-4 text-white/70 font-bold uppercase text-xs tracking-widest">
+                    <div className="w-2 h-2 bg-[#005bb7]"></div>
                     {item}
                  </li>
                ))}
              </ul>
-             <div className="inline-flex items-center gap-2 text-slate-900 font-bold group-hover:gap-4 group-hover:text-emerald-600 transition-all">
-               Online Experience <span className="text-emerald-500">→</span>
+             <div className="inline-flex items-center gap-4 text-white font-black uppercase tracking-widest text-xs group-hover:gap-6 transition-all group-hover:text-[#005bb7]">
+               Phase One <span className="text-[#005bb7]">→</span>
              </div>
           </div>
 
-          <div className="group relative bg-white border border-slate-100 p-12 rounded-[40px] hover:border-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-500 overflow-hidden">
-             <div className="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/5 blur-3xl rounded-full group-hover:bg-blue-500/10 transition-all"></div>
-             
-             <div className="mono text-blue-600 text-sm font-bold mb-4">PHASE 02</div>
-             <div className="flex justify-between items-start mb-8">
-               <h3 className="text-3xl md:text-4xl font-bold text-slate-900">The Final Competition</h3>
-               <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100">
-                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                 </svg>
-               </div>
-             </div>
-             <p className="text-slate-500 text-lg mb-8 leading-relaxed">
-               The stage is set. The top 10 teams from Phase 01 present their refined startups to a live panel of judges and a room full of potential investors.
+          <div className="group bg-[#005bb7] p-12 rounded-[48px] hover:shadow-2xl hover:shadow-[#005bb7]/30 transition-all duration-500">
+             <div className="mono text-white/50 text-sm font-black mb-8 tracking-[0.3em]">STAGE 02</div>
+             <h3 className="text-4xl font-black text-white mb-8 tracking-tight">The Grand <br /> Competition</h3>
+             <p className="text-white/80 text-lg mb-10 leading-relaxed font-medium">
+               A high-stakes finale where the top 10 finalists present their vision to a panel of global leaders.
              </p>
-             <ul className="space-y-3 mb-8">
-               {['Live Stage Pitching', 'Investor Networking', 'Award Ceremony', 'Professional Photoshoot'].map((item, idx) => (
-                 <li key={idx} className="flex items-center gap-3 text-slate-600">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+             <div className="h-[1px] w-full bg-white/20 mb-10"></div>
+             <ul className="space-y-4 mb-12">
+               {['Stage Pitching', 'Networking Gala', 'Funding Opportunities'].map((item, idx) => (
+                 <li key={idx} className="flex items-center gap-4 text-white font-bold uppercase text-xs tracking-widest">
+                    <div className="w-2 h-2 bg-white"></div>
                     {item}
                  </li>
                ))}
              </ul>
-             <div className="inline-flex items-center gap-2 text-slate-900 font-bold group-hover:gap-4 group-hover:text-blue-600 transition-all">
-               In-Person Finale <span className="text-blue-500">→</span>
+             <div className="inline-flex items-center gap-4 text-white font-black uppercase tracking-widest text-xs group-hover:gap-6 transition-all">
+               The Finale <span>→</span>
              </div>
           </div>
         </div>

@@ -4,46 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Synergy Circle | Where Ideas Turn Into Impact</title>
+    <title>Synergy Circle | Rotaract SLIIT & SLIIT Business School</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;500;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --brand-blue: #005bb7;
+            --brand-slate: #0f172a;
+        }
         body {
             font-family: 'Outfit', sans-serif;
             scroll-behavior: smooth;
+            background-color: #fcfcfc;
         }
         .mono {
-            font-family: 'JetBrains+Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
         }
         .text-gradient {
-            background: linear-gradient(to right, #0f172a, #64748b);
+            background: linear-gradient(to bottom right, #0f172a, #475569);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .accent-gradient {
-            background: linear-gradient(to right, #059669, #2563eb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .accent-blue {
+            color: var(--brand-blue);
         }
+        .bg-brand-blue {
+            background-color: var(--brand-blue);
+        }
+        .border-brand-blue {
+            border-color: var(--brand-blue);
+        }
+        
+        /* Sliced Text Effect */
+        .sliced-container {
+            position: relative;
+            display: inline-block;
+        }
+        .slice-top {
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 65%);
+        }
+        .slice-bottom {
+            clip-path: polygon(0 65%, 100% 45%, 100% 100%, 0 100%);
+            position: absolute;
+            top: 4px;
+            left: 0;
+            color: var(--brand-blue);
+        }
+
+        .textured-bg {
+            background-image: url("https://www.transparenttextures.com/patterns/gray-paper.png");
+        }
+
         .glass-card {
-            background: rgba(0, 0, 0, 0.01);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #f8fafc;
+            background: #f1f1f1;
         }
         ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
+            background: #ccc;
+            border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
+            background: var(--brand-blue);
         }
     </style>
 <script type="importmap">
@@ -56,7 +96,7 @@
 }
 </script>
 </head>
-<body class="bg-white text-slate-900 antialiased overflow-x-hidden">
+<body class="bg-[#fcfcfc] text-slate-900 antialiased overflow-x-hidden">
     <div id="root"></div>
 </body>
 </html>
