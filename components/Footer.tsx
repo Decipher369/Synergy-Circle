@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
         <div className="pt-12 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-10">
           <div className="flex flex-col gap-3 text-center md:text-left">
             <p className="text-slate-400 text-xs font-black uppercase tracking-[0.2em]">
-              © 2024 Synergy Circle. Organized by <span className="text-slate-900 border-b-2 border-slate-200 hover:border-[#005bb7] transition-colors cursor-pointer">Rotaract Club of SLIIT</span>.
+              © 2026 Synergy Circle. Organized by <span className="text-slate-900 border-b-2 border-slate-200 hover:border-[#005bb7] transition-colors cursor-pointer">Rotaract Club of SLIIT</span>.
             </p>
             <div className="flex items-center justify-center md:justify-start gap-4">
               <span className="text-[10px] text-slate-300 uppercase tracking-[0.4em] font-black">Professional Excellence</span>

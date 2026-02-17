@@ -26,19 +26,19 @@ const ValueProp: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 border-y border-slate-100 bg-slate-50/30">
+    <section className="py-24 border-y border-slate-100 bg-[#fcfcfc] textured-bg">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16">
-          <div className="mono text-emerald-600 mb-4 font-bold uppercase">Value Proposition</div>
-          <h2 className="text-4xl font-bold text-slate-900">Why join the Circle?</h2>
+          <div className="mono text-[#005bb7] mb-4 font-black uppercase tracking-[0.4em]">Value Proposition</div>
+          <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Why join the Circle?</h2>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           {values.map((v, i) => (
-            <div key={i} className="flex flex-col space-y-4 group">
-              <div className="text-4xl mb-2">{v.icon}</div>
-              <h3 className="text-xl font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">{v.title}</h3>
-              <p className="text-slate-500 text-sm leading-relaxed">{v.description}</p>
+            <div key={i} className="flex flex-col space-y-5 group p-8 bg-white border border-slate-100 rounded-[32px] hover:border-[#005bb7]/30 hover:shadow-xl hover:shadow-[#005bb7]/5 transition-all duration-500">
+              <div className="text-5xl mb-2 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6 origin-left">{v.icon}</div>
+              <h3 className="text-xl font-black text-slate-900 group-hover:text-[#005bb7] transition-colors tracking-tight">{v.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed font-medium">{v.description}</p>
             </div>
           ))}
         </div>

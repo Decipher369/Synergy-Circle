@@ -3,8 +3,13 @@ import React from 'react';
 
 const About: React.FC = () => {
   return (
-    <section id="about" className="py-24 md:py-40 border-t border-slate-100 bg-[#fcfcfc]">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="about" className="py-24 md:py-40 border-t border-slate-100 bg-[#fcfcfc] relative overflow-hidden">
+      {/* Section Specific Watermark */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 text-[15vw] font-black text-slate-900/[0.01] rotate-[-90deg] origin-left select-none pointer-events-none uppercase tracking-[0.2em]">
+        Innovation
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <div className="relative">
             <div className="absolute -left-12 -top-12 text-[120px] font-black text-slate-100 -z-10 select-none">01</div>
@@ -23,7 +28,7 @@ const About: React.FC = () => {
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="bg-white border border-slate-200 p-10 rounded-3xl shadow-sm hover:border-[#005bb7]/30 transition-all group">
+            <div className="bg-white/80 backdrop-blur-sm border border-slate-200 p-10 rounded-3xl shadow-sm hover:border-[#005bb7]/30 transition-all group">
               <div className="text-5xl font-black mb-4 text-[#005bb7] group-hover:scale-110 origin-left transition-transform">100%</div>
               <p className="text-xs text-slate-400 uppercase tracking-widest font-black mono">Industry Relevance</p>
             </div>
@@ -35,7 +40,7 @@ const About: React.FC = () => {
               <div className="text-4xl font-black mb-2 text-white">Top 10</div>
               <p className="text-xs text-slate-400 uppercase tracking-widest font-black mono">Finalist Track</p>
             </div>
-            <div className="bg-slate-100 border border-slate-200 p-10 rounded-3xl shadow-sm">
+            <div className="bg-slate-100/80 backdrop-blur-sm border border-slate-200 p-10 rounded-3xl shadow-sm">
               <div className="text-4xl font-black mb-2 text-slate-900">Expert</div>
               <p className="text-xs text-slate-400 uppercase tracking-widest font-black mono">Mentorship</p>
             </div>

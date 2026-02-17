@@ -4,24 +4,29 @@ import React from 'react';
 const Hero: React.FC = () => {
   return (
     <section className="relative min-h-screen flex items-center pt-24 overflow-hidden textured-bg">
-      {/* Background Watermark Logo */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] pointer-events-none select-none">
-        <span className="text-[600px] font-black tracking-tighter leading-none">CC</span>
+      {/* Background Watermark Logo - Layered SC and Full Text */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+        <div className="absolute text-[500px] md:text-[800px] font-black tracking-tighter leading-none text-slate-900/[0.03] -translate-y-10">
+          SC
+        </div>
+        <div className="absolute text-[12vw] font-black text-[#005bb7]/[0.02] uppercase tracking-[0.5em] mt-80">
+          Synergy Circle
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
         <div className="flex flex-col items-center text-center space-y-12">
           
           <div className="flex flex-col items-center animate-in fade-in slide-in-from-top-4 duration-1000">
-             <div className="mono text-[10px] font-black uppercase tracking-[0.5em] text-slate-400 mb-4 px-4 py-1.5 border border-slate-200 rounded-full">
+             <div className="mono text-[10px] font-black uppercase tracking-[0.5em] text-slate-400 mb-4 px-4 py-1.5 border border-slate-200 rounded-full bg-white/50 backdrop-blur-sm">
                 Professional Development Initiative
              </div>
              
              <div className="relative group">
                {/* Sliced Effect Implementation */}
                <div className="sliced-container text-7xl md:text-[140px] font-black tracking-tighter leading-none uppercase select-none cursor-default">
-                  <div className="slice-top transition-transform duration-500 group-hover:-translate-y-2">COMING SOON</div>
-                  <div className="slice-bottom transition-transform duration-500 group-hover:translate-y-2">COMING SOON</div>
+                  <div className="slice-top transition-transform duration-700 group-hover:-translate-y-4">COMING SOON</div>
+                  <div className="slice-bottom transition-transform duration-700 group-hover:translate-y-4">COMING SOON</div>
                </div>
              </div>
           </div>
