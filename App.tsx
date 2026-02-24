@@ -3,10 +3,13 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Phases from './components/Phases';
+import Eligibility from './components/Eligibility';
 import PrizePool from './components/PrizePool';
 import ValueProp from './components/ValueProp';
 import Timeline from './components/Timeline';
+import Testimonials from './components/Testimonials';
 import Registration from './components/Registration';
+import Partners from './components/Partners';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -51,10 +54,13 @@ const App: React.FC = () => {
           <Hero />
           <About />
           <Phases />
+          <Eligibility />
           <PrizePool />
           <ValueProp />
           <Timeline />
+          <Testimonials />
           <Registration />
+          <Partners />
         </main>
         <Footer />
         <ScrollToTop />

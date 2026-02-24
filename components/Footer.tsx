@@ -14,11 +14,6 @@ const Footer: React.FC = () => {
             </div>
             <div className="flex flex-col -space-y-0.5">
               <span className="text-xl font-black tracking-tighter text-slate-900">SYNERGY<span className="text-[#005bb7]">CIRCLE</span></span>
-              <div className="flex items-center gap-1.5">
-                <span className="text-[8px] font-black tracking-[0.2em] text-slate-400 uppercase">Rotaract</span>
-                <div className="w-0.5 h-0.5 bg-slate-300 rounded-full"></div>
-                <span className="text-[8px] font-black tracking-[0.2em] text-[#005bb7] uppercase">SLIIT BS</span>
-              </div>
             </div>
           </div>
 

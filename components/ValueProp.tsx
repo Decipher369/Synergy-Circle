@@ -6,7 +6,7 @@ const ValueProp: React.FC = () => {
   const values = [
     {
       title: "Master the Pitch",
-      description: "Move beyond buzzwords. Learn to articulate value clearly and confidently to any audience.",
+      description: "Learn to articulate value clearly and confidently to any audience with expert-led workshops.",
       icon: "🎯"
     },
     {
@@ -20,9 +20,9 @@ const ValueProp: React.FC = () => {
       icon: "⚡"
     },
     {
-      title: "Recognition",
-      description: "Winner awards, finalist certificates, and public recognition to boost your professional profile.",
-      icon: "🏆"
+      title: "Capital Access",
+      description: "Direct introduction to angel investors, venture capitalists, and seed-funding grants.",
+      icon: "💰"
     }
   ];
 
