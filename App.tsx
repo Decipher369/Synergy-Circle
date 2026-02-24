@@ -1,9 +1,9 @@
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Phases from './components/Phases';
+import PrizePool from './components/PrizePool';
 import ValueProp from './components/ValueProp';
 import Timeline from './components/Timeline';
 import Registration from './components/Registration';
@@ -12,12 +12,24 @@ import ScrollToTop from './components/ScrollToTop';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [navVisible, setNavVisible] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const currentY = window.scrollY;
+      setScrolled(currentY > 50);
+
+      if (currentY > 300) {
+        // Scrolling down → hide, scrolling up → show
+        setNavVisible(currentY < lastScrollY.current);
+      } else {
+        setNavVisible(true);
+      }
+
+      lastScrollY.current = currentY;
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -34,11 +46,12 @@ const App: React.FC = () => {
       </div>
 
       <div className="relative z-10">
-        <Navbar scrolled={scrolled} />
+        <Navbar scrolled={scrolled} visible={navVisible} />
         <main>
           <Hero />
           <About />
           <Phases />
+          <PrizePool />
           <ValueProp />
           <Timeline />
           <Registration />

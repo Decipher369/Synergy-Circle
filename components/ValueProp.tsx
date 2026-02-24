@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { FadeUp, StaggerContainer, StaggerItem } from './Animations';
 
 const ValueProp: React.FC = () => {
   const values = [
@@ -20,28 +21,35 @@ const ValueProp: React.FC = () => {
     },
     {
       title: "Recognition",
-      description: "Winner awards, finalist certificates, and social media spotlight to boost your professional profile.",
+      description: "Winner awards, finalist certificates, and public recognition to boost your professional profile.",
       icon: "🏆"
     }
   ];
 
   return (
-    <section className="py-24 border-y border-slate-100 bg-[#fcfcfc] textured-bg">
+    <section className="pt-24 pb-8 bg-[#fcfcfc] textured-bg relative">
+      {/* Faded gradient separator line */}
+      <div className="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-transparent via-[#005bb7] to-transparent"></div>
+      <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-[#005bb7]/[0.08] to-transparent pointer-events-none"></div>
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-16">
-          <div className="mono text-[#005bb7] mb-4 font-black uppercase tracking-[0.4em]">Value Proposition</div>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Why join the Circle?</h2>
-        </div>
+        <FadeUp>
+          <div className="mb-16">
+            <div className="mono text-[#005bb7] mb-4 font-black uppercase tracking-[0.4em]">Value Proposition</div>
+            <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Why join the Circle?</h2>
+          </div>
+        </FadeUp>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12" staggerDelay={0.12}>
           {values.map((v, i) => (
-            <div key={i} className="flex flex-col space-y-5 group p-8 bg-white border border-slate-100 rounded-[32px] hover:border-[#005bb7]/30 hover:shadow-xl hover:shadow-[#005bb7]/5 transition-all duration-500">
-              <div className="text-5xl mb-2 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6 origin-left">{v.icon}</div>
-              <h3 className="text-xl font-black text-slate-900 group-hover:text-[#005bb7] transition-colors tracking-tight">{v.title}</h3>
-              <p className="text-slate-500 text-sm leading-relaxed font-medium">{v.description}</p>
-            </div>
+            <StaggerItem key={i}>
+              <div className="flex flex-col space-y-5 group p-8 bg-white border border-slate-100 rounded-[32px] hover:border-[#005bb7]/30 hover:shadow-xl hover:shadow-[#005bb7]/5 transition-all duration-500">
+                <div className="text-5xl mb-2 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6 origin-left">{v.icon}</div>
+                <h3 className="text-xl font-black text-slate-900 group-hover:text-[#005bb7] transition-colors tracking-tight">{v.title}</h3>
+                <p className="text-slate-500 text-sm leading-relaxed font-medium">{v.description}</p>
+              </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

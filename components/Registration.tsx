@@ -1,192 +1,92 @@
 
-import React, { useState } from 'react';
-
-interface FormState {
-  fullName: string;
-  email: string;
-  startupName: string;
-  vision: string;
-}
-
-interface FormErrors {
-  fullName?: string;
-  email?: string;
-  startupName?: string;
-  vision?: string;
-}
+import React from 'react';
+import { FadeUp, MagneticButton } from './Animations';
 
 const Registration: React.FC = () => {
-  const [formData, setFormData] = useState<FormState>({
-    fullName: '',
-    email: '',
-    startupName: '',
-    vision: '',
-  });
-
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-
-  const validate = (): boolean => {
-    const newErrors: FormErrors = {};
-    
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = "Full name is required";
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Invalid email address";
-    }
-
-    if (!formData.startupName.trim()) {
-      newErrors.startupName = "Startup name is required";
-    }
-
-    if (!formData.vision.trim()) {
-      newErrors.vision = "Please describe your vision";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name as keyof FormErrors]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }));
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
-    setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSuccess(true);
-  };
-
-  if (isSuccess) {
-    return (
-      <section id="apply" className="py-24 md:py-40 bg-slate-900">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="bg-white border-8 border-white/10 rounded-[64px] p-12 md:p-24 text-center shadow-2xl animate-in zoom-in duration-700">
-            <div className="w-24 h-24 bg-blue-50 text-[#005bb7] rounded-3xl flex items-center justify-center mx-auto mb-10 rotate-12">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">Vision Received!</h2>
-            <p className="text-slate-500 text-xl mb-12 font-medium leading-relaxed">
-              Thanks, {formData.fullName.split(' ')[0]}. We'll review <span className="text-[#005bb7] font-black">{formData.startupName}</span> and reach out to you very soon.
-            </p>
-            <button 
-              onClick={() => setIsSuccess(false)}
-              className="px-10 py-4 bg-slate-900 text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-[#005bb7] transition-all"
-            >
-              Submit Another
-            </button>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section id="apply" className="py-24 md:py-40 bg-[#fcfcfc] textured-bg">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="bg-white border border-slate-100 rounded-[64px] p-10 md:p-20 relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-[#005bb7]/5 blur-[100px] rounded-full -mr-32 -mt-32"></div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 relative z-10">
-            <div className="flex flex-col justify-center">
-              <div className="mono text-[#005bb7] mb-8 font-black uppercase tracking-[0.5em]">Phase 01</div>
-              <h2 className="text-5xl md:text-6xl font-black text-slate-900 leading-[0.95] mb-8 tracking-tighter">
-                Register Your <br />
-                <span className="text-[#005bb7]">Startup Vision.</span>
-              </h2>
-              <p className="text-slate-500 text-xl font-medium mb-12 leading-relaxed">
-                Join the 2026 cohort of innovators. Bridging the gap between <span className="text-slate-900">imagination</span> and <span className="text-slate-900 font-bold">execution</span>.
-              </p>
-              
-              <div className="space-y-8">
-                {[
-                  { step: "01", text: "Submit basic info & vision" },
-                  { step: "02", text: "Attend the Mastery Workshop" },
-                  { step: "03", text: "Pitch to the grand jury" }
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-6 group">
-                    <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center border border-slate-100 group-hover:bg-[#005bb7] group-hover:text-white transition-all duration-300">
-                      <span className="mono text-xs font-black">{item.step}</span>
-                    </div>
-                    <p className="text-slate-900 font-black uppercase text-xs tracking-widest">{item.text}</p>
-                  </div>
-                ))}
+    <section id="apply" className="pt-8 pb-16 md:pb-24 bg-[#fcfcfc] textured-bg relative overflow-hidden">
+      {/* Background blobs */}
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#005bb7]/[0.07] blur-[150px] rounded-full"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-indigo-400/[0.05] blur-[130px] rounded-full"></div>
+
+      <div className="max-w-4xl mx-auto px-6 relative z-10">
+        <FadeUp>
+          <div className="text-center mb-16">
+            <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em]">Register Now</div>
+            <h2 className="text-5xl md:text-7xl font-black text-slate-900 leading-[0.95] mb-8 tracking-tighter">
+              Register Your <br />
+              <span className="text-[#005bb7]">Startup Vision.</span>
+            </h2>
+            <p className="text-slate-500 text-lg font-medium leading-relaxed max-w-2xl mx-auto">
+              Participants may register as <span className="text-slate-900 font-bold">individuals</span> or as <span className="text-slate-900 font-bold">teams</span>. Team leaders are required to complete the registration on behalf of their team members.
+            </p>
+          </div>
+        </FadeUp>
+
+        <FadeUp delay={0.15}>
+          {/* Payment & Fee Info */}
+          <div className="bg-white/50 backdrop-blur-2xl border border-white/70 rounded-[40px] p-10 md:p-14 mb-12 shadow-[0_8px_60px_-12px_rgba(0,91,183,0.06)]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              {/* Fee */}
+              <div>
+                <div className="mono text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 mb-4">Registration Fee</div>
+                <div className="text-5xl font-black text-slate-900 tracking-tight mb-2">LKR 1000</div>
+                <p className="text-slate-400 text-sm font-medium">Per participant / team</p>
+              </div>
+              {/* Bank Details */}
+              <div className="space-y-3">
+                <div className="mono text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 mb-4">Bank Details</div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-400 font-bold">Account Name</span>
+                  <span className="text-slate-900 font-black">Mendis E.A.</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-400 font-bold">Account No.</span>
+                  <span className="text-slate-900 font-black">069020212993</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-400 font-bold">Bank</span>
+                  <span className="text-slate-900 font-black">Hatton National Bank</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-400 font-bold">Branch</span>
+                  <span className="text-slate-900 font-black">Panadura</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-slate-400 font-bold">Branch ID</span>
+                  <span className="text-slate-900 font-black">0690</span>
+                </div>
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6 bg-slate-50/50 p-8 md:p-12 rounded-[48px] border border-slate-100">
-              <div className="space-y-2">
-                <label className="text-[10px] uppercase tracking-[0.4em] font-black text-slate-400 ml-1">Full Name</label>
-                <input 
-                  type="text" 
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  placeholder="Jane Doe"
-                  className={`w-full px-6 py-5 bg-white border ${errors.fullName ? 'border-red-300' : 'border-slate-100 focus:border-[#005bb7]'} rounded-2xl outline-none transition-all placeholder:text-slate-300 font-bold shadow-sm`}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] uppercase tracking-[0.4em] font-black text-slate-400 ml-1">Email</label>
-                <input 
-                  type="email" 
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="jane@sliit.lk"
-                  className={`w-full px-6 py-5 bg-white border ${errors.email ? 'border-red-300' : 'border-slate-100 focus:border-[#005bb7]'} rounded-2xl outline-none transition-all placeholder:text-slate-300 font-bold shadow-sm`}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] uppercase tracking-[0.4em] font-black text-slate-400 ml-1">Startup Name</label>
-                <input 
-                  type="text" 
-                  name="startupName"
-                  value={formData.startupName}
-                  onChange={handleChange}
-                  placeholder="Nexus Flow"
-                  className={`w-full px-6 py-5 bg-white border ${errors.startupName ? 'border-red-300' : 'border-slate-100 focus:border-[#005bb7]'} rounded-2xl outline-none transition-all placeholder:text-slate-300 font-bold shadow-sm`}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] uppercase tracking-[0.4em] font-black text-slate-400 ml-1">The Vision</label>
-                <textarea 
-                  name="vision"
-                  value={formData.vision}
-                  onChange={handleChange}
-                  rows={3}
-                  placeholder="The problem you solve..."
-                  className={`w-full px-6 py-5 bg-white border ${errors.vision ? 'border-red-300' : 'border-slate-100 focus:border-[#005bb7]'} rounded-2xl outline-none transition-all placeholder:text-slate-300 font-bold shadow-sm resize-none`}
-                />
-              </div>
-
-              <button 
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full py-6 bg-slate-900 text-white rounded-2xl font-black text-xs uppercase tracking-[0.3em] transition-all duration-500 flex items-center justify-center gap-4 ${isSubmitting ? 'opacity-70' : 'hover:bg-[#005bb7] hover:scale-[1.02] shadow-2xl shadow-slate-900/10'}`}
-              >
-                {isSubmitting ? 'Processing...' : 'Submit Application'}
-              </button>
-            </form>
+            <div className="mt-8 flex items-start gap-3 px-5 py-4 bg-amber-50/50 border border-amber-200/30 rounded-2xl">
+              <span className="text-lg mt-0.5">⚠️</span>
+              <p className="text-amber-700/70 text-xs font-bold leading-relaxed">
+                Please ensure that the payment receipt is uploaded as part of the registration. Incomplete submissions will not be considered.
+              </p>
+            </div>
           </div>
-        </div>
+        </FadeUp>
+
+        <FadeUp delay={0.3}>
+          {/* CTA Button */}
+          <div className="text-center">
+            <MagneticButton className="inline-block">
+              <a
+                href="https://forms.gle/ktFne6zniNcP1QvG6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-4 px-16 py-6 bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-full font-black text-sm uppercase tracking-[0.2em] hover:from-[#005bb7] hover:to-[#0070e0] hover:scale-105 transition-all duration-300 shadow-2xl shadow-slate-900/20"
+              >
+                Register Now
+                <span className="text-lg">↗</span>
+              </a>
+            </MagneticButton>
+            <p className="mt-6 text-slate-400 text-xs font-bold uppercase tracking-widest">
+              Opens Google Form in a new tab
+            </p>
+          </div>
+        </FadeUp>
       </div>
     </section>
   );
