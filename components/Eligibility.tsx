@@ -27,7 +27,7 @@ const Eligibility: React.FC = () => {
   ];
 
   return (
-    <section id="eligibility" className="py-24 bg-white relative overflow-hidden">
+    <section id="eligibility" className="py-16 md:py-24 bg-white relative overflow-hidden">
       {/* Decorative background logo */}
       <div className="absolute -right-24 top-1/2 -translate-y-1/2 text-[20vw] font-black text-slate-900/[0.01] select-none pointer-events-none uppercase">
         Criteria

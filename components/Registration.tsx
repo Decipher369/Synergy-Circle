@@ -4,7 +4,7 @@ import { FadeUp, MagneticButton } from './Animations';
 
 const Registration: React.FC = () => {
   return (
-    <section id="apply" className="pt-8 pb-16 md:pb-24 bg-[#fcfcfc] textured-bg relative overflow-hidden">
+    <section id="apply" className="py-16 md:pt-8 md:pb-24 bg-[#fcfcfc] textured-bg relative overflow-hidden">
       {/* Background blobs */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#005bb7]/[0.07] blur-[150px] rounded-full"></div>
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-indigo-400/[0.05] blur-[130px] rounded-full"></div>

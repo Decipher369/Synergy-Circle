@@ -11,12 +11,16 @@ interface Rocket {
   rotation: number;
   size: number;
   duration: number;
+  char: string;
 }
 
 const Hero: React.FC = () => {
   const [rockets, setRockets] = useState<Rocket[]>([]);
+  const [splitActive, setSplitActive] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const rocketIdRef = useRef(0);
+  const splitTimeoutRef = useRef<number | null>(null);
+  const [isSpawning, setIsSpawning] = useState(false);
 
   const spawnRockets = useCallback(() => {
     if (!containerRef.current) return;
@@ -24,35 +28,53 @@ const Hero: React.FC = () => {
     const centerY = rect.height / 2;
 
     const newRockets: Rocket[] = [];
-    const count = 5 + Math.floor(Math.random() * 4); // 5-8 rockets
+    const count = 3 + Math.floor(Math.random() * 3); // Reduced to 3-5 rockets
 
     for (let i = 0; i < count; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const distance = 200 + Math.random() * 400;
-      const spawnX = Math.random() * rect.width; // random along full width
+      const distance = 150 + Math.random() * 300; // Slightly tighter distance
+      const spawnX = Math.random() * rect.width;
       rocketIdRef.current += 1;
 
       newRockets.push({
         id: rocketIdRef.current,
         x: spawnX,
-        y: centerY + (Math.random() - 0.5) * 20, // slight vertical variation around split
+        y: centerY + (Math.random() - 0.5) * 10,
         targetX: spawnX + Math.cos(angle) * distance,
         targetY: centerY + Math.sin(angle) * distance,
         rotation: (angle * 180) / Math.PI + 90,
-        size: 16 + Math.random() * 12,
-        duration: 2 + Math.random() * 1.5,
+        size: 14 + Math.random() * 10,
+        duration: 1.5 + Math.random() * 1,
+        char: ['🚀', '🎯', '💡', '💰', '\u2764'][Math.floor(Math.random() * 5)],
       });
     }
 
     setRockets((prev) => [...prev, ...newRockets]);
 
-    // Clean up after animations finish
     setTimeout(() => {
       setRockets((prev) =>
         prev.filter((r) => !newRockets.find((nr) => nr.id === r.id))
       );
-    }, 3500);
+    }, 3000);
   }, []);
+
+  const handleInteraction = useCallback(() => {
+    setSplitActive(true);
+    
+    if (!isSpawning) {
+      spawnRockets();
+      setIsSpawning(true);
+      setTimeout(() => setIsSpawning(false), 800); // Throttled spawn
+    }
+    
+    if (splitTimeoutRef.current) {
+      window.clearTimeout(splitTimeoutRef.current);
+    }
+    
+    splitTimeoutRef.current = window.setTimeout(() => {
+      setSplitActive(false);
+    }, 2000);
+  }, [spawnRockets, isSpawning]);
 
   return (
     <section className="relative min-h-screen flex items-center pt-24 overflow-hidden textured-bg">
@@ -77,31 +99,38 @@ const Hero: React.FC = () => {
              <div 
                ref={containerRef}
                className="relative group cursor-pointer"
-               onMouseEnter={spawnRockets}
+               onMouseEnter={handleInteraction}
+               onMouseLeave={() => setSplitActive(false)}
+               onTouchStart={handleInteraction}
              >
-               {/* Rocket Particles */}
-               {rockets.map((rocket) => (
-                 <div
-                   key={rocket.id}
-                   className="absolute pointer-events-none z-30"
-                   style={{
-                     left: rocket.x,
-                     top: rocket.y,
-                     fontSize: rocket.size,
-                     transform: `rotate(${rocket.rotation}deg)`,
-                     animation: `rocketFly ${rocket.duration}s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`,
-                     '--tx': `${rocket.targetX - rocket.x}px`,
-                     '--ty': `${rocket.targetY - rocket.y}px`,
-                   } as React.CSSProperties}
-                 >
-                   <span style={{ color: '#005bb7', filter: 'drop-shadow(0 0 4px rgba(0,91,183,0.4))' }}>{'\u2764'}</span>
-                 </div>
-               ))}
+                {/* Rocket Particles */}
+                {rockets.map((rocket) => (
+                  <div
+                    key={rocket.id}
+                    className="absolute pointer-events-none z-30"
+                    style={{
+                      left: rocket.x,
+                      top: rocket.y,
+                      fontSize: rocket.size,
+                      transform: `rotate(${rocket.rotation}deg)`,
+                      animation: `rocketFly ${rocket.duration}s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`,
+                      '--tx': `${rocket.targetX - rocket.x}px`,
+                      '--ty': `${rocket.targetY - rocket.y}px`,
+                    } as React.CSSProperties}
+                  >
+                    <span style={{ 
+                      color: rocket.char === '\u2764' ? '#005bb7' : 'inherit', 
+                      filter: rocket.char === '\u2764' ? 'drop-shadow(0 0 4px rgba(0,91,183,0.4))' : 'none' 
+                    }}>
+                      {rocket.char}
+                    </span>
+                  </div>
+                ))}
 
                {/* Sliced Effect Implementation */}
-               <div className="sliced-container text-7xl md:text-[140px] font-black tracking-tighter leading-none uppercase select-none">
-                  <div className="slice-top transition-transform duration-700 group-hover:-translate-y-4">SYNERGY CIRCLE</div>
-                  <div className="slice-bottom transition-transform duration-700 group-hover:translate-y-4">SYNERGY CIRCLE</div>
+               <div className="sliced-container text-4xl sm:text-7xl md:text-[140px] font-black tracking-tighter leading-none uppercase select-none">
+                  <div className={`slice-top transition-transform duration-700 ${splitActive ? '-translate-y-2' : ''}`}>SYNERGY CIRCLE</div>
+                  <div className={`slice-bottom transition-transform duration-700 ${splitActive ? 'translate-y-2' : ''}`}>SYNERGY CIRCLE</div>
                </div>
              </div>
           </div>

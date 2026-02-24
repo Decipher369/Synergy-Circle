@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { FadeUp, StaggerContainer, StaggerItem } from './Animations';
+import { FadeUp } from './Animations';
 
 const Timeline: React.FC = () => {
   const steps = [

@@ -7,9 +7,7 @@ import Eligibility from './components/Eligibility';
 import PrizePool from './components/PrizePool';
 import ValueProp from './components/ValueProp';
 import Timeline from './components/Timeline';
-import Testimonials from './components/Testimonials';
 import Registration from './components/Registration';
-import Partners from './components/Partners';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 
@@ -58,9 +56,7 @@ const App: React.FC = () => {
           <PrizePool />
           <ValueProp />
           <Timeline />
-          <Testimonials />
           <Registration />
-          <Partners />
         </main>
         <Footer />
         <ScrollToTop />

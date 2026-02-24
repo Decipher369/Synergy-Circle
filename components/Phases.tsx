@@ -4,9 +4,9 @@ import { FadeUp, StaggerContainer, StaggerItem } from './Animations';
 
 const Phases: React.FC = () => {
   return (
-    <section id="phases" className="py-24 md:py-40 bg-slate-900 relative overflow-hidden">
+    <section id="phases" className="py-16 md:py-40 bg-slate-900 relative overflow-hidden">
       {/* Decorative text watermark */}
-      <div className="absolute top-0 right-0 text-[300px] font-black text-white/5 select-none pointer-events-none translate-x-1/2">02</div>
+      <div className="absolute top-0 right-0 text-[300px] font-black text-white/5 select-none pointer-events-none translate-x-1/3">2</div>
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <FadeUp>

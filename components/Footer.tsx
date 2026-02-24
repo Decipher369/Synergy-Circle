@@ -3,22 +3,27 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="py-12 border-t border-slate-100 bg-white relative">
+    <footer className="py-8 border-t border-slate-100 bg-white relative">
       <div className="max-w-7xl mx-auto px-6">
         {/* Top Row: Logo + Nav + Contact */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-10">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
           {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center">
-              <span className="text-white font-black text-sm tracking-tighter">SC</span>
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <div className="flex flex-col -space-y-0.5">
+                <span className="text-xl font-black tracking-tighter text-slate-900">SYNERGY<span className="text-[#005bb7]">CIRCLE</span></span>
+              </div>
             </div>
-            <div className="flex flex-col -space-y-0.5">
-              <span className="text-xl font-black tracking-tighter text-slate-900">SYNERGY<span className="text-[#005bb7]">CIRCLE</span></span>
+            
+            <div className="flex items-center gap-4 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-100 w-fit">
+              <img src="/logos/rotaract-sliit.png" alt="Rotaract SLIIT" className="h-6 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500" />
+              <div className="w-[1px] h-5 bg-slate-200"></div>
+              <img src="/logos/sliit-bs.png" alt="SLIIT Business School" className="h-6 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500" />
             </div>
           </div>
 
           {/* Nav Links */}
-          <div className="flex flex-wrap items-center gap-6">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {[
               { label: 'About', href: '#about' },
               { label: 'Phases', href: '#phases' },
@@ -26,7 +31,7 @@ const Footer: React.FC = () => {
               { label: 'Timeline', href: '#timeline' },
               { label: 'Register', href: '#apply' },
             ].map((item) => (
-              <a key={item.label} href={item.href} className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-[#005bb7] transition-colors">
+              <a key={item.label} href={item.href} className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-[#005bb7] transition-colors">
                 {item.label}
               </a>
             ))}
@@ -34,32 +39,32 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Contact Row */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-10 pb-10 border-b border-slate-100">
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-300">Inquiries</span>
-          <div className="flex flex-wrap items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 pb-6 border-b border-slate-100">
+          <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-300">Inquiries</span>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-slate-600">Rtr. Eranga Mendis</span>
-              <a href="tel:+94777974215" className="text-xs text-[#005bb7] font-bold hover:underline">+94 77 797 4215</a>
+              <span className="text-[11px] font-bold text-slate-600">Rtr. Eranga Mendis</span>
+              <a href="tel:+94777974215" className="text-[11px] text-[#005bb7] font-bold hover:underline">+94 77 797 4215</a>
             </div>
             <div className="w-1 h-1 bg-slate-200 rounded-full hidden sm:block"></div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-slate-600">Rtr. Binuthi Gangodagedara</span>
-              <a href="tel:+94774208240" className="text-xs text-[#005bb7] font-bold hover:underline">+94 77 420 8240</a>
+              <span className="text-[11px] font-bold text-slate-600">Rtr. Binuthi Gangodagedara</span>
+              <a href="tel:+94774208240" className="text-[11px] text-[#005bb7] font-bold hover:underline">+94 77 420 8240</a>
             </div>
           </div>
         </div>
 
         {/* Bottom Row */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-slate-400 text-[11px] font-bold uppercase tracking-[0.15em]">
-            © 2026 Synergy Circle · <span className="text-slate-500">Rotaract Club of SLIIT</span>
+          <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">
+            © {new Date().getFullYear()} <a href="https://www.saltbuilds.online/" target="_blank" rel="noopener noreferrer" className="hover:text-[#005bb7] transition-colors">Salt</a> All rights reserved.
           </p>
           <button 
             onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
-            className="group flex items-center gap-2 text-[10px] font-black text-slate-400 hover:text-[#005bb7] transition-all uppercase tracking-[0.2em]"
+            className="group flex items-center gap-2 text-[9px] font-black text-slate-400 hover:text-[#005bb7] transition-all uppercase tracking-[0.2em]"
           >
             Back to top
-            <span className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-[#005bb7] group-hover:border-[#005bb7] group-hover:text-white transition-all group-hover:-translate-y-1 text-xs">
+            <span className="w-7 h-7 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-[#005bb7] group-hover:border-[#005bb7] group-hover:text-white transition-all group-hover:-translate-y-1 text-[10px]">
               ↑
             </span>
           </button>

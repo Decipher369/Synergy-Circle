@@ -1,10 +1,10 @@
 
 import React from 'react';
-import { FadeUp, SlideLeft, SlideRight, StaggerContainer, StaggerItem } from './Animations';
+import { SlideLeft, StaggerContainer, StaggerItem } from './Animations';
 
 const About: React.FC = () => {
   return (
-    <section id="about" className="py-24 md:py-40 border-t border-slate-100 bg-[#fcfcfc] relative overflow-hidden">
+    <section id="about" className="py-16 md:py-40 border-t border-slate-100 bg-[#fcfcfc] relative overflow-hidden">
       {/* Section Specific Watermark */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 text-[15vw] font-black text-slate-900/[0.01] rotate-[-90deg] origin-left select-none pointer-events-none uppercase tracking-[0.2em]">
         Innovation
@@ -30,32 +30,32 @@ const About: React.FC = () => {
             </div>
           </SlideLeft>
           
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-6" staggerDelay={0.15}>
-            <StaggerItem>
-              <div className="bg-white/80 backdrop-blur-sm border border-slate-200 p-10 rounded-3xl shadow-sm hover:border-[#005bb7]/30 transition-all group">
-                <div className="text-5xl font-black mb-4 text-[#005bb7] group-hover:scale-110 origin-left transition-transform">Inter</div>
-                <p className="text-xs text-slate-400 uppercase tracking-widest font-black mono">University Initiative</p>
-              </div>
-            </StaggerItem>
-            <StaggerItem>
-              <div className="bg-[#005bb7] p-10 rounded-3xl shadow-2xl shadow-[#005bb7]/20 flex flex-col justify-end min-h-[200px]">
-                <div className="text-4xl font-black mb-2 text-white uppercase italic">Impact</div>
-                <p className="text-xs text-white/70 uppercase tracking-widest font-black mono">Driven Curriculum</p>
-              </div>
-            </StaggerItem>
-            <StaggerItem>
-              <div className="bg-slate-900 p-10 rounded-3xl shadow-2xl">
-                <div className="text-4xl font-black mb-2 text-white">Top 5</div>
-                <p className="text-xs text-slate-400 uppercase tracking-widest font-black mono">Finalist Track</p>
-              </div>
-            </StaggerItem>
-            <StaggerItem>
-              <div className="bg-slate-100/80 backdrop-blur-sm border border-slate-200 p-10 rounded-3xl shadow-sm">
-                <div className="text-4xl font-black mb-2 text-slate-900">Expert</div>
-                <p className="text-xs text-slate-400 uppercase tracking-widest font-black mono">Mentorship</p>
-              </div>
-            </StaggerItem>
-          </StaggerContainer>
+          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-4" staggerDelay={0.1}>
+          <StaggerItem>
+            <div className="bg-white/80 backdrop-blur-sm border border-slate-200 p-6 md:p-10 rounded-3xl shadow-sm hover:border-[#005bb7]/30 transition-all group">
+              <div className="text-4xl md:text-5xl font-black mb-4 text-[#005bb7] group-hover:scale-110 origin-left transition-transform">Inter</div>
+              <p className="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest font-black mono">University Initiative</p>
+            </div>
+          </StaggerItem>
+          <StaggerItem>
+            <div className="bg-[#005bb7] p-6 md:p-10 rounded-3xl shadow-2xl shadow-[#005bb7]/20 flex flex-col justify-end min-h-[160px] md:min-h-[200px]">
+              <div className="text-3xl md:text-4xl font-black mb-2 text-white uppercase italic">Impact</div>
+              <p className="text-[10px] md:text-xs text-white/70 uppercase tracking-widest font-black mono">Driven Curriculum</p>
+            </div>
+          </StaggerItem>
+          <StaggerItem>
+            <div className="bg-slate-900 p-6 md:p-10 rounded-3xl shadow-2xl">
+              <div className="text-3xl md:text-4xl font-black mb-2 text-white">Top 5</div>
+              <p className="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest font-black mono">Finalist Track</p>
+            </div>
+          </StaggerItem>
+          <StaggerItem>
+            <div className="bg-slate-100/80 backdrop-blur-sm border border-slate-200 p-6 md:p-10 rounded-3xl shadow-sm">
+              <div className="text-3xl md:text-4xl font-black mb-2 text-slate-900">Expert</div>
+              <p className="text-[10px] md:text-xs text-slate-400 uppercase tracking-widest font-black mono">Mentorship</p>
+            </div>
+          </StaggerItem>
+        </StaggerContainer>
         </div>
       </div>
     </section>

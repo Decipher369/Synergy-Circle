@@ -34,7 +34,7 @@ const PrizePool: React.FC = () => {
   ];
 
   return (
-    <section id="prizes" className="py-24 md:py-40 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 relative overflow-hidden">
+    <section id="prizes" className="py-16 md:py-40 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#005bb7]/[0.06] blur-[150px] rounded-full"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-400/[0.03] blur-[120px] rounded-full"></div>
@@ -44,7 +44,7 @@ const PrizePool: React.FC = () => {
         <FadeUp>
           <div className="text-center mb-20">
             <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em]">Rewards</div>
-            <h2 className="text-5xl md:text-8xl font-black text-white leading-none tracking-tighter mb-6">
+            <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-none tracking-tighter mb-6">
               Prize <span className="text-white/30">Pool</span>
             </h2>
             <p className="text-slate-400 text-xl font-medium max-w-2xl mx-auto leading-relaxed">

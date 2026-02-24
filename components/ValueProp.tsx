@@ -27,7 +27,7 @@ const ValueProp: React.FC = () => {
   ];
 
   return (
-    <section className="pt-24 pb-8 bg-[#fcfcfc] textured-bg relative">
+    <section className="py-16 md:pt-24 md:pb-8 bg-[#fcfcfc] textured-bg relative">
       {/* Faded gradient separator line */}
       <div className="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-transparent via-[#005bb7] to-transparent"></div>
       <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-[#005bb7]/[0.08] to-transparent pointer-events-none"></div>
