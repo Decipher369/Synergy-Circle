@@ -58,14 +58,40 @@ const PrizePool: React.FC = () => {
           {prizes.map((prize, idx) => (
             <StaggerItem key={idx}>
               <div
-                className={`relative bg-gradient-to-br ${prize.color} backdrop-blur-xl border ${prize.border} rounded-[40px] p-10 text-center group hover:scale-[1.03] hover:-translate-y-2 transition-all duration-500 ${idx === 0 ? 'md:-translate-y-4' : ''}`}
+                className={`relative overflow-hidden bg-white/[0.03] backdrop-blur-3xl border ${prize.border} rounded-[48px] p-10 text-center group hover:scale-[1.02] transition-all duration-700 ${idx === 0 ? 'md:-translate-y-4' : ''} shadow-[0_20px_50px_-15px_rgba(0,0,0,0.5)]`}
               >
-                <div className="text-6xl mb-6 group-hover:scale-125 transition-transform duration-500">{prize.icon}</div>
-                <div className={`mono text-sm font-black mb-2 tracking-[0.3em] uppercase ${prize.accent}`}>{prize.place} Place</div>
-                <h3 className="text-2xl font-black text-white mb-6 tracking-tight">{prize.title}</h3>
-                <div className="bg-white/[0.06] backdrop-blur-sm rounded-2xl py-5 px-6 border border-white/[0.06]">
-                  <p className="text-[10px] uppercase tracking-[0.4em] font-black text-white/30 mb-1">Prize Value</p>
-                  <p className={`text-3xl font-black tracking-tight ${prize.accent}`}>{prize.amount}</p>
+                {/* Gloss/Shine Highlight */}
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/[0.08] to-transparent pointer-events-none z-10"></div>
+                
+                {/* Inner Border Gloss */}
+                <div className="absolute inset-[1px] rounded-[47px] border border-white/[0.05] pointer-events-none z-10"></div>
+
+                {/* Liquid Blob 1 */}
+                <div className={`absolute -top-20 -right-20 w-80 h-80 bg-gradient-to-br ${prize.color} blur-[80px] opacity-40 group-hover:opacity-70 group-hover:scale-150 transition-all duration-1000 animate-morph`}></div>
+                
+                {/* Liquid Blob 2 */}
+                <div className={`absolute -bottom-20 -left-20 w-80 h-80 bg-gradient-to-tr ${prize.color} blur-[80px] opacity-20 group-hover:opacity-50 group-hover:scale-150 transition-all duration-1000 animate-morph`} style={{ animationDelay: '2s' }}></div>
+
+                <div className="relative z-20">
+                  <div className="text-7xl mb-8 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-700 drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                    {prize.icon}
+                  </div>
+                  <div className={`mono text-[10px] font-black mb-3 tracking-[0.4em] uppercase ${prize.accent}`}>
+                    {prize.place} Place
+                  </div>
+                  <h3 className="text-3xl font-black text-white mb-8 tracking-tighter group-hover:text-white transition-colors">
+                    {prize.title}
+                  </h3>
+                  
+                  <div className="relative overflow-hidden bg-white/[0.07] backdrop-blur-md rounded-[32px] py-7 px-8 border border-white/20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] group-hover:bg-white/[0.12] transition-all duration-500">
+                    <p className="text-[9px] uppercase tracking-[0.4em] font-black text-white/40 mb-2">Registration Value</p>
+                    <p className={`text-5xl font-black tracking-tighter ${prize.accent} drop-shadow-[0_0_15px_rgba(0,0,0,0.2)]`}>
+                      {prize.amount}
+                    </p>
+                    
+                    {/* Inner Refraction Shine */}
+                    <div className="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-[-25deg] group-hover:left-[200%] transition-all duration-1000 ease-in-out"></div>
+                  </div>
                 </div>
               </div>
             </StaggerItem>

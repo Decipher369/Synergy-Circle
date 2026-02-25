@@ -30,14 +30,29 @@ const App: React.FC = () => {
 
       lastScrollY.current = currentY;
     };
+    const handleMouseMove = (e: MouseEvent) => {
+      // If mouse is within top 50px, show nav
+      if (e.clientY < 50) {
+        setNavVisible(true);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
 
   return (
     <div className="flex flex-col min-h-screen relative overflow-x-hidden">
       {/* Global Watermark Elements */}
       <div className="fixed inset-0 pointer-events-none select-none z-0 overflow-hidden">
+        {/* Liquid Blobs */}
+        <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-[#005bb7]/[0.03] blur-[120px] animate-morph"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-indigo-500/[0.02] blur-[100px] animate-morph" style={{ animationDelay: '4s' }}></div>
+
         <div className="absolute top-[20%] -left-[10%] text-[30vw] font-black text-slate-900/[0.02] rotate-[-15deg] whitespace-nowrap leading-none">
           SYNERGY
         </div>

@@ -77,7 +77,7 @@ const Hero: React.FC = () => {
   }, [spawnRockets, isSpawning]);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-24 overflow-hidden textured-bg">
+    <section className="relative min-h-screen flex items-center pt-24 md:pt-32 overflow-hidden textured-bg">
       {/* Background Watermark Logo */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
         <div className="absolute text-[500px] md:text-[800px] font-black tracking-tighter leading-none text-slate-900/[0.03] -translate-y-10">
@@ -89,7 +89,7 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
-        <div className="flex flex-col items-center text-center space-y-12">
+        <div className="flex flex-col items-center text-center space-y-8 md:space-y-12">
           
           <div className="flex flex-col items-center animate-in fade-in slide-in-from-top-4 duration-1000">
              <div className="mono text-[10px] font-black uppercase tracking-[0.5em] text-slate-400 mb-4 px-4 py-1.5 border border-slate-200 rounded-full bg-white/50 backdrop-blur-sm">
@@ -128,7 +128,7 @@ const Hero: React.FC = () => {
                 ))}
 
                {/* Sliced Effect Implementation */}
-               <div className="sliced-container text-4xl sm:text-7xl md:text-[140px] font-black tracking-tighter leading-none uppercase select-none">
+               <div className="sliced-container text-6xl sm:text-7xl md:text-[140px] font-black tracking-tighter leading-none uppercase select-none">
                   <div className={`slice-top transition-transform duration-700 ${splitActive ? '-translate-y-2' : ''}`}>SYNERGY CIRCLE</div>
                   <div className={`slice-bottom transition-transform duration-700 ${splitActive ? 'translate-y-2' : ''}`}>SYNERGY CIRCLE</div>
                </div>
@@ -136,7 +136,7 @@ const Hero: React.FC = () => {
           </div>
 
           <div className="max-w-3xl animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-8 tracking-tight">
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 md:mb-8 tracking-tight">
               <span className="text-slate-400">Where Ideas Turn Into Impact.</span>
             </h2>
             <p className="text-lg md:text-xl text-slate-500 font-medium leading-relaxed max-w-xl mx-auto">

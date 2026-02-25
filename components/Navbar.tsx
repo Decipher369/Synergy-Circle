@@ -18,7 +18,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled, visible }) => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${visible ? 'translate-y-0' : '-translate-y-full'} ${scrolled ? 'bg-white/95 backdrop-blur-xl py-4 border-b border-slate-100 shadow-sm' : 'bg-transparent py-6'}`}>
+    <nav className={`fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 transition-all duration-500 ${visible ? 'translate-y-0 opacity-100' : '-translate-y-12 opacity-0'} ${scrolled ? 'bg-white/80 backdrop-blur-3xl py-3 px-2 border border-white/20 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)]' : 'bg-transparent py-4'} rounded-[32px] md:rounded-full`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center gap-3 md:gap-6">
           <a href="#" className="flex items-center gap-2 md:gap-4 bg-slate-100/50 px-3 md:px-4 py-1.5 md:py-2 rounded-xl md:rounded-2xl border border-slate-200/50">

@@ -23,50 +23,6 @@ const Registration: React.FC = () => {
           </div>
         </FadeUp>
 
-        <FadeUp delay={0.15}>
-          {/* Payment & Fee Info */}
-          <div className="bg-white/50 backdrop-blur-2xl border border-white/70 rounded-[40px] p-10 md:p-14 mb-12 shadow-[0_8px_60px_-12px_rgba(0,91,183,0.06)]">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              {/* Fee */}
-              <div>
-                <div className="mono text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 mb-4">Registration Fee</div>
-                <div className="text-5xl font-black text-slate-900 tracking-tight mb-2">LKR 1000</div>
-                <p className="text-slate-400 text-sm font-medium">Per participant / team</p>
-              </div>
-              {/* Bank Details */}
-              <div className="space-y-3">
-                <div className="mono text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 mb-4">Bank Details</div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-slate-400 font-bold">Account Name</span>
-                  <span className="text-slate-900 font-black">Mendis E.A.</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-slate-400 font-bold">Account No.</span>
-                  <span className="text-slate-900 font-black">069020212993</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-slate-400 font-bold">Bank</span>
-                  <span className="text-slate-900 font-black">Hatton National Bank</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-slate-400 font-bold">Branch</span>
-                  <span className="text-slate-900 font-black">Panadura</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-slate-400 font-bold">Branch ID</span>
-                  <span className="text-slate-900 font-black">0690</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 flex items-start gap-3 px-5 py-4 bg-amber-50/50 border border-amber-200/30 rounded-2xl">
-              <span className="text-lg mt-0.5">⚠️</span>
-              <p className="text-amber-700/70 text-xs font-bold leading-relaxed">
-                Please ensure that the payment receipt is uploaded as part of the registration. Incomplete submissions will not be considered.
-              </p>
-            </div>
-          </div>
-        </FadeUp>
 
         <FadeUp delay={0.3}>
           {/* CTA Button */}

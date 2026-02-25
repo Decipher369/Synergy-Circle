@@ -3,7 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Synergy Circle | Rotaract SLIIT & SLIIT Business School</title>
+    <title>Synergy Circle 2026 | Rotaract SLIIT & SLIIT Business School</title>
+    <meta name="description" content="Synergy Circle 2026 is an inter-university entrepreneurial initiative by Rotaract SLIIT & SLIIT Business School. Forging the next standard in startup vision." />
+    <meta name="keywords" content="Synergy Circle, Rotaract SLIIT, SLIIT Business School, Entrepreneurship, Startup Competition, Pitch Olympics, Startup Vision 2026" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.synergycircle.online/" />
+    <meta property="og:title" content="Synergy Circle 2026 | Forging the Next Standard" />
+    <meta property="og:description" content="Join the elite inter-university entrepreneurial initiative. Register your startup vision now." />
+    <meta property="og:image" content="https://www.synergycircle.online/og-image.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://www.synergycircle.online/" />
+    <meta property="twitter:title" content="Synergy Circle 2026" />
+    <meta property="twitter:description" content="Join the elite inter-university entrepreneurial initiative." />
+    <meta property="twitter:image" content="https://www.synergycircle.online/og-image.png" />
+
+    <link rel="canonical" href="https://www.synergycircle.online/" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -65,15 +83,30 @@
         border: 1px solid rgba(0, 0, 0, 0.05);
       }
 
-      @keyframes float {
+      @keyframes morph {
         0% {
-          transform: translateY(0px);
+          border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
         }
         50% {
-          transform: translateY(-10px);
+          border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
         }
         100% {
-          transform: translateY(0px);
+          border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+      }
+      .animate-morph {
+        animation: morph 8s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-15px) rotate(2deg);
+        }
+        100% {
+          transform: translateY(0px) rotate(0deg);
         }
       }
       .animate-float {
