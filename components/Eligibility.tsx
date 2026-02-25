@@ -64,14 +64,12 @@ const Eligibility: React.FC = () => {
         </StaggerContainer>
 
         <FadeUp delay={0.4}>
-          <div className="mt-20 p-8 border border-white/20 rounded-[32px] bg-white/[0.04] backdrop-blur-2xl flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-lg">
-            <span className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></span>
+          <div className="mt-20 p-8 border border-slate-100 rounded-[32px] bg-slate-50/50 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-left">
               <p className="text-slate-900 font-bold text-lg">Ready to showcase your vision?</p>
               <p className="text-slate-400 text-sm font-medium">Applications are evaluated on a rolling basis.</p>
             </div>
-            <a href="#apply" className="relative overflow-hidden px-10 py-4 bg-white/[0.06] backdrop-blur-2xl text-slate-900 rounded-full font-black text-xs uppercase tracking-widest border border-white/20 hover:bg-[#005bb7]/10 hover:border-[#005bb7]/30 hover:text-[#005bb7] hover:shadow-[0_10px_30px_-10px_rgba(0,91,183,0.3)] transition-all duration-500 shadow-lg">
-              <span className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></span>
+            <a href="#apply" className="px-10 py-4 bg-slate-900 text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-[#005bb7] transition-colors">
               Check Guidelines
             </a>
           </div>

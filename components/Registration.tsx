@@ -32,14 +32,10 @@ const Registration: React.FC = () => {
                 href="https://forms.gle/ktFne6zniNcP1QvG6"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative overflow-hidden inline-flex items-center gap-4 px-16 py-6 bg-white/[0.06] backdrop-blur-2xl text-slate-900 rounded-full font-black text-sm uppercase tracking-[0.2em] border border-white/20 hover:bg-[#005bb7]/10 hover:border-[#005bb7]/30 hover:text-[#005bb7] hover:shadow-[0_15px_40px_-10px_rgba(0,91,183,0.3)] hover:scale-105 transition-all duration-500 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)]"
+                className="inline-flex items-center gap-4 px-16 py-6 bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-full font-black text-sm uppercase tracking-[0.2em] hover:from-[#005bb7] hover:to-[#0070e0] hover:scale-105 transition-all duration-300 shadow-2xl shadow-slate-900/20"
               >
-                <span className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent"></span>
-                <span className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none rounded-full"></span>
-                <span className="relative z-10 flex items-center gap-4">
-                  Register Now
-                  <span className="text-lg">↗</span>
-                </span>
+                Register Now
+                <span className="text-lg">↗</span>
               </a>
             </MagneticButton>
             <p className="mt-6 text-slate-400 text-xs font-bold uppercase tracking-widest">

@@ -57,8 +57,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled, visible }) => {
               <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#005bb7] transition-all duration-300 group-hover:w-full"></span>
             </a>
           ))}
-          <a href="#apply" className="relative overflow-hidden px-6 py-2.5 bg-white/[0.08] backdrop-blur-2xl text-white rounded-full text-[11px] font-black uppercase tracking-[0.2em] border border-white/20 hover:bg-white/[0.15] hover:border-white/40 hover:shadow-[0_10px_30px_-10px_rgba(0,91,183,0.4)] transition-all duration-500 shadow-lg">
-            <span className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></span>
+          <a href="#apply" className="px-6 py-2.5 bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-full text-[11px] font-black uppercase tracking-[0.2em] hover:from-[#005bb7] hover:to-[#0070e0] transition-all duration-300 shadow-xl shadow-slate-900/10">
             Register
           </a>
         </div>
@@ -94,9 +93,8 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled, visible }) => {
           <a
             href="#apply"
             onClick={() => setMobileOpen(false)}
-            className="relative overflow-hidden block mt-4 text-center py-4 bg-white/[0.06] backdrop-blur-2xl text-slate-900 rounded-2xl font-black text-sm uppercase tracking-widest border border-white/20 hover:bg-[#005bb7]/10 hover:border-[#005bb7]/30 transition-all duration-500 shadow-lg"
+            className="block mt-4 text-center py-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:from-[#005bb7] hover:to-[#0070e0] transition-all"
           >
-            <span className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></span>
             Register Now
           </a>
         </div>

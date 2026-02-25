@@ -146,14 +146,11 @@ const Hero: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row gap-6 items-center animate-in fade-in duration-1000 delay-500">
             <MagneticButton>
-              <a href="#apply" className="relative overflow-hidden px-12 py-5 bg-white/[0.06] backdrop-blur-2xl text-slate-900 rounded-full font-black text-sm uppercase tracking-widest border border-white/20 hover:bg-[#005bb7]/10 hover:border-[#005bb7]/30 hover:text-[#005bb7] hover:shadow-[0_15px_40px_-10px_rgba(0,91,183,0.3)] hover:scale-105 transition-all duration-500 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.1)]">
-                <span className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent"></span>
-                <span className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none rounded-full"></span>
-                <span className="relative z-10">Register Now</span>
+              <a href="#apply" className="px-12 py-5 bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-full font-black text-sm uppercase tracking-widest hover:from-[#005bb7] hover:to-[#0070e0] hover:scale-105 transition-all duration-300 shadow-2xl shadow-slate-900/20">
+                Register Now
               </a>
             </MagneticButton>
-            <div className="relative overflow-hidden flex items-center gap-3 px-6 py-4 bg-white/[0.06] backdrop-blur-2xl border border-white/20 rounded-full shadow-lg">
-                <span className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent"></span>
+            <div className="flex items-center gap-3 px-6 py-4 bg-white/80 backdrop-blur-sm border border-slate-100 rounded-full shadow-sm">
                 <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
                 <span className="text-xs font-black uppercase tracking-widest text-slate-400">Registrations Open</span>
             </div>
