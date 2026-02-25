@@ -83,15 +83,6 @@ const PrizePool: React.FC = () => {
                     {prize.title}
                   </h3>
                   
-                  <div className="relative overflow-hidden bg-white/[0.07] backdrop-blur-md rounded-[32px] py-7 px-8 border border-white/20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] group-hover:bg-white/[0.12] transition-all duration-500">
-                    <p className="text-[9px] uppercase tracking-[0.4em] font-black text-white/40 mb-2">Registration Value</p>
-                    <p className={`text-5xl font-black tracking-tighter ${prize.accent} drop-shadow-[0_0_15px_rgba(0,0,0,0.2)]`}>
-                      {prize.amount}
-                    </p>
-                    
-                    {/* Inner Refraction Shine */}
-                    <div className="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-[-25deg] group-hover:left-[200%] transition-all duration-1000 ease-in-out"></div>
-                  </div>
                 </div>
               </div>
             </StaggerItem>
