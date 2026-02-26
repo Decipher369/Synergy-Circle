@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -10,11 +10,21 @@ import Timeline from './components/Timeline';
 import Registration from './components/Registration';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import Guidelines from './components/Guidelines';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
+  const [currentPage, setCurrentPage] = useState<'home' | 'guidelines'>('home');
   const lastScrollY = useRef(0);
+
+  const navigateToGuidelines = useCallback(() => {
+    setCurrentPage('guidelines');
+  }, []);
+
+  const navigateToHome = useCallback(() => {
+    setCurrentPage('home');
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,6 +55,10 @@ const App: React.FC = () => {
     };
   }, []);
 
+  if (currentPage === 'guidelines') {
+    return <Guidelines onBack={navigateToHome} />;
+  }
+
   return (
     <div className="flex flex-col min-h-screen relative overflow-x-hidden">
       {/* Global Watermark Elements */}
@@ -62,12 +76,12 @@ const App: React.FC = () => {
       </div>
 
       <div className="relative z-10">
-        <Navbar scrolled={scrolled} visible={navVisible} />
+        <Navbar scrolled={scrolled} visible={navVisible} onNavigateGuidelines={navigateToGuidelines} />
         <main>
           <Hero />
           <About />
           <Phases />
-          <Eligibility />
+          <Eligibility onNavigateGuidelines={navigateToGuidelines} />
           <PrizePool />
           <ValueProp />
           <Timeline />

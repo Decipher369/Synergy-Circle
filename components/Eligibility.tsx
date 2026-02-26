@@ -1,8 +1,12 @@
 
 import React from 'react';
-import { FadeUp, StaggerContainer, StaggerItem } from './Animations';
+import { FadeUp, StaggerContainer, StaggerItem, MagneticButton } from './Animations';
 
-const Eligibility: React.FC = () => {
+interface EligibilityProps {
+  onNavigateGuidelines?: () => void;
+}
+
+const Eligibility: React.FC<EligibilityProps> = ({ onNavigateGuidelines }) => {
   const criteria = [
     {
       title: "Venture Stage",
@@ -69,9 +73,14 @@ const Eligibility: React.FC = () => {
               <p className="text-slate-900 font-bold text-lg">Ready to showcase your vision?</p>
               <p className="text-slate-400 text-sm font-medium">Applications are evaluated on a rolling basis.</p>
             </div>
-            <a href="#apply" className="px-10 py-4 bg-slate-900 text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-[#005bb7] transition-colors">
-              Check Guidelines
-            </a>
+            <MagneticButton>
+              <button
+                onClick={onNavigateGuidelines}
+                className="px-10 py-4 bg-slate-900 text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-[#005bb7] transition-colors cursor-pointer"
+              >
+                Check Guidelines
+              </button>
+            </MagneticButton>
           </div>
         </FadeUp>
       </div>
