@@ -2,7 +2,11 @@
 import React from 'react';
 import { FadeUp, StaggerContainer, StaggerItem } from './Animations';
 
-const Phases: React.FC = () => {
+interface PhasesProps {
+  onNavigateGuidelines?: () => void;
+}
+
+const Phases: React.FC<PhasesProps> = ({ onNavigateGuidelines }) => {
   return (
     <section id="phases" className="py-16 md:py-40 bg-slate-900 relative overflow-hidden">
       {/* Decorative text watermark */}
@@ -41,9 +45,12 @@ const Phases: React.FC = () => {
                      </li>
                    ))}
                  </ul>
-                 <div className="inline-flex items-center gap-4 text-white font-black uppercase tracking-widest text-xs group-hover:gap-6 transition-all group-hover:text-[#005bb7]">
-                   Refine Your Ideas <span className="text-[#005bb7]">→</span>
-                 </div>
+                 <button
+                   onClick={onNavigateGuidelines}
+                   className="inline-flex items-center gap-4 text-white font-black uppercase tracking-widest text-xs group-hover:gap-6 transition-all group-hover:text-[#005bb7] cursor-pointer bg-transparent border-none p-0"
+                 >
+                   Refine Your Ideas <span className="text-[#005bb7]">&rarr;</span>
+                 </button>
                </div>
             </div>
           </StaggerItem>
@@ -60,21 +67,24 @@ const Phases: React.FC = () => {
                  <p className="text-white/50 font-black uppercase text-xs tracking-widest mb-8">Two-Day Grand Event</p>
                  <div className="space-y-6 mb-10">
                    <div className="bg-white/5 backdrop-blur-md rounded-3xl p-6 border border-white/10 shadow-inner">
-                     <p className="text-white font-black text-sm uppercase tracking-widest mb-2">Day 1 — First Round</p>
+                     <p className="text-white font-black text-sm uppercase tracking-widest mb-2">Day 1 &mdash; First Round</p>
                      <p className="text-white/80 text-base leading-relaxed font-medium">
                        Registered participants present their business concepts before a judging panel. The top five ideas are selected as finalists.
                      </p>
                    </div>
                    <div className="bg-white/5 backdrop-blur-md rounded-3xl p-6 border border-white/10 shadow-inner">
-                     <p className="text-white font-black text-sm uppercase tracking-widest mb-2">Day 2 — Grand Finale</p>
+                     <p className="text-white font-black text-sm uppercase tracking-widest mb-2">Day 2 &mdash; Grand Finale</p>
                      <p className="text-white/80 text-base leading-relaxed font-medium">
                        Finalists compete in the Grand Finale, pitching their ventures to secure a place among the Top Three Ventures of Synergy Circle 2026.
                      </p>
                    </div>
                  </div>
-                 <div className="inline-flex items-center gap-4 text-white font-black uppercase tracking-widest text-xs group-hover:gap-6 transition-all">
-                   The Grand Stage <span className="text-[#005bb7]">→</span>
-                 </div>
+                 <button
+                   onClick={onNavigateGuidelines}
+                   className="inline-flex items-center gap-4 text-white font-black uppercase tracking-widest text-xs group-hover:gap-6 transition-all cursor-pointer bg-transparent border-none p-0"
+                 >
+                   The Grand Stage <span className="text-[#005bb7]">&rarr;</span>
+                 </button>
                </div>
             </div>
           </StaggerItem>

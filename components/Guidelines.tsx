@@ -135,172 +135,193 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
         const doc = new jsPDF('p', 'mm', 'a4');
         const pageW = doc.internal.pageSize.getWidth();
         const pageH = doc.internal.pageSize.getHeight();
-        const marginL = 20;
-        const marginR = 20;
-        const contentW = pageW - marginL - marginR;
+        const mL = 18;
+        const mR = 18;
+        const cW = pageW - mL - mR;
         let y = 0;
 
-        const brandBlue: [number, number, number] = [0, 91, 183];
-        const darkSlate: [number, number, number] = [15, 23, 42];
-        const medGray: [number, number, number] = [100, 116, 139];
-        const lightGray: [number, number, number] = [148, 163, 184];
+        const blue: [number, number, number] = [0, 91, 183];
+        const dark: [number, number, number] = [15, 23, 42];
+        const mid: [number, number, number] = [100, 116, 139];
+        const light: [number, number, number] = [148, 163, 184];
+        const white: [number, number, number] = [255, 255, 255];
+        const amber: [number, number, number] = [245, 158, 11];
+        const red: [number, number, number] = [220, 38, 38];
+        const cardBg: [number, number, number] = [248, 250, 252];
 
-        const checkPage = (needed: number) => {
-          if (y + needed > pageH - 20) {
-            doc.addPage();
-            y = 25;
-          }
+        const ensureSpace = (h: number) => {
+          if (y + h > pageH - 22) { doc.addPage(); y = 28; }
         };
 
-        const addWrappedText = (text: string, x: number, startY: number, maxW: number, lineH: number, font: string, size: number, color: [number, number, number]): number => {
-          doc.setFont('helvetica', font);
+        const wrapText = (text: string, x: number, maxW: number, lh: number, style: string, size: number, color: [number, number, number]): number => {
+          doc.setFont('helvetica', style);
           doc.setFontSize(size);
           doc.setTextColor(...color);
           const lines = doc.splitTextToSize(text, maxW);
           for (let i = 0; i < lines.length; i++) {
-            checkPage(lineH);
-            doc.text(lines[i], x, startY + i * lineH);
+            ensureSpace(lh);
+            doc.text(lines[i], x, y);
+            y += lh;
           }
-          return startY + lines.length * lineH;
+          return y;
         };
 
-        const addDivider = () => {
-          checkPage(10);
-          doc.setDrawColor(220, 220, 220);
-          doc.setLineWidth(0.3);
-          doc.line(marginL, y, pageW - marginR, y);
-          y += 8;
-        };
-
-        const addSectionHeader = (label: string, title: string) => {
-          checkPage(30);
+        /* ── Styled Section Header (blue accent bar + large title) ── */
+        const sectionHeader = (label: string, title: string, accentColor: [number, number, number] = blue) => {
+          ensureSpace(32);
+          // Accent bar
+          doc.setFillColor(...accentColor);
+          doc.roundedRect(mL, y - 2, 3, 18, 1.5, 1.5, 'F');
+          // Label
           doc.setFont('helvetica', 'bold');
-          doc.setFontSize(8);
-          doc.setTextColor(...brandBlue);
-          doc.text(label.toUpperCase(), marginL, y);
+          doc.setFontSize(7.5);
+          doc.setTextColor(...accentColor);
+          doc.text(label.toUpperCase(), mL + 8, y + 2);
           y += 8;
+          // Title
           doc.setFont('helvetica', 'bold');
-          doc.setFontSize(22);
-          doc.setTextColor(...darkSlate);
-          const titleLines = doc.splitTextToSize(title, contentW);
-          for (const line of titleLines) {
-            checkPage(12);
-            doc.text(line, marginL, y);
-            y += 12;
+          doc.setFontSize(20);
+          doc.setTextColor(...dark);
+          const lines = doc.splitTextToSize(title, cW - 10);
+          for (const ln of lines) {
+            doc.text(ln, mL + 8, y);
+            y += 9;
           }
-          y += 4;
+          y += 6;
         };
 
-        const addBullet = (text: string, indent = 0) => {
-          const bulletX = marginL + indent;
-          const textX = bulletX + 5;
-          const maxW = contentW - indent - 5;
-          checkPage(6);
+
+        /* ── Bullet point ── */
+        const bullet = (text: string, indent = 0, color: [number, number, number] = blue) => {
+          const bx = mL + 10 + indent;
+          const tx = bx + 5;
+          const maxW = cW - 18 - indent;
+          ensureSpace(6);
+          doc.setFillColor(...color);
+          doc.circle(bx + 1, y - 1.2, 1, 'F');
           doc.setFont('helvetica', 'normal');
-          doc.setFontSize(9.5);
-          doc.setTextColor(...medGray);
-          doc.text('•', bulletX, y);
+          doc.setFontSize(9);
+          doc.setTextColor(...mid);
           const lines = doc.splitTextToSize(text, maxW);
           for (let i = 0; i < lines.length; i++) {
-            checkPage(5);
-            doc.text(lines[i], textX, y + i * 5);
+            ensureSpace(4.5);
+            doc.text(lines[i], tx, y + i * 4.5);
           }
-          y += lines.length * 5 + 2;
+          y += lines.length * 4.5 + 2;
         };
 
-        // ── COVER / TITLE PAGE
-        // Brand bar
-        doc.setFillColor(...brandBlue);
-        doc.rect(0, 0, pageW, 4, 'F');
+        // ═══════════════════════════════════════
+        // COVER PAGE
+        // ═══════════════════════════════════════
+        // Top blue accent bar
+        doc.setFillColor(...blue);
+        doc.rect(0, 0, pageW, 5, 'F');
 
-        // Watermark
+        // Large SC watermark
         doc.setFont('helvetica', 'bold');
-        doc.setFontSize(120);
-        doc.setTextColor(240, 240, 240);
-        doc.text('SC', pageW / 2, 140, { align: 'center' });
+        doc.setFontSize(160);
+        doc.setTextColor(245, 245, 245);
+        doc.text('SC', pageW / 2, 160, { align: 'center' });
 
-        // Title
-        y = 55;
+        // Branding label
+        y = 50;
         doc.setFont('helvetica', 'bold');
-        doc.setFontSize(10);
-        doc.setTextColor(...brandBlue);
-        doc.text('SYNERGY CIRCLE 2026', marginL, y);
+        doc.setFontSize(8);
+        doc.setTextColor(...blue);
+        doc.text('SYNERGY CIRCLE 2026', mL, y);
+        // Blue underline
+        doc.setDrawColor(...blue);
+        doc.setLineWidth(0.8);
+        doc.line(mL, y + 3, mL + 42, y + 3);
+
+        // Main title
+        y = 78;
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(42);
+        doc.setTextColor(...dark);
+        doc.text("Delegates'", mL, y);
+        y += 18;
+        doc.text('Handbook', mL, y);
+
         y += 16;
-
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(36);
-        doc.setTextColor(...darkSlate);
-        doc.text("Delegates'", marginL, y);
-        y += 16;
-        doc.text('Handbook', marginL, y);
-        y += 20;
-
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(11);
-        doc.setTextColor(...medGray);
-        y = addWrappedText(
-          'Organized by the Rotaract Club of SLIIT in collaboration with SLIIT Business School.',
-          marginL, y, contentW, 6, 'normal', 11, medGray
-        );
-        y += 10;
+        doc.setTextColor(...mid);
+        doc.text('Organized by the Rotaract Club of SLIIT', mL, y);
+        y += 6;
+        doc.text('In collaboration with SLIIT Business School', mL, y);
 
-        // Decorative line
-        doc.setDrawColor(...brandBlue);
-        doc.setLineWidth(1);
-        doc.line(marginL, y, marginL + 40, y);
-        y += 15;
+        y += 16;
+        doc.setDrawColor(...blue);
+        doc.setLineWidth(1.2);
+        doc.line(mL, y, mL + 50, y);
 
+        y += 12;
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(9);
-        doc.setTextColor(...lightGray);
-        doc.text('This document contains all information, guidelines, and regulations', marginL, y);
+        doc.setTextColor(...light);
+        doc.text('This document contains all information, guidelines, and regulations', mL, y);
         y += 5;
-        doc.text('for delegates participating in Synergy Circle 2026.', marginL, y);
+        doc.text('for delegates participating in Synergy Circle 2026.', mL, y);
 
-        // Footer bar
-        doc.setFillColor(...darkSlate);
-        doc.rect(0, pageH - 12, pageW, 12, 'F');
+        // Cover footer
+        doc.setFillColor(...dark);
+        doc.rect(0, pageH - 14, pageW, 14, 'F');
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(7);
-        doc.setTextColor(255, 255, 255);
-        doc.text('SYNERGY CIRCLE 2026  |  ROTARACT SLIIT  x  SLIIT BUSINESS SCHOOL', pageW / 2, pageH - 5, { align: 'center' });
+        doc.setTextColor(...white);
+        doc.text('SYNERGY CIRCLE 2026   |   ROTARACT SLIIT  x  SLIIT BUSINESS SCHOOL   |   www.synergycircle.online', pageW / 2, pageH - 5.5, { align: 'center' });
 
-        // ── PAGE 2: WHAT IS SYNERGY CIRCLE
+        // ═══════════════════════════════════════
+        // WHAT IS SYNERGY CIRCLE
+        // ═══════════════════════════════════════
         doc.addPage();
-        y = 25;
+        y = 28;
 
-        addSectionHeader('Overview', 'What is Synergy Circle?');
-        y = addWrappedText(
-          'Synergy Circle is designed to cultivate innovation, strategic thinking, and entrepreneurial confidence among undergraduates. This initiative is not merely a pitching competition — it is a structured journey that equips participants with the mindset, tools, and exposure required to translate ideas into viable ventures.',
-          marginL, y, contentW, 5.5, 'normal', 10, medGray
+        sectionHeader('Overview', 'What is Synergy Circle?');
+        wrapText(
+          'Synergy Circle is designed to cultivate innovation, strategic thinking, and entrepreneurial confidence among undergraduates. This initiative is not merely a pitching competition \u2014 it is a structured journey that equips participants with the mindset, tools, and exposure required to translate ideas into viable ventures.',
+          mL + 8, cW - 10, 5, 'normal', 10, mid
         );
-        y += 4;
-        y = addWrappedText(
+        y += 3;
+        wrapText(
           'Through a two-phase structure combining skill development and competitive evaluation, Synergy Circle bridges academic learning with real-world entrepreneurial expectations.',
-          marginL, y, contentW, 5.5, 'normal', 10, medGray
+          mL + 8, cW - 10, 5, 'normal', 10, mid
         );
         y += 4;
-        y = addWrappedText(
-          'We encourage all delegates to approach this opportunity with professionalism, preparation, and bold thinking.',
-          marginL, y, contentW, 5.5, 'italic', 10, darkSlate
-        );
-        y += 10;
 
-        addDivider();
+        // Quote card
+        ensureSpace(22);
+        doc.setFillColor(240, 246, 255);
+        doc.roundedRect(mL, y - 3, cW, 18, 3, 3, 'F');
+        doc.setFillColor(...blue);
+        doc.roundedRect(mL, y - 3, 2.5, 18, 1.2, 1.2, 'F');
+        doc.setFont('helvetica', 'bolditalic');
+        doc.setFontSize(9);
+        doc.setTextColor(...dark);
+        const quoteLines = doc.splitTextToSize('"We encourage all delegates to approach this opportunity with professionalism, preparation, and bold thinking."', cW - 16);
+        quoteLines.forEach((ln: string, i: number) => {
+          doc.text(ln, mL + 8, y + 4 + i * 4.5);
+        });
+        y += 24;
 
-        // ── PHASE 1
-        addSectionHeader('Phase 01', 'Pitch Olympics — Workshop');
-        y = addWrappedText(
+        // ═══════════════════════════════════════
+        // PHASE 1
+        // ═══════════════════════════════════════
+        y += 4;
+        sectionHeader('Phase 01', 'Pitch Olympics \u2014 Workshop');
+        wrapText(
           'A structured training workshop designed to develop pitching competence and business validation skills.',
-          marginL, y, contentW, 5.5, 'normal', 10, medGray
+          mL + 8, cW - 10, 5, 'normal', 10, mid
         );
-        y += 6;
+        y += 5;
 
+        // Sub-header
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(11);
-        doc.setTextColor(...darkSlate);
-        checkPage(8);
-        doc.text('Detailed Guidelines', marginL, y);
+        doc.setTextColor(...dark);
+        ensureSpace(8);
+        doc.text('Workshop Guidelines', mL + 8, y);
         y += 8;
 
         const guidelines = [
@@ -315,194 +336,259 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
           'Certificates will be given only to participants who complete the full programme.',
         ];
         guidelines.forEach((g, i) => {
-          checkPage(7);
+          ensureSpace(12);
+          // Number badge
+          doc.setFillColor(...blue);
+          doc.roundedRect(mL + 8, y - 3.5, 8, 5, 1.5, 1.5, 'F');
           doc.setFont('helvetica', 'bold');
-          doc.setFontSize(8);
-          doc.setTextColor(...brandBlue);
-          doc.text(`${String(i + 1).padStart(2, '0')}`, marginL, y);
+          doc.setFontSize(6.5);
+          doc.setTextColor(...white);
+          doc.text(String(i + 1).padStart(2, '0'), mL + 9.5, y);
+          // Text
           doc.setFont('helvetica', 'normal');
-          doc.setFontSize(9.5);
-          doc.setTextColor(...medGray);
-          const lines = doc.splitTextToSize(g, contentW - 12);
-          for (let j = 0; j < lines.length; j++) {
-            doc.text(lines[j], marginL + 12, y + j * 5);
-          }
-          y += lines.length * 5 + 3;
+          doc.setFontSize(9);
+          doc.setTextColor(...mid);
+          const lines = doc.splitTextToSize(g, cW - 26);
+          lines.forEach((ln: string, j: number) => {
+            doc.text(ln, mL + 19, y + j * 4.5);
+          });
+          y += lines.length * 4.5 + 3.5;
         });
 
+        // ═══════════════════════════════════════
+        // PHASE 2
+        // ═══════════════════════════════════════
         y += 6;
-        addDivider();
-
-        // ── PHASE 2
-        addSectionHeader('Phase 02', 'Synergy Circle Competition');
-        y = addWrappedText(
+        sectionHeader('Phase 02', 'Synergy Circle Competition');
+        wrapText(
           'A competitive evaluation round where teams present their refined business concepts before a judging panel.',
-          marginL, y, contentW, 5.5, 'normal', 10, medGray
+          mL + 8, cW - 10, 5, 'normal', 10, mid
         );
-        y += 8;
+        y += 6;
+
+        // Day 1 Card
+        const dayCardH = 42;
+        ensureSpace(dayCardH + 6);
+        const dayCardW = (cW - 6) / 2;
 
         // Day 1
-        checkPage(40);
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(13);
-        doc.setTextColor(...darkSlate);
-        doc.text('DAY 1 — Preliminary Round', marginL, y);
-        y += 8;
-        y = addWrappedText('Objective: To evaluate all participating teams and shortlist finalists.', marginL, y, contentW, 5.5, 'normal', 10, medGray);
-        y += 3;
-        addBullet('5-7 minute pitch presentation');
-        addBullet('3-5 minute Q&A session');
-        y += 2;
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(9);
-        doc.setTextColor(...brandBlue);
-        checkPage(6);
-        doc.text('Outcome: The 5 top-performing teams will qualify for the Grand Finale.', marginL, y);
-        y += 10;
-
-        // Day 2
-        checkPage(40);
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(13);
-        doc.setTextColor(...darkSlate);
-        doc.text('DAY 2 — Grand Finale', marginL, y);
-        y += 8;
-        y = addWrappedText('Objective: To determine the final winners of the competition.', marginL, y, contentW, 5.5, 'normal', 10, medGray);
-        y += 3;
-        addBullet('10-minute detailed pitch');
-        addBullet('5-10 minute Q&A');
-        y += 2;
-        y = addWrappedText(
-          'Judges may probe questions based on financial aspects, market scalability, risk mitigation, competitive sustainability, etc. Winners will be announced during the closing ceremony.',
-          marginL, y, contentW, 5.5, 'normal', 9.5, medGray
-        );
-        y += 8;
-
-        addDivider();
-
-        // ── ELIGIBLE CATEGORIES
-        addSectionHeader('Categories', 'Eligible Categories');
-        y = addWrappedText(
-          'There are no restrictions on the category or industry of the idea presented. Participants are free to propose concepts across any sector, including but not limited to:',
-          marginL, y, contentW, 5.5, 'normal', 10, medGray
-        );
-        y += 4;
-        ['Technology', 'Social Innovation', 'Sustainability', 'Consumer Products', 'Digital Platforms', 'Services', 'Emerging Industries'].forEach(cat => {
-          addBullet(cat, 4);
-        });
-        y += 4;
-
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(10);
-        doc.setTextColor(...darkSlate);
-        checkPage(8);
-        doc.text('Restrictions', marginL, y);
-        y += 6;
-        y = addWrappedText(
-          'All submitted ideas must be original and developed by the participating team. Concepts that promote illegal, unethical, harmful, discriminatory, or socially irresponsible practices will not be accepted.',
-          marginL, y, contentW, 5.5, 'normal', 9.5, medGray
-        );
-        y += 8;
-
-        addDivider();
-
-        // ── TEAM STRUCTURE
-        addSectionHeader('Structure', 'Team Requirements');
-        addBullet('1-5 members per team');
-        addBullet('Cross-university collaboration allowed');
-        addBullet('Each participant may join only one team');
-        addBullet('Teams cannot change members after the submission deadline');
-        y += 6;
-
-        addDivider();
-
-        // ── TIME REGULATIONS
-        addSectionHeader('Regulations', 'Time Management');
-        addBullet('Timer will be visible throughout your presentation.');
-        addBullet('1-minute warning will be given.');
-        addBullet('Exceeding allocated time may result in scoring penalties.');
-        y += 3;
-
-        checkPage(12);
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(9);
-        doc.setTextColor(...darkSlate);
-        doc.text('Pitch Durations:', marginL, y);
-        y += 6;
-        addBullet('Preliminary Round: 5-7 minutes pitch + 3-5 minutes Q&A');
-        addBullet('Grand Finale: 10 minutes pitch + 5-10 minutes Q&A');
-        y += 6;
-
-        addDivider();
-
-        // ── PROFESSIONAL CONDUCT
-        addSectionHeader('Conduct', 'Professional Standards');
-        y = addWrappedText('Participants are expected to:', marginL, y, contentW, 5.5, 'normal', 10, medGray);
-        y += 3;
-        addBullet('Maintain professional attire');
-        addBullet('Show respect toward judges and peers');
-        addBullet('Avoid disruptive behavior');
-        y += 3;
-        y = addWrappedText('Misconduct may lead to disqualification.', marginL, y, contentW, 5.5, 'bold', 9.5, [220, 38, 38]);
-        y += 8;
-
-        addDivider();
-
-        // ── DISQUALIFICATION
-        addSectionHeader('Warning', 'Disqualification Conditions');
-        y = addWrappedText('A team may be disqualified for:', marginL, y, contentW, 5.5, 'normal', 10, medGray);
-        y += 3;
-        addBullet('Plagiarism — All submitted ideas must be original and developed by the participating team.');
-        addBullet('Violation of Conduct Policy — Any breach of the professional conduct policy during any phase.');
-        addBullet('Ethical Breaches — Concepts promoting illegal, unethical, harmful, discriminatory, or socially irresponsible practices.');
-        y += 8;
-
-        addDivider();
-
-        // ── PRIZES & RECOGNITION
-        addSectionHeader('Recognition', 'Prizes & Recognition');
-        y = addWrappedText('The prize structure will be announced at a later stage. Winners may receive:', marginL, y, contentW, 5.5, 'normal', 10, medGray);
-        y += 4;
-        addBullet('Winning teams will receive awards and official recognition certificates issued by the Rotaract Club of SLIIT for their achievements.');
-        addBullet('Finalists and all registered participants will receive recognition certificates in appreciation of their active participation.');
-        addBullet('Participants will gain networking exposure through interactions with judges, industry professionals, academic representatives, and fellow student entrepreneurs.');
-        addBullet('Winning teams will receive support in the development of a professional website to assist in marketing their business.');
-        addBullet('Participants, particularly finalists and winning teams, may gain access to potential mentorship opportunities from industry professionals and academic experts.');
-
-        // ── Footer on last page
-        y = pageH - 25;
-        doc.setDrawColor(...brandBlue);
-        doc.setLineWidth(0.5);
-        doc.line(marginL, y, pageW - marginR, y);
-        y += 8;
+        doc.setFillColor(...cardBg);
+        doc.setDrawColor(220, 228, 240);
+        doc.setLineWidth(0.3);
+        doc.roundedRect(mL, y - 3, dayCardW, dayCardH, 3, 3, 'FD');
+        doc.setFillColor(...blue);
+        doc.roundedRect(mL, y - 3, dayCardW, 8, 3, 3, 'F');
+        doc.rect(mL, y + 1, dayCardW, 4, 'F');
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(8);
-        doc.setTextColor(...brandBlue);
-        doc.text('SYNERGY CIRCLE 2026', marginL, y);
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(7.5);
-        doc.setTextColor(...lightGray);
-        doc.text('Organized by the Rotaract Club of SLIIT in collaboration with SLIIT Business School', marginL, y + 5);
-        doc.text('www.synergycircle.online', pageW - marginR, y + 5, { align: 'right' });
+        doc.setTextColor(...white);
+        doc.text('DAY 1 \u2014 PRELIMINARY ROUND', mL + 5, y + 2);
 
-        // Add page numbers to all pages
+        let dy1 = y + 12;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8.5);
+        doc.setTextColor(...mid);
+        doc.text('Evaluate teams & shortlist finalists', mL + 5, dy1); dy1 += 6;
+        doc.setFillColor(...blue);
+        doc.circle(mL + 7, dy1 - 1, 0.8, 'F');
+        doc.text('5-7 min pitch presentation', mL + 10, dy1); dy1 += 5;
+        doc.setFillColor(...blue);
+        doc.circle(mL + 7, dy1 - 1, 0.8, 'F');
+        doc.text('3-5 min Q&A session', mL + 10, dy1); dy1 += 7;
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(7.5);
+        doc.setTextColor(...blue);
+        doc.text('Top 5 teams qualify for Grand Finale', mL + 5, dy1);
+
+        // Day 2
+        const d2x = mL + dayCardW + 6;
+        doc.setFillColor(...cardBg);
+        doc.setDrawColor(220, 228, 240);
+        doc.roundedRect(d2x, y - 3, dayCardW, dayCardH, 3, 3, 'FD');
+        doc.setFillColor(...amber);
+        doc.roundedRect(d2x, y - 3, dayCardW, 8, 3, 3, 'F');
+        doc.rect(d2x, y + 1, dayCardW, 4, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(8);
+        doc.setTextColor(...white);
+        doc.text('DAY 2 \u2014 GRAND FINALE', d2x + 5, y + 2);
+
+        let dy2 = y + 12;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8.5);
+        doc.setTextColor(...mid);
+        doc.text('Determine final winners', d2x + 5, dy2); dy2 += 6;
+        doc.setFillColor(...amber);
+        doc.circle(d2x + 7, dy2 - 1, 0.8, 'F');
+        doc.text('10-minute detailed pitch', d2x + 10, dy2); dy2 += 5;
+        doc.setFillColor(...amber);
+        doc.circle(d2x + 7, dy2 - 1, 0.8, 'F');
+        doc.text('5-10 minute Q&A', d2x + 10, dy2); dy2 += 7;
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(7.5);
+        doc.setTextColor(...amber);
+        doc.text('Winners announced at closing ceremony', d2x + 5, dy2);
+
+        y += dayCardH + 8;
+
+        // Note
+        ensureSpace(14);
+        doc.setFillColor(248, 250, 252);
+        doc.setDrawColor(220, 225, 235);
+        doc.roundedRect(mL, y - 3, cW, 12, 2.5, 2.5, 'FD');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(8);
+        doc.setTextColor(...dark);
+        doc.text('Note:', mL + 5, y + 2);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(...mid);
+        doc.text('Judges may probe questions on finance, scalability, risk mitigation, & sustainability.', mL + 18, y + 2);
+        y += 18;
+
+        // ═══════════════════════════════════════
+        // ELIGIBLE CATEGORIES
+        // ═══════════════════════════════════════
+        sectionHeader('Categories', 'Eligible Categories');
+        wrapText(
+          'No restrictions on category or industry. Propose concepts across any sector:',
+          mL + 8, cW - 10, 5, 'normal', 10, mid
+        );
+        y += 3;
+
+        // Category pills
+        const cats = ['Technology', 'Social Innovation', 'Sustainability', 'Consumer Products', 'Digital Platforms', 'Services', 'Emerging Industries'];
+        let pillX = mL + 8;
+        const pillH = 6;
+        ensureSpace(20);
+        cats.forEach(cat => {
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(7.5);
+          const tw = doc.getTextWidth(cat) + 8;
+          if (pillX + tw > pageW - mR) {
+            pillX = mL + 8;
+            y += pillH + 3;
+            ensureSpace(pillH + 4);
+          }
+          doc.setFillColor(240, 246, 255);
+          doc.setDrawColor(200, 220, 245);
+          doc.setLineWidth(0.2);
+          doc.roundedRect(pillX, y - 3, tw, pillH, 3, 3, 'FD');
+          doc.setTextColor(...blue);
+          doc.text(cat, pillX + 4, y + 0.5);
+          pillX += tw + 3;
+        });
+        y += pillH + 8;
+
+        // Restrictions warning
+        ensureSpace(16);
+        doc.setFillColor(255, 245, 245);
+        doc.setDrawColor(252, 200, 200);
+        doc.setLineWidth(0.3);
+        doc.roundedRect(mL, y - 3, cW, 14, 2.5, 2.5, 'FD');
+        doc.setFillColor(...red);
+        doc.roundedRect(mL, y - 3, 2.5, 14, 1.2, 1.2, 'F');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(8.5);
+        doc.setTextColor(...red);
+        doc.text('Restrictions', mL + 7, y + 1);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(120, 80, 80);
+        const rLines = doc.splitTextToSize('All ideas must be original. Concepts promoting illegal, unethical, harmful, or discriminatory practices will not be accepted.', cW - 14);
+        rLines.forEach((ln: string, i: number) => {
+          doc.text(ln, mL + 7, y + 5.5 + i * 4);
+        });
+        y += 22;
+
+        // ═══════════════════════════════════════
+        // TEAM STRUCTURE
+        // ═══════════════════════════════════════
+        sectionHeader('Structure', 'Team Requirements');
+        bullet('1\u20135 members per team');
+        bullet('Cross-university collaboration allowed');
+        bullet('Each participant may join only one team');
+        bullet('Teams cannot change members after the submission deadline');
+        y += 8;
+
+        // ═══════════════════════════════════════
+        // TIME REGULATIONS
+        // ═══════════════════════════════════════
+        sectionHeader('Regulations', 'Time Management', amber);
+        bullet('Timer will be visible throughout your presentation.', 0, amber);
+        bullet('1-minute warning will be given.', 0, amber);
+        bullet('Exceeding allocated time may result in scoring penalties.', 0, amber);
+        y += 8;
+
+        // ═══════════════════════════════════════
+        // PROFESSIONAL CONDUCT
+        // ═══════════════════════════════════════
+        sectionHeader('Conduct', 'Professional Standards');
+        wrapText('Participants are expected to:', mL + 8, cW - 10, 5, 'normal', 10, mid);
+        y += 2;
+        bullet('Maintain professional attire');
+        bullet('Show respect toward judges and peers');
+        bullet('Avoid disruptive behavior');
+        y += 2;
+        wrapText('Misconduct may lead to disqualification.', mL + 8, cW - 10, 5, 'bold', 9, red);
+        y += 8;
+
+        // ═══════════════════════════════════════
+        // DISQUALIFICATION
+        // ═══════════════════════════════════════
+        sectionHeader('Warning', 'Disqualification Conditions', red);
+        wrapText('A team may be disqualified for:', mL + 8, cW - 10, 5, 'normal', 10, mid);
+        y += 2;
+        bullet('Plagiarism \u2014 All ideas must be original and developed by the team.', 0, red);
+        bullet('Conduct Violation \u2014 Any breach of the professional conduct policy.', 0, red);
+        bullet('Ethical Breaches \u2014 Concepts promoting illegal, unethical, or harmful practices.', 0, red);
+        y += 8;
+
+        // ═══════════════════════════════════════
+        // PRIZES & RECOGNITION
+        // ═══════════════════════════════════════
+        sectionHeader('Recognition', 'Prizes & Recognition');
+        wrapText('The prize structure will be announced at a later stage. Winners may receive:', mL + 8, cW - 10, 5, 'normal', 10, mid);
+        y += 3;
+        bullet('Awards and official recognition certificates issued by the Rotaract Club of SLIIT.');
+        bullet('Finalists and all registered participants will receive recognition certificates.');
+        bullet('Networking exposure with judges, industry professionals, and academic representatives.');
+        bullet('Support in developing a professional website for their business.');
+        bullet('Access to potential mentorship opportunities from industry professionals.');
+
+        // ═══════════════════════════════════════
+        // PAGE NUMBERING & BRANDING
+        // ═══════════════════════════════════════
         const totalPages = doc.getNumberOfPages();
         for (let i = 1; i <= totalPages; i++) {
           doc.setPage(i);
+
+          // Page number
           doc.setFont('helvetica', 'normal');
           doc.setFontSize(7);
-          doc.setTextColor(...lightGray);
-          doc.text(`Page ${i} of ${totalPages}`, pageW - marginR, pageH - 8, { align: 'right' });
-          // Top right branding on each page after cover
+          doc.setTextColor(...light);
+          doc.text(`${i} / ${totalPages}`, pageW - mR, pageH - 8, { align: 'right' });
+
           if (i > 1) {
+            // Top brand bar
+            doc.setFillColor(...blue);
+            doc.rect(0, 0, pageW, 2, 'F');
+            // Top-right branding
             doc.setFont('helvetica', 'bold');
-            doc.setFontSize(7);
-            doc.setTextColor(...brandBlue);
-            doc.text('SYNERGY CIRCLE 2026', pageW - marginR, 12, { align: 'right' });
-            // Top accent line
-            doc.setDrawColor(...brandBlue);
-            doc.setLineWidth(0.8);
-            doc.line(marginL, 16, pageW - marginR, 16);
+            doc.setFontSize(6.5);
+            doc.setTextColor(...blue);
+            doc.text('SYNERGY CIRCLE 2026', pageW - mR, 10, { align: 'right' });
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(6.5);
+            doc.setTextColor(...light);
+            doc.text("Delegates' Handbook", mL, 10);
+            // Thin line
+            doc.setDrawColor(230, 235, 240);
+            doc.setLineWidth(0.3);
+            doc.line(mL, 14, pageW - mR, 14);
+            // Bottom line
+            doc.setDrawColor(230, 235, 240);
+            doc.line(mL, pageH - 12, pageW - mR, pageH - 12);
           }
         }
 
@@ -1032,10 +1118,13 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                 ].map((item, idx) => (
                   <motion.div
                     key={idx}
-                    className="flex items-start gap-4 p-5 bg-slate-50 rounded-2xl group hover:bg-amber-50/60 transition-colors duration-300"
-                    whileHover={{ scale: 1.02 }}
+                    className="flex items-start gap-4 p-5 bg-white/80 backdrop-blur-md border border-slate-100/80 rounded-2xl group hover:border-[#005bb7]/20 hover:shadow-lg hover:shadow-[#005bb7]/5 transition-all duration-500"
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
                   >
-                    <span className="text-2xl shrink-0">{item.icon}</span>
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#005bb7]/10 to-[#005bb7]/5 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <span className="text-lg">{item.icon}</span>
+                    </div>
                     <div>
                       <p className="text-slate-900 font-black text-base">{item.label}</p>
                       <p className="text-slate-500 text-sm font-medium">{item.value}</p>
@@ -1044,41 +1133,59 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                 ))}
               </div>
 
-              {/* Visual Duration Bars */}
-              <div className="p-7 bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl">
-                <p className="text-white/50 text-[10px] font-black uppercase tracking-widest mb-6">Pitch Duration Comparison</p>
-                <div className="space-y-5">
-                  <div>
-                    <div className="flex justify-between mb-2">
-                      <span className="text-white/80 text-sm font-bold">Preliminary</span>
-                      <span className="text-[#005bb7] text-sm font-black">5-7 min</span>
+              {/* Pitch Duration Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <motion.div
+                  className="relative overflow-hidden bg-gradient-to-br from-[#005bb7]/[0.06] to-[#005bb7]/[0.02] backdrop-blur-md border border-[#005bb7]/15 rounded-3xl p-6 group"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
+                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/40 to-transparent pointer-events-none"></div>
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="mono text-[9px] font-black uppercase tracking-[0.3em] text-[#005bb7]">Day 1</span>
+                      <div className="w-2 h-2 bg-[#005bb7] rounded-full animate-pulse"></div>
                     </div>
-                    <div className="w-full bg-white/10 rounded-full h-3">
-                      <motion.div
-                        className="h-3 bg-gradient-to-r from-[#005bb7] to-[#0070e0] rounded-full"
-                        initial={{ width: '0%' }}
-                        whileInView={{ width: '60%' }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.2, delay: 0.2, ease: 'easeOut' }}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex justify-between mb-2">
-                      <span className="text-white/80 text-sm font-bold">Grand Finale</span>
-                      <span className="text-amber-400 text-sm font-black">10 min</span>
-                    </div>
-                    <div className="w-full bg-white/10 rounded-full h-3">
-                      <motion.div
-                        className="h-3 bg-gradient-to-r from-amber-400 to-amber-500 rounded-full"
-                        initial={{ width: '0%' }}
-                        whileInView={{ width: '85%' }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1.2, delay: 0.4, ease: 'easeOut' }}
-                      />
+                    <h4 className="text-slate-900 font-black text-xl tracking-tight mb-1">Preliminary</h4>
+                    <p className="text-slate-400 text-xs font-bold mb-5">First Round</p>
+                    <div className="space-y-2">
+                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-[#005bb7]/10 rounded-full">
+                        <span className="text-xs">🎤</span>
+                        <span className="text-slate-700 font-bold text-xs">5-7 min pitch</span>
+                      </div>
+                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-[#005bb7]/10 rounded-full ml-1">
+                        <span className="text-xs">💬</span>
+                        <span className="text-slate-700 font-bold text-xs">3-5 min Q&A</span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
+
+                <motion.div
+                  className="relative overflow-hidden bg-gradient-to-br from-amber-400/[0.08] to-amber-500/[0.02] backdrop-blur-md border border-amber-300/20 rounded-3xl p-6 group"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
+                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/40 to-transparent pointer-events-none"></div>
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="mono text-[9px] font-black uppercase tracking-[0.3em] text-amber-600">Day 2</span>
+                      <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
+                    </div>
+                    <h4 className="text-slate-900 font-black text-xl tracking-tight mb-1">Grand Finale</h4>
+                    <p className="text-slate-400 text-xs font-bold mb-5">Final Round</p>
+                    <div className="space-y-2">
+                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-amber-300/20 rounded-full">
+                        <span className="text-xs">🎤</span>
+                        <span className="text-slate-700 font-bold text-xs">10 min pitch</span>
+                      </div>
+                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-amber-300/20 rounded-full ml-1">
+                        <span className="text-xs">💬</span>
+                        <span className="text-slate-700 font-bold text-xs">5-10 min Q&A</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
             </AccordionItem>
 

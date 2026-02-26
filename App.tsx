@@ -80,7 +80,7 @@ const App: React.FC = () => {
         <main>
           <Hero />
           <About />
-          <Phases />
+          <Phases onNavigateGuidelines={navigateToGuidelines} />
           <Eligibility onNavigateGuidelines={navigateToGuidelines} />
           <PrizePool />
           <ValueProp />
