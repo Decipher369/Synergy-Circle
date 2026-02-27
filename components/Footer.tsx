@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Footer: React.FC = () => {
   return (
@@ -55,9 +55,31 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Row */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">
-            © {new Date().getFullYear()} <a href="https://www.saltbuilds.online/" target="_blank" rel="noopener noreferrer" className="hover:text-[#005bb7] transition-colors">Salt</a> All rights reserved.
+        <motion.div 
+          className="flex flex-col sm:flex-row justify-between items-center gap-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.1 }}
+        >
+          <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest flex items-center gap-1 flex-wrap">
+            © {new Date().getFullYear()} 
+            <motion.a 
+              href="https://www.saltbuilds.online/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="inline-block hover:text-[#005bb7] transition-colors origin-bottom text-slate-600"
+              variants={{
+                hidden: { y: 0, rotate: 0 },
+                visible: {
+                  y: [0, -6, 0, -3, 0],
+                  rotate: [0, -10, 10, -5, 5, 0],
+                  transition: { duration: 0.6, ease: "easeInOut", delay: 0.2 }
+                }
+              }}
+            >
+              Salt
+            </motion.a> 
+            All rights reserved.
           </p>
           <button 
             onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
@@ -68,7 +90,7 @@ const Footer: React.FC = () => {
               ↑
             </span>
           </button>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

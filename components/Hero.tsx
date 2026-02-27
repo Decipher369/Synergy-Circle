@@ -127,8 +127,20 @@ const Hero: React.FC = () => {
                   </div>
                 ))}
 
-               {/* Sliced Effect Implementation */}
-               <div className="sliced-container text-6xl sm:text-7xl md:text-[140px] font-black tracking-tighter leading-none uppercase select-none">
+               {/* Sliced Effect Implementation - Mobile (Split to handle wrapping safely) */}
+               <div className="flex lg:hidden flex-wrap justify-center gap-[0.3em] text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-none uppercase select-none">
+                 <div className="sliced-container">
+                    <div className={`slice-top transition-transform duration-700 ${splitActive ? '-translate-y-2' : ''}`}>SYNERGY</div>
+                    <div className={`slice-bottom transition-transform duration-700 ${splitActive ? 'translate-y-2' : ''}`}>SYNERGY</div>
+                 </div>
+                 <div className="sliced-container">
+                    <div className={`slice-top transition-transform duration-700 ${splitActive ? '-translate-y-2' : ''}`}>CIRCLE</div>
+                    <div className={`slice-bottom transition-transform duration-700 ${splitActive ? 'translate-y-2' : ''}`}>CIRCLE</div>
+                 </div>
+               </div>
+
+               {/* Sliced Effect Implementation - Desktop (Single continuous cut) */}
+               <div className="hidden lg:inline-block relative sliced-container text-[100px] xl:text-[140px] font-black tracking-tighter leading-none uppercase select-none whitespace-nowrap">
                   <div className={`slice-top transition-transform duration-700 ${splitActive ? '-translate-y-2' : ''}`}>SYNERGY CIRCLE</div>
                   <div className={`slice-bottom transition-transform duration-700 ${splitActive ? 'translate-y-2' : ''}`}>SYNERGY CIRCLE</div>
                </div>
