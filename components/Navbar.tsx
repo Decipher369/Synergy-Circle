@@ -65,9 +65,6 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled, visible, onNavigateGuidelines
             Guidelines
             <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#005bb7] transition-all duration-300 group-hover:w-full"></span>
           </button>
-          <a href="#apply" className="px-4 xl:px-6 py-2 xl:py-2.5 bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-full text-[10px] xl:text-[11px] font-black uppercase tracking-[0.2em] hover:from-[#005bb7] hover:to-[#0070e0] transition-all duration-300 shadow-xl shadow-slate-900/10 shrink-0 mt-0">
-            Register
-          </a>
         </div>
         
         {/* Mobile Menu Button */}
@@ -104,13 +101,6 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled, visible, onNavigateGuidelines
           >
             Guidelines
           </button>
-          <a
-            href="#apply"
-            onClick={() => setMobileOpen(false)}
-            className="block mt-4 text-center py-4 bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:from-[#005bb7] hover:to-[#0070e0] transition-all"
-          >
-            Register Now
-          </a>
         </div>
       )}
     </nav>

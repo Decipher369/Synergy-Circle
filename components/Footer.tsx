@@ -29,7 +29,6 @@ const Footer: React.FC = () => {
               { label: 'Phases', href: '#phases' },
               { label: 'Prizes', href: '#prizes' },
               { label: 'Timeline', href: '#timeline' },
-              { label: 'Register', href: '#apply' },
             ].map((item) => (
               <a key={item.label} href={item.href} className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-[#005bb7] transition-colors">
                 {item.label}

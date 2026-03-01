@@ -1,6 +1,6 @@
 
 import React, { useState, useCallback, useRef } from 'react';
-import { MagneticButton } from './Animations';
+import Countdown from './Countdown';
 
 interface Rocket {
   id: number;
@@ -156,16 +156,12 @@ const Hero: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-6 items-center animate-in fade-in duration-1000 delay-500">
-            <MagneticButton>
-              <a href="#apply" className="px-12 py-5 bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-full font-black text-sm uppercase tracking-widest hover:from-[#005bb7] hover:to-[#0070e0] hover:scale-105 transition-all duration-300 shadow-2xl shadow-slate-900/20">
-                Register Now
-              </a>
-            </MagneticButton>
-            <div className="flex items-center gap-3 px-6 py-4 bg-white/80 backdrop-blur-sm border border-slate-100 rounded-full shadow-sm">
-                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-                <span className="text-xs font-black uppercase tracking-widest text-slate-400">Registrations Open</span>
+          <div className="flex flex-col gap-6 items-center animate-in fade-in duration-1000 delay-500">
+            <div className="flex items-center gap-3 px-6 py-4 bg-white/80 backdrop-blur-sm border border-slate-100 rounded-full shadow-sm mb-2">
+                <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
+                <span className="text-xs font-black uppercase tracking-widest text-slate-400">Registrations Open In</span>
             </div>
+            <Countdown />
           </div>
         </div>
       </div>

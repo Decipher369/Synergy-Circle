@@ -1323,26 +1323,15 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
           <ScaleUp>
             <div className="mono text-[#005bb7] mb-8 font-black uppercase tracking-[0.5em] text-xs">Ready?</div>
             <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-slate-900 tracking-tighter leading-[0.85] mb-8">
-              Register<br />Your <span className="text-[#005bb7]">Vision.</span>
+              Prepare<br />Your <span className="text-[#005bb7]">Vision.</span>
             </h2>
             <p className="text-slate-500 text-xl md:text-2xl font-medium leading-relaxed mb-14 max-w-xl mx-auto">
-              Now that you know the guidelines, it's time to take the first step.
+              Now that you know the guidelines, get ready to take the first step. Registrations open on March 3rd.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-              <motion.a
-                href="https://forms.gle/ktFne6zniNcP1QvG6"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-4 px-14 py-6 bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-full font-black text-sm uppercase tracking-[0.2em] hover:from-[#005bb7] hover:to-[#0070e0] transition-all duration-300 shadow-2xl shadow-slate-900/20"
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Register Now
-                <span className="text-xl group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
-              </motion.a>
               <motion.button
                 onClick={onBack}
-                className="group inline-flex items-center gap-3 px-10 py-6 bg-white border-2 border-slate-200 text-slate-600 rounded-full font-black text-sm uppercase tracking-[0.15em] hover:border-[#005bb7]/40 hover:text-[#005bb7] transition-all duration-300"
+                className="group inline-flex items-center gap-3 px-10 py-6 bg-slate-900 text-white rounded-full font-black text-sm uppercase tracking-[0.15em] hover:bg-[#005bb7] transition-all duration-300 shadow-2xl shadow-slate-900/20"
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
               >

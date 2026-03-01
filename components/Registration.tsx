@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { FadeUp, MagneticButton } from './Animations';
+import { FadeUp } from './Animations';
+import Countdown from './Countdown';
 
 const Registration: React.FC = () => {
   return (
@@ -12,13 +13,13 @@ const Registration: React.FC = () => {
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         <FadeUp>
           <div className="text-center mb-16">
-            <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em]">Register Now</div>
+            <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em]">Opening Soon</div>
             <h2 className="text-5xl md:text-7xl font-black text-slate-900 leading-[0.95] mb-8 tracking-tighter">
-              Register Your <br />
+              Prepare Your <br />
               <span className="text-[#005bb7]">Startup Vision.</span>
             </h2>
             <p className="text-slate-500 text-lg font-medium leading-relaxed max-w-2xl mx-auto">
-              Participants may register as <span className="text-slate-900 font-bold">individuals</span> or as <span className="text-slate-900 font-bold">teams</span>. Team leaders are required to complete the registration on behalf of their team members.
+              Participants may register as <span className="text-slate-900 font-bold">individuals</span> or as <span className="text-slate-900 font-bold">teams</span>. Team leaders will be required to complete the registration on behalf of their team members.
             </p>
           </div>
         </FadeUp>
@@ -26,21 +27,12 @@ const Registration: React.FC = () => {
 
         <FadeUp delay={0.3}>
           {/* CTA Button */}
-          <div className="text-center">
-            <MagneticButton className="inline-block">
-              <a
-                href="https://forms.gle/ktFne6zniNcP1QvG6"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-4 px-16 py-6 bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-full font-black text-sm uppercase tracking-[0.2em] hover:from-[#005bb7] hover:to-[#0070e0] hover:scale-105 transition-all duration-300 shadow-2xl shadow-slate-900/20"
-              >
-                Register Now
-                <span className="text-lg">↗</span>
-              </a>
-            </MagneticButton>
-            <p className="mt-6 text-slate-400 text-xs font-bold uppercase tracking-widest">
-              Opens Google Form in a new tab
-            </p>
+          <div className="text-center flex flex-col items-center">
+            <div className="inline-flex items-center gap-3 px-6 py-4 bg-white/80 backdrop-blur-sm border border-slate-200 rounded-full shadow-sm mb-6">
+                <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
+                <span className="text-xs font-black uppercase tracking-widest text-slate-400">Opening on March 3rd</span>
+            </div>
+            <Countdown />
           </div>
         </FadeUp>
       </div>
