@@ -4,11 +4,11 @@ import { FadeUp } from './Animations';
 
 const Timeline: React.FC = () => {
   const steps = [
-    { date: "Feb 25, 2026", event: "Official Reveal", status: "Registration Open", icon: "🚀" },
+    { date: "Mar 3, 2026", event: "Registration Opens", status: "Registration Open", icon: "🚀" },
     { date: "Mar 22, 2026", event: "Registration Closes", status: "Final Deadline", icon: "📋" },
     { date: "Mar 28, 2026", event: "Pitch Olympics Workshop", status: "Phase 1", icon: "🎓" },
-    { date: "Apr 25, 2026", event: "Competition — First Round", status: "Phase 2 · Day 1", icon: "🎤" },
-    { date: "Apr 26, 2026", event: "The Grand Finale", status: "Phase 2 · Day 2", icon: "🏆" },
+    { date: "TBA", event: "Competition — First Round", status: "Phase 2 · Day 1", icon: "🎤" },
+    { date: "TBA", event: "The Grand Finale", status: "Phase 2 · Day 2", icon: "🏆" },
   ];
 
   return (
@@ -109,7 +109,7 @@ const Timeline: React.FC = () => {
           <div className="flex items-center gap-3">
             <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-slate-200"></div>
             <div className="w-2 h-2 bg-[#005bb7]/20 rounded-full"></div>
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300">Feb — Apr 2026</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300">Mar — Apr 2026</span>
             <div className="w-2 h-2 bg-[#005bb7]/20 rounded-full"></div>
             <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-slate-200"></div>
           </div>
