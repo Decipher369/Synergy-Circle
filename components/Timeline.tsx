@@ -1,15 +1,13 @@
 
 import React from 'react';
 import { FadeUp } from './Animations';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const Timeline: React.FC = () => {
-  const steps = [
-    { date: "Mar 3, 2026", event: "Registration Opens", status: "Registration Open", icon: "🚀" },
-    { date: "Mar 22, 2026", event: "Registration Closes", status: "Final Deadline", icon: "📋" },
-    { date: "Mar 28, 2026", event: "Pitch Olympics Workshop", status: "Phase 1", icon: "🎓" },
-    { date: "TBA", event: "Competition — First Round", status: "Phase 2 · Day 1", icon: "🎤" },
-    { date: "TBA", event: "The Grand Finale", status: "Phase 2 · Day 2", icon: "🏆" },
-  ];
+  const { t } = useLanguage();
+
+  const dates = ["Mar 3, 2026", "Mar 22, 2026", "Mar 28, 2026", "TBA", "TBA"];
+  const icons = ["🚀", "📋", "🎓", "🎤", "🏆"];
 
   return (
     <section id="timeline" className="pt-16 md:pt-24 pb-8 overflow-hidden bg-white relative">
@@ -53,19 +51,19 @@ const Timeline: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <FadeUp>
           <div className="text-center mb-20">
-            <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em]">The Roadmap</div>
-            <h2 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter mb-4">Key Milestones</h2>
-            <p className="text-slate-400 text-lg font-medium max-w-lg mx-auto">Your journey from idea to impact — mapped out.</p>
+            <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em]">{t.timeline.sectionLabel}</div>
+            <h2 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter mb-4">{t.timeline.heading}</h2>
+            <p className="text-slate-400 text-lg font-medium max-w-lg mx-auto">{t.timeline.subheading}</p>
           </div>
         </FadeUp>
         
-        {/* Timeline Cards - Vertical on mobile, horizontal on desktop */}
+        {/* Timeline Cards */}
         <div className="relative">
           {/* Connector Line */}
           <div className="absolute left-8 md:left-0 top-0 md:top-1/2 w-[2px] md:w-full h-full md:h-[2px] bg-gradient-to-b md:bg-gradient-to-r from-[#005bb7]/20 via-slate-200 to-[#005bb7]/20 md:-translate-y-1/2"></div>
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-6">
-            {steps.map((step, i) => (
+            {t.timeline.steps.map((step, i) => (
               <div key={i} className="relative group">
                 {/* Dot on the line */}
                 <div className="absolute left-8 md:left-1/2 top-0 md:top-0 -translate-x-1/2 z-20">
@@ -74,8 +72,8 @@ const Timeline: React.FC = () => {
                       ? 'bg-[#005bb7] shadow-[#005bb7]/20 rotate-[-6deg] scale-110' 
                       : 'bg-white/80 backdrop-blur-xl border-slate-100 group-hover:bg-[#005bb7]/5 group-hover:border-[#005bb7]/20 group-hover:rotate-[-6deg]'
                   }`}>
-                    <span className={`text-2xl transition-transform duration-500 group-hover:scale-125 ${i === 0 ? '' : ''}`}>
-                      {step.icon}
+                    <span className={`text-2xl transition-transform duration-500 group-hover:scale-125`}>
+                      {icons[i]}
                     </span>
                   </div>
                 </div>
@@ -88,7 +86,7 @@ const Timeline: React.FC = () => {
                     {/* Subtle glass refraction */}
                     <div className="absolute -top-6 -right-6 w-20 h-20 bg-[#005bb7]/[0.03] blur-[25px] rounded-full"></div>
                     
-                    <span className="mono text-[#005bb7] text-[11px] font-black mb-3 tracking-widest uppercase block">{step.date}</span>
+                    <span className="mono text-[#005bb7] text-[11px] font-black mb-3 tracking-widest uppercase block">{dates[i]}</span>
                     <h4 className="text-lg font-black text-slate-900 mb-3 tracking-tight leading-tight">{step.event}</h4>
                     <span className={`inline-block px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] font-black transition-all ${
                       i === 0 
@@ -109,7 +107,7 @@ const Timeline: React.FC = () => {
           <div className="flex items-center gap-3">
             <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-slate-200"></div>
             <div className="w-2 h-2 bg-[#005bb7]/20 rounded-full"></div>
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300">Mar — Apr 2026</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300">{t.timeline.bottomLabel}</span>
             <div className="w-2 h-2 bg-[#005bb7]/20 rounded-full"></div>
             <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-slate-200"></div>
           </div>

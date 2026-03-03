@@ -1,12 +1,14 @@
 
 import React from 'react';
 import { FadeUp, ScaleUp, StaggerContainer, StaggerItem } from './Animations';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const PrizePool: React.FC = () => {
+  const { t } = useLanguage();
+
   const prizes = [
     {
       place: "1st",
-      title: "Grand Champion",
       amount: "TBA",
       color: "from-amber-400/20 via-yellow-300/10 to-amber-500/5",
       border: "border-amber-300/30",
@@ -15,7 +17,6 @@ const PrizePool: React.FC = () => {
     },
     {
       place: "2nd",
-      title: "First Runner-Up",
       amount: "TBA",
       color: "from-slate-300/20 via-slate-200/10 to-slate-400/5",
       border: "border-slate-300/30",
@@ -24,7 +25,6 @@ const PrizePool: React.FC = () => {
     },
     {
       place: "3rd",
-      title: "Second Runner-Up",
       amount: "TBA",
       color: "from-orange-400/15 via-amber-600/10 to-orange-500/5",
       border: "border-orange-300/30",
@@ -43,12 +43,12 @@ const PrizePool: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <FadeUp>
           <div className="text-center mb-20">
-            <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em]">Rewards</div>
+            <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em]">{t.prizes.sectionLabel}</div>
             <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-none tracking-tighter mb-6">
-              Prize <span className="text-white/30">Pool</span>
+              {t.prizes.heading1} <span className="text-white/30">{t.prizes.heading2}</span>
             </h2>
             <p className="text-slate-400 text-xl font-medium max-w-2xl mx-auto leading-relaxed">
-              Compete for exciting prizes and recognition. The top three ventures of Synergy Circle 2026 walk away with more than just a title.
+              {t.prizes.description}
             </p>
           </div>
         </FadeUp>
@@ -77,10 +77,10 @@ const PrizePool: React.FC = () => {
                     {prize.icon}
                   </div>
                   <div className={`mono text-[10px] font-black mb-3 tracking-[0.4em] uppercase ${prize.accent}`}>
-                    {prize.place} Place
+                    {prize.place} {t.prizes.place}
                   </div>
                   <h3 className="text-3xl font-black text-white mb-8 tracking-tighter group-hover:text-white transition-colors">
-                    {prize.title}
+                    {t.prizes.titles[idx]}
                   </h3>
                   
                 </div>
@@ -95,7 +95,7 @@ const PrizePool: React.FC = () => {
             <div className="inline-flex items-center gap-4 bg-gradient-to-r from-[#005bb7]/10 to-[#005bb7]/5 border border-[#005bb7]/20 rounded-full px-8 py-4">
               <div className="w-2.5 h-2.5 bg-[#005bb7] rounded-full animate-pulse"></div>
               <span className="text-white/70 text-xs font-black uppercase tracking-[0.3em]">
-                Prize details will be updated soon
+                {t.prizes.updateNotice}
               </span>
             </div>
           </div>

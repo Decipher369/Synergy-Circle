@@ -1,7 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const Footer: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <footer className="py-8 border-t border-slate-100 bg-white relative">
       <div className="max-w-7xl mx-auto px-6">
@@ -25,10 +28,10 @@ const Footer: React.FC = () => {
           {/* Nav Links */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {[
-              { label: 'About', href: '#about' },
-              { label: 'Phases', href: '#phases' },
-              { label: 'Prizes', href: '#prizes' },
-              { label: 'Timeline', href: '#timeline' },
+              { label: t.nav.about, href: '#about' },
+              { label: t.nav.phases, href: '#phases' },
+              { label: t.nav.prizes, href: '#prizes' },
+              { label: t.nav.timeline, href: '#timeline' },
             ].map((item) => (
               <a key={item.label} href={item.href} className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-[#005bb7] transition-colors">
                 {item.label}
@@ -39,7 +42,7 @@ const Footer: React.FC = () => {
 
         {/* Contact Row */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6 pb-6 border-b border-slate-100">
-          <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-300">Inquiries</span>
+          <span className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-300">{t.footer.inquiries}</span>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <div className="flex items-center gap-2">
               <span className="text-[11px] font-bold text-slate-600">Rtr. Eranga Mendis</span>
@@ -78,13 +81,13 @@ const Footer: React.FC = () => {
             >
               Salt
             </motion.a> 
-            All rights reserved.
+            {t.footer.allRights}
           </p>
           <button 
             onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
             className="group flex items-center gap-2 text-[9px] font-black text-slate-400 hover:text-[#005bb7] transition-all uppercase tracking-[0.2em]"
           >
-            Back to top
+            {t.footer.backToTop}
             <span className="w-7 h-7 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-[#005bb7] group-hover:border-[#005bb7] group-hover:text-white transition-all group-hover:-translate-y-1 text-[10px]">
               ↑
             </span>

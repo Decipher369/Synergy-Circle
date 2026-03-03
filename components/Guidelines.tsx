@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { FadeUp, ScaleUp, SlideLeft, SlideRight, StaggerContainer, StaggerItem } from './Animations';
 import jsPDF from 'jspdf';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface GuidelinesProps {
   onBack: () => void;
@@ -113,6 +114,8 @@ const PhaseTab: React.FC<{ label: string; active: boolean; onClick: () => void }
 
 
 const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
+  const { t } = useLanguage();
+  const g = t.guidelines;
   const [activePhase, setActivePhase] = useState<1 | 2>(1);
   const [openAccordion, setOpenAccordion] = useState<number | null>(null);
   const [hoveredPrize, setHoveredPrize] = useState<number | null>(null);
@@ -601,25 +604,17 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
     }, 100);
   }, []);
 
-  const workshopGuidelines = [
-    { num: '01', text: 'Registration confirmation is required to enter the workshop.', icon: '✅' },
-    { num: '02', text: 'Please arrive on or before the scheduled start time.', icon: '⏰' },
-    { num: '03', text: 'Bring a notebook or device for taking notes.', icon: '📝' },
-    { num: '04', text: 'No prior pitching knowledge or business idea is required.', icon: '💡' },
-    { num: '05', text: 'Follow all instructions given by the organising committee and facilitators.', icon: '📋' },
-    { num: '06', text: 'Active participation in all activities is expected.', icon: '🙋' },
-    { num: '07', text: 'Be respectful to facilitators and fellow participants at all times.', icon: '🤝' },
-    { num: '08', text: 'Food and drinks are allowed only in designated areas.', icon: '🍽️' },
-    { num: '09', text: 'Certificates will be given only to participants who complete the full programme.', icon: '🎓' },
-  ];
+  const workshopGuidelineIcons = ['✅', '⏰', '📝', '💡', '📋', '🙋', '🤝', '🍽️', '🎓'];
+  const workshopGuidelines = g.phase1Guidelines.map((item, idx) => ({
+    ...item,
+    icon: workshopGuidelineIcons[idx] || '📌',
+  }));
 
-  const prizeItems = [
-    { icon: '🏆', title: 'Awards & Certificates', text: 'Winning teams will receive awards and official recognition certificates issued by the Rotaract Club of SLIIT.' },
-    { icon: '📜', title: 'Participation Certificates', text: 'Finalists and all registered participants will receive recognition certificates for their active participation.' },
-    { icon: '🌐', title: 'Networking Exposure', text: 'Gain exposure through interactions with judges, industry professionals, academic representatives, and fellow student entrepreneurs.' },
-    { icon: '💻', title: 'Website Development', text: 'Winning teams will receive support in the development of a professional website for their business.' },
-    { icon: '🎓', title: 'Mentorship Access', text: 'Finalists and winning teams may gain access to potential mentorship opportunities from industry professionals and academic experts.' },
-  ];
+  const prizeItemIcons = ['🏆', '📜', '🌐', '💻', '🎓'];
+  const prizeItems = g.prizeItems.map((item, idx) => ({
+    ...item,
+    icon: prizeItemIcons[idx] || '🎖️',
+  }));
 
   return (
     <div className="min-h-screen bg-[#fcfcfc] relative overflow-hidden">
@@ -651,7 +646,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
         <svg className="w-5 h-5 text-slate-600 group-hover:text-[#005bb7] transition-all group-hover:-translate-x-1.5 duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
-        <span className="text-xs font-black uppercase tracking-widest text-slate-600 group-hover:text-[#005bb7] transition-colors">Home</span>
+        <span className="text-xs font-black uppercase tracking-widest text-slate-600 group-hover:text-[#005bb7] transition-colors">{g.homeButton}</span>
       </motion.button>
 
       {/* ─── FLOATING DOWNLOAD PDF BUTTON ─── */}
@@ -676,7 +671,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
           </svg>
         )}
         <span className="text-xs font-black uppercase tracking-widest">
-          {isGeneratingPDF ? 'Generating...' : 'Download PDF'}
+          {isGeneratingPDF ? g.generating : g.downloadPdf}
         </span>
       </motion.button>
 
@@ -704,7 +699,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
               transition={{ duration: 1.2, delay: 0.3 }}
             >
               <motion.div className="w-10 h-[2px] bg-[#005bb7]" initial={{ width: 0 }} animate={{ width: 40 }} transition={{ duration: 0.8, delay: 0.6 }} />
-              Delegates' Handbook
+              {g.heroLabel}
               <motion.div className="w-10 h-[2px] bg-[#005bb7]" initial={{ width: 0 }} animate={{ width: 40 }} transition={{ duration: 0.8, delay: 0.6 }} />
             </motion.div>
 
@@ -715,7 +710,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                Info &
+                {g.heroTitle1}
               </motion.span>
               <motion.span
                 className="block text-[#005bb7]"
@@ -723,7 +718,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                Guidelines.
+                {g.heroTitle2}
               </motion.span>
             </h1>
 
@@ -733,7 +728,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              Everything you need to know about <span className="text-slate-900 font-bold">Synergy Circle 2026</span>.
+              {g.heroDescription}<span className="text-slate-900 font-bold">{g.heroDescBold}</span>.
             </motion.p>
           </motion.div>
 
@@ -744,7 +739,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 0.8 }}
           >
-            <span className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-300">Scroll</span>
+            <span className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-300">{g.scrollPrompt}</span>
             <motion.div
               className="w-[1px] h-10 bg-gradient-to-b from-slate-300 to-transparent"
               animate={{ scaleY: [1, 0.5, 1] }}
@@ -759,10 +754,10 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
         <div className="absolute inset-0 bg-gradient-to-r from-[#005bb7]/10 via-transparent to-[#005bb7]/10"></div>
         <div className="max-w-5xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
-            <AnimatedCounter target={2} label="Phases" />
-            <AnimatedCounter target={5} label="Max Team Size" delay={0.1} />
-            <AnimatedCounter target={5} label="Finalists" delay={0.2} />
-            <AnimatedCounter target={2} label="Competition Days" delay={0.3} />
+            <AnimatedCounter target={2} label={g.statPhases} />
+            <AnimatedCounter target={5} label={g.statMaxTeam} delay={0.1} />
+            <AnimatedCounter target={5} label={g.statFinalists} delay={0.2} />
+            <AnimatedCounter target={2} label={g.statDays} delay={0.3} />
           </div>
         </div>
       </section>
@@ -775,9 +770,9 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <FadeUp>
             <div className="mb-16 md:mb-20">
-              <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em] text-xs">Overview</div>
+              <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em] text-xs">{g.overviewLabel}</div>
               <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-slate-900 tracking-tighter leading-[0.85]">
-                What is <br />Synergy <span className="text-[#005bb7]">Circle?</span>
+                {g.overviewHeading1}<br />{g.overviewHeading2}<span className="text-[#005bb7]">{g.overviewHeading3}</span>
               </h2>
             </div>
           </FadeUp>
@@ -786,15 +781,15 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
             <SlideLeft>
               <div className="space-y-8">
                 <p className="text-slate-600 text-xl md:text-2xl font-medium leading-relaxed">
-                  Synergy Circle is designed to cultivate <strong className="text-slate-900">innovation</strong>, <strong className="text-slate-900">strategic thinking</strong>, and <strong className="text-slate-900">entrepreneurial confidence</strong> among undergraduates.
+                  {g.overviewParagraph1}<strong className="text-slate-900">{g.overviewBold1}</strong>, <strong className="text-slate-900">{g.overviewBold2}</strong>, {g.overviewBold3}
                 </p>
                 <p className="text-slate-500 text-lg md:text-xl font-medium leading-relaxed">
-                  This initiative is not merely a pitching competition — it is a <span className="text-[#005bb7] font-bold">structured journey</span> that equips participants with the mindset, tools, and exposure required to translate ideas into viable ventures.
+                  {g.overviewParagraph2}<span className="text-[#005bb7] font-bold">{g.overviewParagraph2Bold}</span>
                 </p>
                 <div className="flex items-start gap-5 pt-4 p-6 bg-[#005bb7]/5 rounded-2xl border border-[#005bb7]/10">
                   <div className="w-1 h-full min-h-[60px] bg-[#005bb7] rounded-full shrink-0"></div>
                   <p className="text-slate-800 font-bold text-lg md:text-xl italic leading-relaxed">
-                    "We encourage all delegates to approach this opportunity with professionalism, preparation, and bold thinking."
+                    {g.overviewQuote}
                   </p>
                 </div>
               </div>
@@ -803,10 +798,10 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
             <SlideRight>
               <div className="grid grid-cols-2 gap-4">
                 {[
-                  { emoji: '🧠', title: 'Strategic', subtitle: 'Thinking' },
-                  { emoji: '🚀', title: 'Startup', subtitle: 'Mindset' },
-                  { emoji: '🎤', title: 'Pitching', subtitle: 'Skills' },
-                  { emoji: '🌍', title: 'Real-World', subtitle: 'Exposure' },
+                  { emoji: '🧠', ...g.overviewCards[0] },
+                  { emoji: '🚀', ...g.overviewCards[1] },
+                  { emoji: '🎤', ...g.overviewCards[2] },
+                  { emoji: '🌍', ...g.overviewCards[3] },
                 ].map((item, idx) => (
                   <motion.div
                     key={idx}
@@ -833,9 +828,9 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <FadeUp>
             <div className="text-center mb-16 md:mb-20">
-              <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em] text-xs">Program Structure</div>
+              <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em] text-xs">{g.phasesLabel}</div>
               <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-white tracking-tighter leading-[0.85] mb-6">
-                Two Phases.<br /><span className="text-white/20">One Journey.</span>
+                {g.phasesHeading1}<br /><span className="text-white/20">{g.phasesHeading2}</span>
               </h2>
             </div>
           </FadeUp>
@@ -843,8 +838,8 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
           {/* Tab Buttons */}
           <FadeUp delay={0.2}>
             <div className="flex justify-center gap-4 mb-16">
-              <PhaseTab label="Phase 1 — Workshop" active={activePhase === 1} onClick={() => setActivePhase(1)} />
-              <PhaseTab label="Phase 2 — Competition" active={activePhase === 2} onClick={() => setActivePhase(2)} />
+              <PhaseTab label={g.phaseTab1} active={activePhase === 1} onClick={() => setActivePhase(1)} />
+              <PhaseTab label={g.phaseTab2} active={activePhase === 2} onClick={() => setActivePhase(2)} />
             </div>
           </FadeUp>
 
@@ -863,17 +858,17 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                   <div className="relative z-10">
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                       <div>
-                        <span className="mono text-[#005bb7] text-sm font-black tracking-[0.3em]">PHASE 01</span>
-                        <h3 className="text-4xl md:text-6xl font-black text-white tracking-tight mt-2">Pitch Olympics</h3>
-                        <p className="text-[#005bb7] font-black uppercase text-xs tracking-widest mt-2">Workshop</p>
+                        <span className="mono text-[#005bb7] text-sm font-black tracking-[0.3em]">{g.phase1Label}</span>
+                        <h3 className="text-4xl md:text-6xl font-black text-white tracking-tight mt-2">{g.phase1Title}</h3>
+                        <p className="text-[#005bb7] font-black uppercase text-xs tracking-widest mt-2">{g.phase1Subtitle}</p>
                       </div>
                       <p className="text-white/50 text-lg font-medium max-w-md leading-relaxed">
-                        A structured training workshop designed to develop pitching competence and business validation skills.
+                        {g.phase1Description}
                       </p>
                     </div>
 
                     <div className="h-[1px] w-full bg-white/10 mb-10"></div>
-                    <h4 className="text-white font-black text-lg uppercase tracking-widest mb-8">Workshop Guidelines</h4>
+                    <h4 className="text-white font-black text-lg uppercase tracking-widest mb-8">{g.phase1GuidelinesTitle}</h4>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       {workshopGuidelines.map((item, idx) => (
@@ -911,12 +906,12 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                   <div className="relative z-10">
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                       <div>
-                        <span className="mono text-white/50 text-sm font-black tracking-[0.3em]">PHASE 02</span>
-                        <h3 className="text-4xl md:text-6xl font-black text-white tracking-tight mt-2">The Competition</h3>
-                        <p className="text-white/50 font-black uppercase text-xs tracking-widest mt-2">Competitive Evaluation</p>
+                        <span className="mono text-white/50 text-sm font-black tracking-[0.3em]">{g.phase2Label}</span>
+                        <h3 className="text-4xl md:text-6xl font-black text-white tracking-tight mt-2">{g.phase2Title}</h3>
+                        <p className="text-white/50 font-black uppercase text-xs tracking-widest mt-2">{g.phase2Subtitle}</p>
                       </div>
                       <p className="text-white/50 text-lg font-medium max-w-md leading-relaxed">
-                        Teams present their refined business concepts before a judging panel across two days.
+                        {g.phase2Description}
                       </p>
                     </div>
 
@@ -933,24 +928,24 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                           <div className="flex items-center gap-3 mb-5">
                             <div className="w-12 h-12 bg-[#005bb7]/20 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">📅</div>
                             <div>
-                              <p className="text-white font-black text-lg uppercase tracking-widest">Day 1</p>
-                              <p className="text-white/40 text-xs font-bold uppercase tracking-wider">Preliminary Round</p>
+                              <p className="text-white font-black text-lg uppercase tracking-widest">{g.phase2Day1Title}</p>
+                              <p className="text-white/40 text-xs font-bold uppercase tracking-wider">{g.phase2Day1Subtitle}</p>
                             </div>
                           </div>
-                          <p className="text-white/80 text-base leading-relaxed font-medium mb-6">Evaluate all participating teams and shortlist finalists.</p>
+                          <p className="text-white/80 text-base leading-relaxed font-medium mb-6">{g.phase2Day1Desc}</p>
                           <div className="space-y-3">
                             <div className="flex items-center gap-3 p-3 bg-white/5 rounded-xl">
                               <div className="w-8 h-8 bg-[#005bb7]/20 rounded-lg flex items-center justify-center text-sm">🎤</div>
-                              <span className="text-white/70 font-bold text-sm">5-7 minute pitch presentation</span>
+                              <span className="text-white/70 font-bold text-sm">{g.phase2Day1Detail1}</span>
                             </div>
                             <div className="flex items-center gap-3 p-3 bg-white/5 rounded-xl">
                               <div className="w-8 h-8 bg-[#005bb7]/20 rounded-lg flex items-center justify-center text-sm">❓</div>
-                              <span className="text-white/70 font-bold text-sm">3-5 minute Q&A session</span>
+                              <span className="text-white/70 font-bold text-sm">{g.phase2Day1Detail2}</span>
                             </div>
                           </div>
                           <div className="mt-6 flex items-center gap-2">
                             <div className="w-2 h-2 bg-[#005bb7] rounded-full animate-pulse"></div>
-                            <span className="text-[#005bb7] font-black text-xs uppercase tracking-wider">Top 5 teams advance</span>
+                            <span className="text-[#005bb7] font-black text-xs uppercase tracking-wider">{g.phase2Day1Advance}</span>
                           </div>
                         </div>
                       </motion.div>
@@ -966,24 +961,24 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                           <div className="flex items-center gap-3 mb-5">
                             <div className="w-12 h-12 bg-amber-400/20 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🏆</div>
                             <div>
-                              <p className="text-white font-black text-lg uppercase tracking-widest">Day 2</p>
-                              <p className="text-white/40 text-xs font-bold uppercase tracking-wider">Grand Finale</p>
+                              <p className="text-white font-black text-lg uppercase tracking-widest">{g.phase2Day2Title}</p>
+                              <p className="text-white/40 text-xs font-bold uppercase tracking-wider">{g.phase2Day2Subtitle}</p>
                             </div>
                           </div>
-                          <p className="text-white/80 text-base leading-relaxed font-medium mb-6">Determine the final winners of the competition.</p>
+                          <p className="text-white/80 text-base leading-relaxed font-medium mb-6">{g.phase2Day2Desc}</p>
                           <div className="space-y-3">
                             <div className="flex items-center gap-3 p-3 bg-white/5 rounded-xl">
                               <div className="w-8 h-8 bg-amber-400/20 rounded-lg flex items-center justify-center text-sm">🎤</div>
-                              <span className="text-white/70 font-bold text-sm">10-minute detailed pitch</span>
+                              <span className="text-white/70 font-bold text-sm">{g.phase2Day2Detail1}</span>
                             </div>
                             <div className="flex items-center gap-3 p-3 bg-white/5 rounded-xl">
                               <div className="w-8 h-8 bg-amber-400/20 rounded-lg flex items-center justify-center text-sm">❓</div>
-                              <span className="text-white/70 font-bold text-sm">5-10 minute Q&A</span>
+                              <span className="text-white/70 font-bold text-sm">{g.phase2Day2Detail2}</span>
                             </div>
                           </div>
                           <div className="mt-6 flex items-center gap-2">
                             <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
-                            <span className="text-amber-400 font-black text-xs uppercase tracking-wider">Winners announced at closing ceremony</span>
+                            <span className="text-amber-400 font-black text-xs uppercase tracking-wider">{g.phase2Day2Announce}</span>
                           </div>
                         </div>
                       </motion.div>
@@ -991,7 +986,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
 
                     <div className="p-6 bg-white/[0.04] border border-white/[0.08] rounded-2xl">
                       <p className="text-white/60 text-base leading-relaxed font-medium">
-                        <span className="text-white font-bold text-lg">Note:</span> Judges may probe questions on financial aspects, market scalability, risk mitigation, competitive sustainability, and more.
+                        <span className="text-white font-bold text-lg">{g.phase2Note}</span> {g.phase2NoteText}
                       </p>
                     </div>
                   </div>
@@ -1010,26 +1005,26 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <FadeUp>
             <div className="text-center mb-16 md:mb-20">
-              <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em] text-xs">Categories</div>
+              <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em] text-xs">{g.categoriesLabel}</div>
               <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-slate-900 tracking-tighter leading-[0.85] mb-8">
-                Any Sector.<br /><span className="text-[#005bb7]">Any Industry.</span>
+                {g.categoriesHeading1}<br /><span className="text-[#005bb7]">{g.categoriesHeading2}</span>
               </h2>
               <p className="text-slate-500 text-xl md:text-2xl font-medium leading-relaxed max-w-2xl mx-auto">
-                No restrictions on the category. Propose concepts across any sector.
+                {g.categoriesDescription}
               </p>
             </div>
           </FadeUp>
 
           <StaggerContainer className="grid grid-cols-2 sm:grid-cols-4 gap-4" staggerDelay={0.06}>
             {[
-              { name: 'Technology', emoji: '💻' },
-              { name: 'Social Innovation', emoji: '🤲' },
-              { name: 'Sustainability', emoji: '🌿' },
-              { name: 'Consumer Products', emoji: '📦' },
-              { name: 'Digital Platforms', emoji: '📱' },
-              { name: 'Services', emoji: '🛎️' },
-              { name: 'Emerging Industries', emoji: '⚡' },
-              { name: 'And More...', emoji: '✨' },
+              { name: g.categoryNames[0], emoji: '💻' },
+              { name: g.categoryNames[1], emoji: '🤲' },
+              { name: g.categoryNames[2], emoji: '🌿' },
+              { name: g.categoryNames[3], emoji: '📦' },
+              { name: g.categoryNames[4], emoji: '📱' },
+              { name: g.categoryNames[5], emoji: '🛎️' },
+              { name: g.categoryNames[6], emoji: '⚡' },
+              { name: g.categoryNames[7], emoji: '✨' },
             ].map((cat, idx) => (
               <StaggerItem key={idx}>
                 <motion.div
@@ -1048,9 +1043,9 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
             <div className="mt-14 p-7 bg-red-50/70 border border-red-200/40 rounded-3xl flex items-start gap-5">
               <div className="text-3xl shrink-0 mt-1">⚠️</div>
               <div>
-                <p className="text-slate-900 font-black text-lg mb-2">Restrictions</p>
+                <p className="text-slate-900 font-black text-lg mb-2">{g.restrictionsTitle}</p>
                 <p className="text-slate-600 text-base leading-relaxed font-medium">
-                  All submitted ideas must be <strong>original</strong> and developed by the participating team. Concepts that promote illegal, unethical, harmful, discriminatory, or socially irresponsible practices will <strong>not be accepted</strong>.
+                  {g.restrictionsText1}<strong>{g.restrictionsBold1}</strong>{g.restrictionsText2}<strong>{g.restrictionsBold2}</strong>.
                 </p>
               </div>
             </div>
@@ -1066,16 +1061,16 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
         <div className="max-w-5xl mx-auto px-6 relative z-10">
           <FadeUp>
             <div className="mb-16 md:mb-20">
-              <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em] text-xs">Regulations</div>
+              <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em] text-xs">{g.regulationsLabel}</div>
               <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-slate-900 tracking-tighter leading-[0.85]">
-                Rules & <span className="text-[#005bb7]">Regulations.</span>
+                {g.regulationsHeading1}<span className="text-[#005bb7]">{g.regulationsHeading2}</span>
               </h2>
             </div>
           </FadeUp>
 
           <div className="space-y-4">
             <AccordionItem
-              title="Team Structure"
+              title={g.teamTitle}
               icon="👥"
               index={0}
               isOpen={openAccordion === 0}
@@ -1083,10 +1078,10 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
-                  { label: 'Team Size', value: '1–5 members per team', icon: '👤' },
-                  { label: 'Collaboration', value: 'Cross-university collaboration allowed', icon: '🏫' },
-                  { label: 'Participation', value: 'Each participant may join only one team', icon: '☝️' },
-                  { label: 'Deadline', value: 'Teams cannot change members after submission deadline', icon: '🔒' },
+                  { ...g.teamItems[0], icon: '👤' },
+                  { ...g.teamItems[1], icon: '🏫' },
+                  { ...g.teamItems[2], icon: '☝️' },
+                  { ...g.teamItems[3], icon: '🔒' },
                 ].map((item, idx) => (
                   <motion.div
                     key={idx}
@@ -1104,7 +1099,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
             </AccordionItem>
 
             <AccordionItem
-              title="Time Regulations"
+              title={g.timeTitle}
               icon="⏱️"
               index={1}
               isOpen={openAccordion === 1}
@@ -1112,9 +1107,9 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
             >
               <div className="space-y-4 mb-8">
                 {[
-                  { label: 'Timer Visibility', value: 'Timer will be visible throughout your presentation', icon: '👁️' },
-                  { label: '1-Minute Warning', value: 'A warning will be given when 1 minute remains', icon: '⚡' },
-                  { label: 'Scoring Penalty', value: 'Exceeding allocated time may result in scoring penalties', icon: '📉' },
+                  { ...g.timeItems[0], icon: '👁️' },
+                  { ...g.timeItems[1], icon: '⚡' },
+                  { ...g.timeItems[2], icon: '📉' },
                 ].map((item, idx) => (
                   <motion.div
                     key={idx}
@@ -1146,16 +1141,16 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                       <span className="mono text-[9px] font-black uppercase tracking-[0.3em] text-[#005bb7]">Day 1</span>
                       <div className="w-2 h-2 bg-[#005bb7] rounded-full animate-pulse"></div>
                     </div>
-                    <h4 className="text-slate-900 font-black text-xl tracking-tight mb-1">Preliminary</h4>
-                    <p className="text-slate-400 text-xs font-bold mb-5">First Round</p>
+                    <h4 className="text-slate-900 font-black text-xl tracking-tight mb-1">{g.timePreliminary}</h4>
+                    <p className="text-slate-400 text-xs font-bold mb-5">{g.timeFirstRound}</p>
                     <div className="space-y-2">
                       <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-[#005bb7]/10 rounded-full">
                         <span className="text-xs">🎤</span>
-                        <span className="text-slate-700 font-bold text-xs">5-7 min pitch</span>
+                        <span className="text-slate-700 font-bold text-xs">{g.timePitch57}</span>
                       </div>
                       <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-[#005bb7]/10 rounded-full ml-1">
                         <span className="text-xs">💬</span>
-                        <span className="text-slate-700 font-bold text-xs">3-5 min Q&A</span>
+                        <span className="text-slate-700 font-bold text-xs">{g.timeQA35}</span>
                       </div>
                     </div>
                   </div>
@@ -1172,16 +1167,16 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                       <span className="mono text-[9px] font-black uppercase tracking-[0.3em] text-amber-600">Day 2</span>
                       <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
                     </div>
-                    <h4 className="text-slate-900 font-black text-xl tracking-tight mb-1">Grand Finale</h4>
-                    <p className="text-slate-400 text-xs font-bold mb-5">Final Round</p>
+                    <h4 className="text-slate-900 font-black text-xl tracking-tight mb-1">{g.timeGrandFinale}</h4>
+                    <p className="text-slate-400 text-xs font-bold mb-5">{g.timeFinalRound}</p>
                     <div className="space-y-2">
                       <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-amber-300/20 rounded-full">
                         <span className="text-xs">🎤</span>
-                        <span className="text-slate-700 font-bold text-xs">10 min pitch</span>
+                        <span className="text-slate-700 font-bold text-xs">{g.timePitch10}</span>
                       </div>
                       <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-amber-300/20 rounded-full ml-1">
                         <span className="text-xs">💬</span>
-                        <span className="text-slate-700 font-bold text-xs">5-10 min Q&A</span>
+                        <span className="text-slate-700 font-bold text-xs">{g.timeQA510}</span>
                       </div>
                     </div>
                   </div>
@@ -1190,7 +1185,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
             </AccordionItem>
 
             <AccordionItem
-              title="Professional Conduct"
+              title={g.conductTitle}
               icon="👔"
               index={2}
               isOpen={openAccordion === 2}
@@ -1198,9 +1193,9 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 {[
-                  { icon: '👔', text: 'Maintain professional attire', bg: 'bg-blue-50' },
-                  { icon: '🤝', text: 'Show respect toward judges and peers', bg: 'bg-emerald-50' },
-                  { icon: '🚫', text: 'Avoid disruptive behavior', bg: 'bg-red-50' },
+                  { icon: '👔', text: g.conductRules[0], bg: 'bg-blue-50' },
+                  { icon: '🤝', text: g.conductRules[1], bg: 'bg-emerald-50' },
+                  { icon: '🚫', text: g.conductRules[2], bg: 'bg-red-50' },
                 ].map((rule, idx) => (
                   <motion.div
                     key={idx}
@@ -1215,12 +1210,12 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
               </div>
               <p className="text-red-500 font-black text-sm uppercase tracking-widest flex items-center gap-2">
                 <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                Misconduct may lead to disqualification
+                {g.conductWarning}
               </p>
             </AccordionItem>
 
             <AccordionItem
-              title="Disqualification Conditions"
+              title={g.disqualTitle}
               icon="🛡️"
               index={3}
               isOpen={openAccordion === 3}
@@ -1228,9 +1223,9 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
             >
               <div className="space-y-4">
                 {[
-                  { icon: '📋', title: 'Plagiarism', desc: 'All submitted ideas must be original and developed by the participating team.' },
-                  { icon: '⚖️', title: 'Conduct Violation', desc: 'Violation of the professional conduct policy during any phase of the program.' },
-                  { icon: '🛡️', title: 'Ethical Breaches', desc: 'Concepts promoting illegal, unethical, harmful, discriminatory, or socially irresponsible practices.' },
+                  { icon: '📋', ...g.disqualItems[0] },
+                  { icon: '⚖️', ...g.disqualItems[1] },
+                  { icon: '🛡️', ...g.disqualItems[2] },
                 ].map((item, idx) => (
                   <motion.div
                     key={idx}
@@ -1259,12 +1254,12 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
         <div className="max-w-5xl mx-auto px-6 relative z-10">
           <FadeUp>
             <div className="text-center mb-16 md:mb-20">
-              <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em] text-xs">Recognition</div>
+              <div className="mono text-[#005bb7] mb-6 font-black uppercase tracking-[0.5em] text-xs">{g.prizesLabel}</div>
               <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.85] mb-6">
-                Prizes & <br /><span className="text-white/20">Recognition.</span>
+                {g.prizesHeading1}<br /><span className="text-white/20">{g.prizesHeading2}</span>
               </h2>
               <p className="text-slate-400 text-xl font-medium max-w-xl mx-auto">
-                The prize structure will be announced at a later stage.
+                {g.prizesDescription}
               </p>
             </div>
           </FadeUp>
@@ -1321,12 +1316,12 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
 
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <ScaleUp>
-            <div className="mono text-[#005bb7] mb-8 font-black uppercase tracking-[0.5em] text-xs">Ready?</div>
+            <div className="mono text-[#005bb7] mb-8 font-black uppercase tracking-[0.5em] text-xs">{g.ctaLabel}</div>
             <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-slate-900 tracking-tighter leading-[0.85] mb-8">
-              Prepare<br />Your <span className="text-[#005bb7]">Vision.</span>
+              {g.ctaHeading1}<br />{g.ctaHeading2}<span className="text-[#005bb7]">{g.ctaHeading3}</span>
             </h2>
             <p className="text-slate-500 text-xl md:text-2xl font-medium leading-relaxed mb-14 max-w-xl mx-auto">
-              Now that you know the guidelines, get ready to take the first step. Registrations open on March 3rd.
+              {g.ctaDescription}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
               <motion.button
@@ -1338,7 +1333,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                 <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-                Back to Home
+                {g.ctaButton}
               </motion.button>
             </div>
           </ScaleUp>
@@ -1349,10 +1344,10 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
       <div className="py-10 border-t border-slate-100 bg-white">
         <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-slate-400 text-xs font-black uppercase tracking-widest">
-            Synergy Circle 2026 — Delegates' Handbook
+            {g.footerTitle}
           </p>
           <p className="text-slate-300 text-xs font-medium">
-            Organized by Rotaract Club of SLIIT × SLIIT Business School
+            {g.footerOrganized}
           </p>
         </div>
       </div>

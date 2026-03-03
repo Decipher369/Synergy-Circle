@@ -1,6 +1,7 @@
 
 import React, { useState, useCallback, useRef } from 'react';
 import Countdown from './Countdown';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface Rocket {
   id: number;
@@ -21,6 +22,7 @@ const Hero: React.FC = () => {
   const rocketIdRef = useRef(0);
   const splitTimeoutRef = useRef<number | null>(null);
   const [isSpawning, setIsSpawning] = useState(false);
+  const { t } = useLanguage();
 
   const spawnRockets = useCallback(() => {
     if (!containerRef.current) return;
@@ -28,11 +30,11 @@ const Hero: React.FC = () => {
     const centerY = rect.height / 2;
 
     const newRockets: Rocket[] = [];
-    const count = 3 + Math.floor(Math.random() * 3); // Reduced to 3-5 rockets
+    const count = 3 + Math.floor(Math.random() * 3);
 
     for (let i = 0; i < count; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const distance = 150 + Math.random() * 300; // Slightly tighter distance
+      const distance = 150 + Math.random() * 300;
       const spawnX = Math.random() * rect.width;
       rocketIdRef.current += 1;
 
@@ -64,7 +66,7 @@ const Hero: React.FC = () => {
     if (!isSpawning) {
       spawnRockets();
       setIsSpawning(true);
-      setTimeout(() => setIsSpawning(false), 800); // Throttled spawn
+      setTimeout(() => setIsSpawning(false), 800);
     }
     
     if (splitTimeoutRef.current) {
@@ -93,7 +95,7 @@ const Hero: React.FC = () => {
           
           <div className="flex flex-col items-center animate-in fade-in slide-in-from-top-4 duration-1000">
              <div className="mono text-[10px] font-black uppercase tracking-[0.5em] text-slate-400 mb-4 px-4 py-1.5 border border-slate-200 rounded-full bg-white/50 backdrop-blur-sm">
-                Professional Development Initiative
+                {t.hero.badge}
              </div>
              
              <div 
@@ -127,7 +129,7 @@ const Hero: React.FC = () => {
                   </div>
                 ))}
 
-               {/* Sliced Effect Implementation - Mobile (Split to handle wrapping safely) */}
+               {/* Sliced Effect Implementation - Mobile */}
                <div className="flex lg:hidden flex-wrap justify-center gap-[0.3em] text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-none uppercase select-none">
                  <div className="sliced-container">
                     <div className={`slice-top transition-transform duration-700 ${splitActive ? '-translate-y-2' : ''}`}>SYNERGY</div>
@@ -139,7 +141,7 @@ const Hero: React.FC = () => {
                  </div>
                </div>
 
-               {/* Sliced Effect Implementation - Desktop (Single continuous cut) */}
+               {/* Sliced Effect Implementation - Desktop */}
                <div className="hidden lg:inline-block relative sliced-container text-[100px] xl:text-[140px] font-black tracking-tighter leading-none uppercase select-none whitespace-nowrap">
                   <div className={`slice-top transition-transform duration-700 ${splitActive ? '-translate-y-2' : ''}`}>SYNERGY CIRCLE</div>
                   <div className={`slice-bottom transition-transform duration-700 ${splitActive ? 'translate-y-2' : ''}`}>SYNERGY CIRCLE</div>
@@ -149,17 +151,17 @@ const Hero: React.FC = () => {
 
           <div className="max-w-3xl animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
             <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 md:mb-8 tracking-tight">
-              <span className="text-slate-400">Where Ideas Turn Into Impact.</span>
+              <span className="text-slate-400">{t.hero.tagline}</span>
             </h2>
             <p className="text-lg md:text-xl text-slate-500 font-medium leading-relaxed max-w-xl mx-auto">
-              Bridging the gap between student innovation and corporate excellence. A collaboration between <span className="text-slate-900 font-bold">Rotaract SLIIT</span> and <span className="text-[#005bb7] font-bold">SLIIT Business School</span>.
+              {t.hero.description} <span className="text-slate-900 font-bold">{t.hero.rotaractSliit}</span> and <span className="text-[#005bb7] font-bold">{t.hero.sliitBs}</span>.
             </p>
           </div>
 
           <div className="flex flex-col gap-6 items-center animate-in fade-in duration-1000 delay-500">
             <div className="flex items-center gap-3 px-6 py-4 bg-white/80 backdrop-blur-sm border border-slate-100 rounded-full shadow-sm mb-2">
                 <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
-                <span className="text-xs font-black uppercase tracking-widest text-slate-400">Registrations Open In</span>
+                <span className="text-xs font-black uppercase tracking-widest text-slate-400">{t.hero.countdownLabel}</span>
             </div>
             <Countdown />
           </div>
@@ -176,7 +178,7 @@ const Hero: React.FC = () => {
                <div className="w-10 h-10 border-4 border-[#005bb7] rounded-lg rotate-12"></div>
             </div>
          </div>
-         <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#005bb7] origin-right">Explore</span>
+         <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#005bb7] origin-right">{t.hero.explore}</span>
       </div>
 
       {/* Rocket animation keyframes */}

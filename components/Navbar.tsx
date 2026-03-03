@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface NavbarProps {
   scrolled: boolean;
@@ -9,13 +10,14 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ scrolled, visible, onNavigateGuidelines }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
 
   const navItems = [
-    { label: 'About', href: '#about' },
-    { label: 'Phases', href: '#phases' },
-    { label: 'Criteria', href: '#eligibility' },
-    { label: 'Prizes', href: '#prizes' },
-    { label: 'Timeline', href: '#timeline' },
+    { label: t.nav.about, href: '#about' },
+    { label: t.nav.phases, href: '#phases' },
+    { label: t.nav.criteria, href: '#eligibility' },
+    { label: t.nav.prizes, href: '#prizes' },
+    { label: t.nav.timeline, href: '#timeline' },
   ];
 
   return (
@@ -62,24 +64,52 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled, visible, onNavigateGuidelines
             onClick={onNavigateGuidelines}
             className="relative text-[10px] xl:text-[11px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-[#005bb7] transition-colors group cursor-pointer bg-transparent border-none whitespace-nowrap"
           >
-            Guidelines
+            {t.nav.guidelines}
             <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#005bb7] transition-all duration-300 group-hover:w-full"></span>
+          </button>
+          
+          {/* Language Toggle */}
+          <button
+            onClick={toggleLanguage}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-200/60 bg-white/50 backdrop-blur-sm hover:border-[#005bb7]/40 hover:bg-[#005bb7]/5 transition-all duration-300 cursor-pointer group"
+            title={language === 'en' ? 'සිංහලට මාරු වන්න' : 'Switch to English'}
+          >
+            <span className={`text-[10px] font-black uppercase tracking-wider transition-colors duration-300 ${language === 'en' ? 'text-[#005bb7]' : 'text-slate-400 group-hover:text-slate-600'}`}>EN</span>
+            <div className="relative w-8 h-4 rounded-full bg-slate-200/80 transition-colors duration-300">
+              <div className={`absolute top-0.5 w-3 h-3 rounded-full bg-[#005bb7] shadow-sm transition-all duration-300 ${language === 'si' ? 'left-[18px]' : 'left-0.5'}`}></div>
+            </div>
+            <span className={`text-[10px] font-black uppercase tracking-wider transition-colors duration-300 ${language === 'si' ? 'text-[#005bb7]' : 'text-slate-400 group-hover:text-slate-600'}`}>සිං</span>
           </button>
         </div>
         
-        {/* Mobile Menu Button */}
-        <button 
-          className="lg:hidden p-2 text-slate-900"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            {mobileOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 8h16M4 16h16" />
-            )}
-          </svg>
-        </button>
+        {/* Mobile Menu Button + Language Toggle */}
+        <div className="lg:hidden flex items-center gap-2">
+          {/* Mobile Language Toggle */}
+          <button
+            onClick={toggleLanguage}
+            className="flex items-center gap-1 px-2 py-1 rounded-full border border-slate-200/60 bg-white/50 backdrop-blur-sm hover:border-[#005bb7]/40 transition-all duration-300 cursor-pointer"
+            title={language === 'en' ? 'සිංහලට මාරු වන්න' : 'Switch to English'}
+          >
+            <span className={`text-[9px] font-black transition-colors duration-300 ${language === 'en' ? 'text-[#005bb7]' : 'text-slate-400'}`}>EN</span>
+            <div className="relative w-6 h-3 rounded-full bg-slate-200/80">
+              <div className={`absolute top-[1px] w-[10px] h-[10px] rounded-full bg-[#005bb7] shadow-sm transition-all duration-300 ${language === 'si' ? 'left-[13px]' : 'left-[1px]'}`}></div>
+            </div>
+            <span className={`text-[9px] font-black transition-colors duration-300 ${language === 'si' ? 'text-[#005bb7]' : 'text-slate-400'}`}>සිං</span>
+          </button>
+          
+          <button 
+            className="p-2 text-slate-900"
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              {mobileOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 8h16M4 16h16" />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -99,7 +129,7 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled, visible, onNavigateGuidelines
             onClick={() => { setMobileOpen(false); onNavigateGuidelines?.(); }}
             className="block w-full text-left py-3 px-4 text-sm font-black uppercase tracking-[0.2em] text-slate-600 hover:text-[#005bb7] hover:bg-slate-50 rounded-xl transition-all cursor-pointer bg-transparent border-none"
           >
-            Guidelines
+            {t.nav.guidelines}
           </button>
         </div>
       )}
