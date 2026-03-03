@@ -18,7 +18,7 @@ export interface Translations {
     description: string;
     rotaractSliit: string;
     sliitBs: string;
-    countdownLabel: string;
+    registrationOpen: string;
     explore: string;
   };
 
@@ -123,7 +123,6 @@ export interface Translations {
     bottomLabel: string;
   };
 
-  // Registration
   registration: {
     sectionLabel: string;
     heading1: string;
@@ -134,6 +133,10 @@ export interface Translations {
     teams: string;
     teamLeaders: string;
     openingLabel: string;
+    openNowLabel: string;
+    registrationsOpen: string;
+    registerNow: string;
+    closingLabel: string;
   };
 
   // Footer
@@ -292,7 +295,7 @@ export const translations: Record<Language, Translations> = {
       description: 'Bridging the gap between student innovation and corporate excellence. A collaboration between',
       rotaractSliit: 'Rotaract SLIIT',
       sliitBs: 'SLIIT Business School',
-      countdownLabel: 'Registrations Open In',
+      registrationOpen: 'Registration Open',
       explore: 'Explore',
     },
     countdown: {
@@ -399,6 +402,10 @@ export const translations: Record<Language, Translations> = {
       teams: 'teams',
       teamLeaders: '. Team leaders will be required to complete the registration on behalf of their team members.',
       openingLabel: 'Opening on March 3rd',
+      openNowLabel: 'Now Open',
+      registrationsOpen: 'Registrations are now open!',
+      registerNow: 'Register Now',
+      closingLabel: 'Registration closes in',
     },
     footer: {
       inquiries: 'Inquiries',
@@ -570,7 +577,7 @@ export const translations: Record<Language, Translations> = {
       description: 'ශිෂ්‍ය නවෝත්පාදනය සහ ආයතනික විශිෂ්ටත්වය අතර පරතරය පිරවීම. මෙය',
       rotaractSliit: 'රොටරැක්ට් SLIIT',
       sliitBs: 'SLIIT ව්‍යාපාර පීඨය',
-      countdownLabel: 'ලියාපදිංචිය ආරම්භ වන්නේ',
+      registrationOpen: 'ලියාපදිංචිය විවෘතයි',
       explore: 'ගවේෂණය',
     },
     countdown: {
@@ -677,6 +684,10 @@ export const translations: Record<Language, Translations> = {
       teams: 'කණ්ඩායම්',
       teamLeaders: ' ලෙස ලියාපදිංචි විය හැකිය. කණ්ඩායම් නායකයින් ඔවුන්ගේ කණ්ඩායම් සාමාජිකයින් වනුවෙන් ලියාපදිංචිය සම්පූර්ණ කිරීම අවශ්‍යයි.',
       openingLabel: 'මාර්තු 3 වැනිදා විවෘත වේ',
+      openNowLabel: 'දැන් විවෘතයි',
+      registrationsOpen: 'ලියාපදිංචිය දැන් විවෘතයි!',
+      registerNow: 'දැන් ලියාපදිංචි වන්න',
+      closingLabel: 'ලියාපදිංචිය වසා දමනු ලබන්නේ',
     },
     footer: {
       inquiries: 'විමසීම්',

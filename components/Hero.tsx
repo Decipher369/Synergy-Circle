@@ -1,6 +1,5 @@
 
 import React, { useState, useCallback, useRef } from 'react';
-import Countdown from './Countdown';
 import { useLanguage } from '../i18n/LanguageContext';
 
 interface Rocket {
@@ -159,11 +158,16 @@ const Hero: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-6 items-center animate-in fade-in duration-1000 delay-500">
-            <div className="flex items-center gap-3 px-6 py-4 bg-white/80 backdrop-blur-sm border border-slate-100 rounded-full shadow-sm mb-2">
-                <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
-                <span className="text-xs font-black uppercase tracking-widest text-slate-400">{t.hero.countdownLabel}</span>
-            </div>
-            <Countdown />
+            <button 
+              onClick={() => document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' })}
+              className="group flex items-center gap-3 px-6 py-4 bg-white/80 backdrop-blur-sm border border-emerald-200 rounded-full shadow-sm mb-2 cursor-pointer hover:shadow-md hover:border-emerald-300 transition-all duration-300"
+            >
+                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                <span className="text-xs font-black uppercase tracking-widest text-emerald-600">{t.hero.registrationOpen}</span>
+                <svg className="w-4 h-4 text-emerald-500 group-hover:translate-y-1 transition-transform duration-300 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
           </div>
         </div>
       </div>

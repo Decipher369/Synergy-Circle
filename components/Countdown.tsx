@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../i18n/LanguageContext';
 
-const targetDate = new Date('2026-03-03T15:30:00+05:30');
+const targetDate = new Date('2026-03-22T23:59:59+05:30');
 
 const calculateTimeLeft = () => {
   const difference = +targetDate - +new Date();
@@ -56,16 +56,22 @@ const Countdown: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const isExpired = +targetDate - +new Date() <= 0;
+  if (isExpired) return null;
+
   const unitLabels = [t.countdown.days, t.countdown.hours, t.countdown.minutes, t.countdown.seconds];
 
   return (
-    <div className="flex gap-3 md:gap-5 items-center justify-center">
-      {Object.entries(timeLeft).map(([_unit, value], index) => (
-        <div key={index} className="flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl w-24 h-24 md:w-28 md:h-28 shadow-2xl shadow-slate-900/20 border border-slate-700/50 hover:bg-slate-800 transition-colors duration-300">
-          <AnimatedDigit value={value as number} />
-          <span className="text-[9px] md:text-[11px] uppercase font-black tracking-widest text-slate-400 mt-2">{unitLabels[index]}</span>
-        </div>
-      ))}
+    <div className="flex flex-col items-center gap-4">
+      <span className="text-xs font-black uppercase tracking-widest text-slate-400">{t.registration.closingLabel}</span>
+      <div className="flex gap-3 md:gap-5 items-center justify-center">
+        {Object.entries(timeLeft).map(([, value], index) => (
+          <div key={index} className="flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl w-24 h-24 md:w-28 md:h-28 shadow-2xl shadow-slate-900/20 border border-slate-700/50 hover:bg-slate-800 transition-colors duration-300">
+            <AnimatedDigit value={value as number} />
+            <span className="text-[9px] md:text-[11px] uppercase font-black tracking-widest text-slate-400 mt-2">{unitLabels[index]}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
