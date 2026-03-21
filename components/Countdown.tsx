@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../i18n/LanguageContext';
 
-const targetDate = new Date('2026-03-22T23:59:59+05:30');
+const targetDate = new Date('2026-04-21T23:59:59+05:30');
 
 const calculateTimeLeft = () => {
   const difference = +targetDate - +new Date();

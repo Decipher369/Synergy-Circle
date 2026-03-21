@@ -6,7 +6,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 const Timeline: React.FC = () => {
   const { t } = useLanguage();
 
-  const dates = ["Mar 3, 2026", "Mar 22, 2026", "Mar 28, 2026", "TBA", "TBA"];
+  const dates = ["Mar 3, 2026", "Mar 22, 2026", "Mar 26, 2026", "TBA", "TBA"];
   const icons = ["🚀", "📋", "🎓", "🎤", "🏆"];
 
   return (
