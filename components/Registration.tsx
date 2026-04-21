@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FadeUp } from './Animations';
-import Countdown from './Countdown';
+
 import { useLanguage } from '../i18n/LanguageContext';
 
 const REGISTRATION_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSeCDryci35W853u0OKc6niLSTQu0muuXrzUAerqTJY0xOU8qg/formResponse';
@@ -56,8 +56,7 @@ const Registration: React.FC = () => {
               </motion.a>
             </div>
 
-            {/* Closing Countdown */}
-            <Countdown />
+
           </div>
         </FadeUp>
       </div>

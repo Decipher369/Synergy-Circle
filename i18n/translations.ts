@@ -22,13 +22,7 @@ export interface Translations {
     explore: string;
   };
 
-  // Countdown
-  countdown: {
-    days: string;
-    hours: string;
-    minutes: string;
-    seconds: string;
-  };
+
 
   // About
   about: {
@@ -136,7 +130,7 @@ export interface Translations {
     openNowLabel: string;
     registrationsOpen: string;
     registerNow: string;
-    closingLabel: string;
+
   };
 
   // Footer
@@ -298,12 +292,7 @@ export const translations: Record<Language, Translations> = {
       registrationOpen: 'Registration Open',
       explore: 'Explore',
     },
-    countdown: {
-      days: 'days',
-      hours: 'hours',
-      minutes: 'minutes',
-      seconds: 'seconds',
-    },
+
     about: {
       watermark: 'Innovation',
       sectionLabel: 'The Mission',
@@ -405,7 +394,7 @@ export const translations: Record<Language, Translations> = {
       openNowLabel: 'Now Open',
       registrationsOpen: 'Registrations are now open!',
       registerNow: 'Register Now',
-      closingLabel: 'Registration closes in',
+
     },
     footer: {
       inquiries: 'Inquiries',
@@ -580,12 +569,7 @@ export const translations: Record<Language, Translations> = {
       registrationOpen: 'ලියාපදිංචිය විවෘතයි',
       explore: 'ගවේෂණය',
     },
-    countdown: {
-      days: 'දින',
-      hours: 'පැය',
-      minutes: 'මිනි',
-      seconds: 'තත්',
-    },
+
     about: {
       watermark: 'නවෝත්පාදනය',
       sectionLabel: 'මෙහෙවර',
@@ -687,7 +671,7 @@ export const translations: Record<Language, Translations> = {
       openNowLabel: 'දැන් විවෘතයි',
       registrationsOpen: 'ලියාපදිංචිය දැන් විවෘතයි!',
       registerNow: 'දැන් ලියාපදිංචි වන්න',
-      closingLabel: 'ලියාපදිංචිය වසා දමනු ලබන්නේ',
+
     },
     footer: {
       inquiries: 'විමසීම්',
