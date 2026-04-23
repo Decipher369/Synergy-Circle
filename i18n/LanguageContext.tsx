@@ -20,14 +20,14 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     // Check localStorage for saved preference
     try {
       const saved = localStorage.getItem('synergy-lang');
-      if (saved === 'si') return 'si';
+      if (saved === 'si' || saved === 'ta') return saved as Language;
     } catch {}
     return 'en';
   });
 
   const toggleLanguage = useCallback(() => {
     setLanguageState((prev) => {
-      const next = prev === 'en' ? 'si' : 'en';
+      const next = prev === 'en' ? 'si' : prev === 'si' ? 'ta' : 'en';
       try { localStorage.setItem('synergy-lang', next); } catch {}
       return next;
     });

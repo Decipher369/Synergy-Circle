@@ -10,7 +10,13 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ scrolled, visible, onNavigateGuidelines }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { language, toggleLanguage, t } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
+
+  const LANGS = [
+    { code: 'en', label: 'EN' },
+    { code: 'si', label: 'සිං' },
+    { code: 'ta', label: 'தமிழ்' },
+  ] as const;
 
   const navItems = [
     { label: t.nav.about, href: '#about' },
@@ -69,33 +75,41 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled, visible, onNavigateGuidelines
           </button>
           
           {/* Language Toggle */}
-          <button
-            onClick={toggleLanguage}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-200/60 bg-white/50 backdrop-blur-sm hover:border-[#005bb7]/40 hover:bg-[#005bb7]/5 transition-all duration-300 cursor-pointer group"
-            title={language === 'en' ? 'සිංහලට මාරු වන්න' : 'Switch to English'}
-          >
-            <span className={`text-[10px] font-black uppercase tracking-wider transition-colors duration-300 ${language === 'en' ? 'text-[#005bb7]' : 'text-slate-400 group-hover:text-slate-600'}`}>EN</span>
-            <div className="relative w-8 h-4 rounded-full bg-slate-200/80 transition-colors duration-300">
-              <div className={`absolute top-0.5 w-3 h-3 rounded-full bg-[#005bb7] shadow-sm transition-all duration-300 ${language === 'si' ? 'left-[18px]' : 'left-0.5'}`}></div>
-            </div>
-            <span className={`text-[10px] font-black uppercase tracking-wider transition-colors duration-300 ${language === 'si' ? 'text-[#005bb7]' : 'text-slate-400 group-hover:text-slate-600'}`}>සිං</span>
-          </button>
+          <div className="flex items-center gap-0.5 p-1 rounded-full border border-slate-200/60 bg-white/50 backdrop-blur-sm">
+            {LANGS.map(({ code, label }) => (
+              <button
+                key={code}
+                onClick={() => setLanguage(code)}
+                className={`px-2.5 py-1 rounded-full text-[10px] font-black tracking-wider transition-all duration-200 cursor-pointer border-none ${
+                  language === code
+                    ? 'bg-[#005bb7] text-white shadow-sm'
+                    : 'text-slate-400 hover:text-slate-600 bg-transparent'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
         
         {/* Mobile Menu Button + Language Toggle */}
         <div className="lg:hidden flex items-center gap-2">
           {/* Mobile Language Toggle */}
-          <button
-            onClick={toggleLanguage}
-            className="flex items-center gap-1 px-2 py-1 rounded-full border border-slate-200/60 bg-white/50 backdrop-blur-sm hover:border-[#005bb7]/40 transition-all duration-300 cursor-pointer"
-            title={language === 'en' ? 'සිංහලට මාරු වන්න' : 'Switch to English'}
-          >
-            <span className={`text-[9px] font-black transition-colors duration-300 ${language === 'en' ? 'text-[#005bb7]' : 'text-slate-400'}`}>EN</span>
-            <div className="relative w-6 h-3 rounded-full bg-slate-200/80">
-              <div className={`absolute top-[1px] w-[10px] h-[10px] rounded-full bg-[#005bb7] shadow-sm transition-all duration-300 ${language === 'si' ? 'left-[13px]' : 'left-[1px]'}`}></div>
-            </div>
-            <span className={`text-[9px] font-black transition-colors duration-300 ${language === 'si' ? 'text-[#005bb7]' : 'text-slate-400'}`}>සිං</span>
-          </button>
+          <div className="flex items-center gap-0.5 p-0.5 rounded-full border border-slate-200/60 bg-white/50 backdrop-blur-sm">
+            {LANGS.map(({ code, label }) => (
+              <button
+                key={code}
+                onClick={() => setLanguage(code)}
+                className={`px-2 py-0.5 rounded-full text-[9px] font-black tracking-wider transition-all duration-200 cursor-pointer border-none ${
+                  language === code
+                    ? 'bg-[#005bb7] text-white shadow-sm'
+                    : 'text-slate-400 bg-transparent'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
           
           <button 
             className="p-2 text-slate-900"
