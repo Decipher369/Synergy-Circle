@@ -13,9 +13,9 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled, visible, onNavigateGuidelines
   const { language, setLanguage, t } = useLanguage();
 
   const LANGS = [
-    { code: 'en', label: 'EN' },
-    { code: 'si', label: 'සිං' },
-    { code: 'ta', label: 'தமிழ்' },
+    { code: 'en', label: 'EN',  short: 'EN' },
+    { code: 'si', label: 'සිං', short: 'සි' },
+    { code: 'ta', label: 'TA',  short: 'TA' },
   ] as const;
 
   const navItems = [
@@ -75,12 +75,12 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled, visible, onNavigateGuidelines
           </button>
           
           {/* Language Toggle */}
-          <div className="flex items-center gap-0.5 p-1 rounded-full border border-slate-200/60 bg-white/50 backdrop-blur-sm">
+          <div className="flex items-center gap-0.5 p-[3px] rounded-full border border-slate-200/60 bg-white/50 backdrop-blur-sm">
             {LANGS.map(({ code, label }) => (
               <button
                 key={code}
                 onClick={() => setLanguage(code)}
-                className={`px-2.5 py-1 rounded-full text-[10px] font-black tracking-wider transition-all duration-200 cursor-pointer border-none ${
+                className={`px-2 py-[3px] rounded-full text-[9px] font-black tracking-wide transition-all duration-200 cursor-pointer border-none min-w-[26px] text-center ${
                   language === code
                     ? 'bg-[#005bb7] text-white shadow-sm'
                     : 'text-slate-400 hover:text-slate-600 bg-transparent'
@@ -95,18 +95,18 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled, visible, onNavigateGuidelines
         {/* Mobile Menu Button + Language Toggle */}
         <div className="lg:hidden flex items-center gap-2">
           {/* Mobile Language Toggle */}
-          <div className="flex items-center gap-0.5 p-0.5 rounded-full border border-slate-200/60 bg-white/50 backdrop-blur-sm">
-            {LANGS.map(({ code, label }) => (
+          <div className="flex items-center gap-0.5 p-[2px] rounded-full border border-slate-200/60 bg-white/50 backdrop-blur-sm">
+            {LANGS.map(({ code, short }) => (
               <button
                 key={code}
                 onClick={() => setLanguage(code)}
-                className={`px-2 py-0.5 rounded-full text-[9px] font-black tracking-wider transition-all duration-200 cursor-pointer border-none ${
+                className={`px-1.5 py-[2px] rounded-full text-[8px] font-black tracking-wide transition-all duration-200 cursor-pointer border-none min-w-[20px] text-center ${
                   language === code
                     ? 'bg-[#005bb7] text-white shadow-sm'
                     : 'text-slate-400 bg-transparent'
                 }`}
               >
-                {label}
+                {short}
               </button>
             ))}
           </div>
