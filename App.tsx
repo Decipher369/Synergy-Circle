@@ -11,6 +11,9 @@ import Registration from './components/Registration';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import Guidelines from './components/Guidelines';
+import MarqueeStrip from './components/MarqueeStrip';
+import { useAnimations } from './hooks/useAnimations';
+import { useCursor } from './hooks/useCursor';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -25,6 +28,9 @@ const App: React.FC = () => {
   const navigateToHome = useCallback(() => {
     setCurrentPage('home');
   }, []);
+
+  useAnimations(currentPage === 'home');
+  useCursor();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,6 +67,9 @@ const App: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen relative overflow-x-hidden">
+      {/* Custom cursor — desktop only, stays opacity-0 on touch */}
+      <div id="cursor-dot" className="fixed top-0 left-0 w-2 h-2 bg-[#005bb7] rounded-full pointer-events-none z-[9999]" style={{ mixBlendMode: 'multiply' }} />
+      <div id="cursor-ring" className="fixed top-0 left-0 w-8 h-8 border border-[#005bb7]/40 rounded-full pointer-events-none z-[9998]" />
       {/* Global Watermark Elements */}
       <div className="fixed inset-0 pointer-events-none select-none z-0 overflow-hidden">
         {/* Liquid Blobs */}
@@ -79,6 +88,7 @@ const App: React.FC = () => {
         <Navbar scrolled={scrolled} visible={navVisible} onNavigateGuidelines={navigateToGuidelines} />
         <main>
           <Hero />
+          <MarqueeStrip />
           <About />
           <Phases onNavigateGuidelines={navigateToGuidelines} />
           <Eligibility onNavigateGuidelines={navigateToGuidelines} />

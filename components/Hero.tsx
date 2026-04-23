@@ -78,13 +78,13 @@ const Hero: React.FC = () => {
   }, [spawnRockets, isSpawning]);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-24 md:pt-32 overflow-hidden textured-bg">
+    <section id="hero" className="relative min-h-screen flex items-center pt-24 md:pt-32 overflow-hidden textured-bg">
       {/* Background Watermark Logo */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-        <div className="absolute text-[500px] md:text-[800px] font-black tracking-tighter leading-none text-slate-900/[0.03] -translate-y-10">
+        <div className="hero-watermark-sc absolute text-[500px] md:text-[800px] font-black tracking-tighter leading-none text-slate-900/[0.03] -translate-y-10">
           SC
         </div>
-        <div className="absolute text-[12vw] font-black text-[#005bb7]/[0.02] uppercase tracking-[0.5em] mt-80">
+        <div className="hero-watermark-text absolute text-[12vw] font-black text-[#005bb7]/[0.02] uppercase tracking-[0.5em] mt-80">
           Synergy Circle
         </div>
       </div>

@@ -147,6 +147,22 @@
       ::-webkit-scrollbar-thumb:hover {
         background: var(--brand-blue);
       }
+
+      /* Marquee */
+      @keyframes marquee-fwd {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+      }
+      @keyframes marquee-rev {
+        from { transform: translateX(-50%); }
+        to   { transform: translateX(0); }
+      }
+
+      /* Custom cursor (desktop only) */
+      .custom-cursor,
+      .custom-cursor * {
+        cursor: none !important;
+      }
     </style>
   </head>
   <body class="bg-[#fcfcfc] text-slate-900 antialiased overflow-x-hidden">

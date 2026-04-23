@@ -60,11 +60,11 @@ const Timeline: React.FC = () => {
         {/* Timeline Cards */}
         <div className="relative">
           {/* Connector Line */}
-          <div className="absolute left-8 md:left-0 top-0 md:top-1/2 w-[2px] md:w-full h-full md:h-[2px] bg-gradient-to-b md:bg-gradient-to-r from-[#005bb7]/20 via-slate-200 to-[#005bb7]/20 md:-translate-y-1/2"></div>
+          <div className="timeline-connector absolute left-8 md:left-0 top-0 md:top-1/2 w-[2px] md:w-full h-full md:h-[2px] bg-gradient-to-b md:bg-gradient-to-r from-[#005bb7]/20 via-slate-200 to-[#005bb7]/20 md:-translate-y-1/2"></div>
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-6">
             {t.timeline.steps.map((step, i) => (
-              <div key={i} className="relative group">
+              <div key={i} className="timeline-card relative group">
                 {/* Dot on the line */}
                 <div className="absolute left-8 md:left-1/2 top-0 md:top-0 -translate-x-1/2 z-20">
                   <div className={`w-16 h-16 rounded-2xl flex items-center justify-center border-4 border-white transition-all duration-500 shadow-lg ${
