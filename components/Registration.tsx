@@ -111,10 +111,6 @@ const Registration: React.FC = () => {
 
               {/* Card header */}
               <div className="mb-8">
-                <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-white/10 border border-white/20 rounded-full mb-6">
-                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                  <span className="text-xs font-black uppercase tracking-widest text-white/80">{t.registration.registrationsOpen}</span>
-                </div>
                 <h3 className="text-3xl md:text-4xl font-black text-white leading-tight tracking-tighter mb-1">
                   Synergy Circle
                 </h3>
@@ -122,7 +118,7 @@ const Registration: React.FC = () => {
               </div>
 
               {/* Description */}
-              <p className="text-white/70 text-base leading-relaxed mb-10 flex-1">
+              <p className="text-white/70 text-base leading-relaxed mb-8">
                 {t.registration.description}{' '}
                 <span className="text-white font-bold">{t.registration.individuals}</span>
                 {t.registration.orAs}
@@ -130,11 +126,40 @@ const Registration: React.FC = () => {
                 {t.registration.teamLeaders}
               </p>
 
+              {/* Event details */}
+              <div className="space-y-3 mb-10 flex-1">
+                <div className="flex items-center gap-4 px-5 py-4 bg-white/10 rounded-2xl">
+                  <span className="text-xl shrink-0">📅</span>
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-0.5">Date</div>
+                    <div className="font-bold text-white text-sm">TBA</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4 px-5 py-4 bg-white/10 rounded-2xl">
+                  <span className="text-xl shrink-0">⏰</span>
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-0.5">Time</div>
+                    <div className="font-bold text-white text-sm">TBA</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4 px-5 py-4 bg-white/10 rounded-2xl">
+                  <span className="text-xl shrink-0">📍</span>
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-0.5">Location</div>
+                    <div className="font-bold text-white text-sm">TBA</div>
+                  </div>
+                </div>
+              </div>
+
               {/* Divider */}
               <div className="border-t border-white/10 mb-8"></div>
 
               {/* CTA */}
               <div className="flex flex-col items-start gap-4">
+                <div className="inline-flex items-center gap-3 px-5 py-3 bg-white/10 border border-white/20 rounded-full">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                  <span className="text-xs font-black uppercase tracking-widest text-white/80">{t.registration.registrationsOpen}</span>
+                </div>
                 <motion.a
                   href={SYNERGY_REGISTRATION_URL}
                   target="_blank"
