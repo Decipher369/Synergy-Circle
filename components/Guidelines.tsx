@@ -252,7 +252,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
         doc.setTextColor(...mid);
         doc.text('Organized by the Rotaract Club of SLIIT', mL, y);
         y += 6;
-        doc.text('In collaboration with SLIIT Business School', mL, y);
+        doc.text('In collaboration with SLIIT Entrepreneurship Club', mL, y);
 
         y += 16;
         doc.setDrawColor(...blue);

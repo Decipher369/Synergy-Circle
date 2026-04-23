@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
             <div className="flex items-center gap-4 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-100 w-fit">
               <img src="/logos/rotaract-sliit.png" alt="Rotaract SLIIT" className="h-6 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500" />
               <div className="w-[1px] h-5 bg-slate-200"></div>
-              <img src="/logos/sliit-bs.png" alt="SLIIT Business School" className="h-6 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500" />
+              <img src="/logos/sliit-bs.png" alt="SLIIT Entrepreneurship Club" className="h-8 w-auto grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500" />
             </div>
           </div>
 

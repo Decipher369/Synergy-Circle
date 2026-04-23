@@ -45,8 +45,8 @@ const Navbar: React.FC<NavbarProps> = ({ scrolled, visible, onNavigateGuidelines
         <div className="flex items-center gap-3 md:gap-6 shrink-0">
           <a href="#" className="flex items-center gap-2 md:gap-4 bg-slate-100/50 px-3 md:px-4 py-1.5 md:py-2 rounded-xl md:rounded-2xl border border-slate-200/50 shrink-0">
              <img src="/logos/rotaract-sliit.png" alt="Rotaract SLIIT" className="h-6 md:h-10 w-auto object-contain" />
-             <div className="w-[1px] h-5 md:h-8 bg-slate-300"></div>
-             <img src="/logos/sliit-bs.png" alt="SLIIT Business School" className="h-6 md:h-10 w-auto object-contain" />
+             <div className="w-[1px] h-7 md:h-10 bg-slate-300"></div>
+             <img src="/logos/sliit-bs.png" alt="SLIIT Entrepreneurship Club" className="h-8 md:h-12 w-auto object-contain" />
           </a>
           
           <div className="hidden sm:flex lg:hidden xl:flex items-center gap-3 group cursor-pointer">
