@@ -31,7 +31,16 @@ const Registration: React.FC = () => {
 
           {/* LEFT — Pitch Olympics Workshop */}
           <SlideLeft delay={0.2} className="h-full">
-            <div className="bg-white border border-slate-200 rounded-3xl p-8 md:p-10 shadow-lg shadow-slate-100/80 flex flex-col h-full">
+            <div className="bg-white border border-slate-200 rounded-3xl p-8 md:p-10 shadow-lg shadow-slate-100/80 flex flex-col h-full relative overflow-hidden group">
+              
+              {/* OVERLAY: Successfully Concluded */}
+              <div className="absolute inset-0 z-30 bg-slate-900/60 backdrop-blur-[2px] flex items-center justify-center pointer-events-none rounded-3xl">
+                 <div className="bg-emerald-500 text-white px-6 py-3 rounded-full font-black uppercase tracking-[0.2em] text-sm shadow-2xl shadow-emerald-500/40 rotate-[-8deg] border-2 border-white/20">
+                   Successfully Concluded
+                 </div>
+              </div>
+
+              <div className="relative z-10 opacity-40 grayscale pointer-events-none h-full flex flex-col">
 
               {/* Card header */}
               <div className="mb-8">
@@ -99,6 +108,7 @@ const Registration: React.FC = () => {
                 </motion.a>
               </div>
 
+              </div>
             </div>
           </SlideLeft>
 
@@ -132,21 +142,21 @@ const Registration: React.FC = () => {
                   <span className="text-xl shrink-0">📅</span>
                   <div>
                     <div className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-0.5">Date</div>
-                    <div className="font-bold text-white text-sm">TBA</div>
+                    <div className="font-bold text-white text-sm">10th of May</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 px-5 py-4 bg-white/10 rounded-2xl">
                   <span className="text-xl shrink-0">⏰</span>
                   <div>
                     <div className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-0.5">Time</div>
-                    <div className="font-bold text-white text-sm">TBA</div>
+                    <div className="font-bold text-white text-sm">09:30 AM onwards</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 px-5 py-4 bg-white/10 rounded-2xl">
-                  <span className="text-xl shrink-0">📍</span>
+                <div className="flex items-start gap-4 px-5 py-4 bg-white/10 rounded-2xl">
+                  <span className="text-xl shrink-0 mt-0.5">📍</span>
                   <div>
                     <div className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-0.5">Location</div>
-                    <div className="font-bold text-white text-sm">TBA</div>
+                    <div className="font-bold text-white text-sm leading-tight">14th Floor, G Block, New Building, SLIIT Malabe</div>
                   </div>
                 </div>
               </div>

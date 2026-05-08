@@ -6,8 +6,8 @@ import { useLanguage } from '../i18n/LanguageContext';
 const Timeline: React.FC = () => {
   const { t } = useLanguage();
 
-  const dates = ["Mar 3, 2026", "TBA", "TBA", "TBA", "TBA"];
-  const icons = ["🚀", "📋", "🎓", "🎤", "🏆"];
+  const dates = ["Mar 3, 2026", "TBA", "Apr 30, 2026", "May 10, 2026"];
+  const icons = ["🚀", "📋", "🎓", "🏆"];
 
   return (
     <section id="timeline" className="pt-16 md:pt-24 pb-8 overflow-hidden bg-white relative">

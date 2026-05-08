@@ -369,10 +369,10 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
         );
         y += 6;
 
-        // Day 1 Card
-        const dayCardH = 42;
+        // Day Card
+        const dayCardH = 62;
         ensureSpace(dayCardH + 6);
-        const dayCardW = (cW - 6) / 2;
+        const dayCardW = cW; // Full width
 
         // Day 1
         doc.setFillColor(...cardBg);
@@ -385,52 +385,34 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(8);
         doc.setTextColor(...white);
-        doc.text('DAY 1 \u2014 PRELIMINARY ROUND', mL + 5, y + 2);
+        doc.text('COMPETITION DAY', mL + 5, y + 2);
 
         let dy1 = y + 12;
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(8.5);
         doc.setTextColor(...mid);
-        doc.text('Evaluate teams & shortlist finalists', mL + 5, dy1); dy1 += 6;
+        doc.text('Evaluate teams & determine final winners', mL + 5, dy1); dy1 += 6;
         doc.setFillColor(...blue);
         doc.circle(mL + 7, dy1 - 1, 0.8, 'F');
-        doc.text('5-7 min pitch presentation', mL + 10, dy1); dy1 += 5;
+        doc.text('10-minute detailed pitch', mL + 10, dy1); dy1 += 5;
         doc.setFillColor(...blue);
         doc.circle(mL + 7, dy1 - 1, 0.8, 'F');
-        doc.text('3-5 min Q&A session', mL + 10, dy1); dy1 += 7;
+        doc.text('5-10 minute Q&A session', mL + 10, dy1); dy1 += 7;
+
+        // Details
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(8);
+        doc.setTextColor(...dark);
+        doc.text('Date:', mL + 5, dy1); doc.setFont('helvetica', 'normal'); doc.text('10th May 2026', mL + 15, dy1); dy1 += 5;
+        doc.setFont('helvetica', 'bold');
+        doc.text('Time:', mL + 5, dy1); doc.setFont('helvetica', 'normal'); doc.text('09:30 AM onwards', mL + 15, dy1); dy1 += 5;
+        doc.setFont('helvetica', 'bold');
+        doc.text('Venue:', mL + 5, dy1); doc.setFont('helvetica', 'normal'); doc.text('14th Floor, G Block, New Building, SLIIT Malabe', mL + 17, dy1); dy1 += 7;
+
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(7.5);
         doc.setTextColor(...blue);
-        doc.text('Top 5 teams qualify for Grand Finale', mL + 5, dy1);
-
-        // Day 2
-        const d2x = mL + dayCardW + 6;
-        doc.setFillColor(...cardBg);
-        doc.setDrawColor(220, 228, 240);
-        doc.roundedRect(d2x, y - 3, dayCardW, dayCardH, 3, 3, 'FD');
-        doc.setFillColor(...amber);
-        doc.roundedRect(d2x, y - 3, dayCardW, 8, 3, 3, 'F');
-        doc.rect(d2x, y + 1, dayCardW, 4, 'F');
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(8);
-        doc.setTextColor(...white);
-        doc.text('DAY 2 \u2014 GRAND FINALE', d2x + 5, y + 2);
-
-        let dy2 = y + 12;
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(8.5);
-        doc.setTextColor(...mid);
-        doc.text('Determine final winners', d2x + 5, dy2); dy2 += 6;
-        doc.setFillColor(...amber);
-        doc.circle(d2x + 7, dy2 - 1, 0.8, 'F');
-        doc.text('10-minute detailed pitch', d2x + 10, dy2); dy2 += 5;
-        doc.setFillColor(...amber);
-        doc.circle(d2x + 7, dy2 - 1, 0.8, 'F');
-        doc.text('5-10 minute Q&A', d2x + 10, dy2); dy2 += 7;
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(7.5);
-        doc.setTextColor(...amber);
-        doc.text('Winners announced at closing ceremony', d2x + 5, dy2);
+        doc.text('Winners announced at closing ceremony', mL + 5, dy1);
 
         y += dayCardH + 8;
 
@@ -756,8 +738,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
             <AnimatedCounter target={2} label={g.statPhases} />
             <AnimatedCounter target={5} label={g.statMaxTeam} delay={0.1} />
-            <AnimatedCounter target={5} label={g.statFinalists} delay={0.2} />
-            <AnimatedCounter target={2} label={g.statDays} delay={0.3} />
+            <AnimatedCounter target={1} label={g.statDays} delay={0.3} />
           </div>
         </div>
       </section>
@@ -854,8 +835,15 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                 transition={{ duration: 0.5 }}
               >
                 <div className="relative overflow-hidden bg-white/[0.04] backdrop-blur-2xl border border-white/10 rounded-[40px] p-8 md:p-14">
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/[0.06] to-transparent pointer-events-none"></div>
-                  <div className="relative z-10">
+                  {/* OVERLAY: Successfully Concluded */}
+                  <div className="absolute inset-0 z-30 bg-slate-900/70 backdrop-blur-[4px] flex flex-col items-center justify-center rounded-[40px] pointer-events-none">
+                    <div className="bg-emerald-500/90 text-white px-8 py-4 rounded-full font-black uppercase tracking-[0.2em] text-sm shadow-2xl shadow-emerald-500/30 rotate-[-10deg] border border-white/20 backdrop-blur-md">
+                      Successfully Concluded
+                    </div>
+                  </div>
+
+                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/[0.06] to-transparent pointer-events-none z-0"></div>
+                  <div className="relative z-10 opacity-40 grayscale select-none pointer-events-none">
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                       <div>
                         <span className="mono text-[#005bb7] text-sm font-black tracking-[0.3em]">{g.phase1Label}</span>
@@ -916,7 +904,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                     </div>
 
                     {/* Day Cards - Interactive */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                    <div className="grid grid-cols-1 gap-8 mb-10">
                       {/* Day 1 */}
                       <motion.div
                         className="relative bg-white/[0.05] backdrop-blur-md rounded-3xl p-8 border border-white/10 overflow-hidden group cursor-default"
@@ -929,11 +917,10 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                             <div className="w-12 h-12 bg-[#005bb7]/20 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">📅</div>
                             <div>
                               <p className="text-white font-black text-lg uppercase tracking-widest">{g.phase2Day1Title}</p>
-                              <p className="text-white/40 text-xs font-bold uppercase tracking-wider">{g.phase2Day1Subtitle}</p>
                             </div>
                           </div>
                           <p className="text-white/80 text-base leading-relaxed font-medium mb-6">{g.phase2Day1Desc}</p>
-                          <div className="space-y-3">
+                          <div className="space-y-3 mb-6">
                             <div className="flex items-center gap-3 p-3 bg-white/5 rounded-xl">
                               <div className="w-8 h-8 bg-[#005bb7]/20 rounded-lg flex items-center justify-center text-sm">🎤</div>
                               <span className="text-white/70 font-bold text-sm">{g.phase2Day1Detail1}</span>
@@ -943,42 +930,35 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                               <span className="text-white/70 font-bold text-sm">{g.phase2Day1Detail2}</span>
                             </div>
                           </div>
+
+                          {/* Event Details */}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
+                            <div className="flex items-center gap-3 p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl">
+                              <div className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center text-sm">📅</div>
+                              <div>
+                                <div className="text-[9px] uppercase tracking-widest text-white/40 font-bold mb-0.5">Date</div>
+                                <span className="text-white/80 font-bold text-sm">10th May 2026</span>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-3 p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl">
+                              <div className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center text-sm">⏰</div>
+                              <div>
+                                <div className="text-[9px] uppercase tracking-widest text-white/40 font-bold mb-0.5">Time</div>
+                                <span className="text-white/80 font-bold text-sm">09:30 AM onwards</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-3 p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl mb-4">
+                            <div className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center text-sm shrink-0">📍</div>
+                            <div>
+                              <div className="text-[9px] uppercase tracking-widest text-white/40 font-bold mb-0.5">Location</div>
+                              <span className="text-white/80 font-bold text-sm leading-tight">14th Floor, G Block, New Building, SLIIT Malabe</span>
+                            </div>
+                          </div>
+
                           <div className="mt-6 flex items-center gap-2">
                             <div className="w-2 h-2 bg-[#005bb7] rounded-full animate-pulse"></div>
                             <span className="text-[#005bb7] font-black text-xs uppercase tracking-wider">{g.phase2Day1Advance}</span>
-                          </div>
-                        </div>
-                      </motion.div>
-
-                      {/* Day 2 */}
-                      <motion.div
-                        className="relative bg-white/[0.05] backdrop-blur-md rounded-3xl p-8 border border-white/10 overflow-hidden group cursor-default"
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ type: 'spring', stiffness: 200 }}
-                      >
-                        <div className="absolute top-0 right-0 text-[120px] font-black text-white/[0.03] leading-none">2</div>
-                        <div className="relative z-10">
-                          <div className="flex items-center gap-3 mb-5">
-                            <div className="w-12 h-12 bg-amber-400/20 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🏆</div>
-                            <div>
-                              <p className="text-white font-black text-lg uppercase tracking-widest">{g.phase2Day2Title}</p>
-                              <p className="text-white/40 text-xs font-bold uppercase tracking-wider">{g.phase2Day2Subtitle}</p>
-                            </div>
-                          </div>
-                          <p className="text-white/80 text-base leading-relaxed font-medium mb-6">{g.phase2Day2Desc}</p>
-                          <div className="space-y-3">
-                            <div className="flex items-center gap-3 p-3 bg-white/5 rounded-xl">
-                              <div className="w-8 h-8 bg-amber-400/20 rounded-lg flex items-center justify-center text-sm">🎤</div>
-                              <span className="text-white/70 font-bold text-sm">{g.phase2Day2Detail1}</span>
-                            </div>
-                            <div className="flex items-center gap-3 p-3 bg-white/5 rounded-xl">
-                              <div className="w-8 h-8 bg-amber-400/20 rounded-lg flex items-center justify-center text-sm">❓</div>
-                              <span className="text-white/70 font-bold text-sm">{g.phase2Day2Detail2}</span>
-                            </div>
-                          </div>
-                          <div className="mt-6 flex items-center gap-2">
-                            <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
-                            <span className="text-amber-400 font-black text-xs uppercase tracking-wider">{g.phase2Day2Announce}</span>
                           </div>
                         </div>
                       </motion.div>
@@ -1129,7 +1109,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
               </div>
 
               {/* Pitch Duration Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4">
                 <motion.div
                   className="relative overflow-hidden bg-gradient-to-br from-[#005bb7]/[0.06] to-[#005bb7]/[0.02] backdrop-blur-md border border-[#005bb7]/15 rounded-3xl p-6 group"
                   whileHover={{ scale: 1.02 }}
@@ -1138,43 +1118,17 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/40 to-transparent pointer-events-none"></div>
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4">
-                      <span className="mono text-[9px] font-black uppercase tracking-[0.3em] text-[#005bb7]">Day 1</span>
+                      <span className="mono text-[9px] font-black uppercase tracking-[0.3em] text-[#005bb7]">Competition</span>
                       <div className="w-2 h-2 bg-[#005bb7] rounded-full animate-pulse"></div>
                     </div>
-                    <h4 className="text-slate-900 font-black text-xl tracking-tight mb-1">{g.timePreliminary}</h4>
-                    <p className="text-slate-400 text-xs font-bold mb-5">{g.timeFirstRound}</p>
+                    <h4 className="text-slate-900 font-black text-xl tracking-tight mb-1">Pitch Session</h4>
+                    <p className="text-slate-400 text-xs font-bold mb-5">{g.phase2Day1Detail1}</p>
                     <div className="space-y-2">
                       <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-[#005bb7]/10 rounded-full">
                         <span className="text-xs">🎤</span>
-                        <span className="text-slate-700 font-bold text-xs">{g.timePitch57}</span>
-                      </div>
-                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-[#005bb7]/10 rounded-full ml-1">
-                        <span className="text-xs">💬</span>
-                        <span className="text-slate-700 font-bold text-xs">{g.timeQA35}</span>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  className="relative overflow-hidden bg-gradient-to-br from-amber-400/[0.08] to-amber-500/[0.02] backdrop-blur-md border border-amber-300/20 rounded-3xl p-6 group"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                >
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/40 to-transparent pointer-events-none"></div>
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="mono text-[9px] font-black uppercase tracking-[0.3em] text-amber-600">Day 2</span>
-                      <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
-                    </div>
-                    <h4 className="text-slate-900 font-black text-xl tracking-tight mb-1">{g.timeGrandFinale}</h4>
-                    <p className="text-slate-400 text-xs font-bold mb-5">{g.timeFinalRound}</p>
-                    <div className="space-y-2">
-                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-amber-300/20 rounded-full">
-                        <span className="text-xs">🎤</span>
                         <span className="text-slate-700 font-bold text-xs">{g.timePitch10}</span>
                       </div>
-                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-amber-300/20 rounded-full ml-1">
+                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/70 backdrop-blur-sm border border-[#005bb7]/10 rounded-full ml-1">
                         <span className="text-xs">💬</span>
                         <span className="text-slate-700 font-bold text-xs">{g.timeQA510}</span>
                       </div>
