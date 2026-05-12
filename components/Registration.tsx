@@ -142,7 +142,7 @@ const Registration: React.FC = () => {
                   <span className="text-xl shrink-0">📅</span>
                   <div>
                     <div className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-0.5">Date</div>
-                    <div className="font-bold text-white text-sm">10th of May</div>
+                    <div className="font-bold text-white text-sm">17th of May</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 px-5 py-4 bg-white/10 rounded-2xl">

@@ -403,7 +403,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(8);
         doc.setTextColor(...dark);
-        doc.text('Date:', mL + 5, dy1); doc.setFont('helvetica', 'normal'); doc.text('10th May 2026', mL + 15, dy1); dy1 += 5;
+        doc.text('Date:', mL + 5, dy1); doc.setFont('helvetica', 'normal'); doc.text('17th May 2026', mL + 15, dy1); dy1 += 5;
         doc.setFont('helvetica', 'bold');
         doc.text('Time:', mL + 5, dy1); doc.setFont('helvetica', 'normal'); doc.text('09:30 AM onwards', mL + 15, dy1); dy1 += 5;
         doc.setFont('helvetica', 'bold');
@@ -937,7 +937,7 @@ const Guidelines: React.FC<GuidelinesProps> = ({ onBack }) => {
                               <div className="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center text-sm">📅</div>
                               <div>
                                 <div className="text-[9px] uppercase tracking-widest text-white/40 font-bold mb-0.5">Date</div>
-                                <span className="text-white/80 font-bold text-sm">10th May 2026</span>
+                                <span className="text-white/80 font-bold text-sm">17th May 2026</span>
                               </div>
                             </div>
                             <div className="flex items-center gap-3 p-3 bg-white/[0.02] border border-white/[0.05] rounded-xl">
