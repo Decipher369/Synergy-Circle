@@ -140,6 +140,15 @@ export interface Translations {
     allRights: string;
   };
 
+  // Concluded Page
+  concluded: {
+    title: string;
+    badge: string;
+    subtitle: string;
+    quote: string;
+    author: string;
+  };
+
   // Guidelines Page
   guidelines: {
     // Floating buttons
@@ -399,6 +408,13 @@ export const translations: Record<Language, Translations> = {
       inquiries: 'Inquiries',
       backToTop: 'Back to top',
       allRights: 'All rights reserved.',
+    },
+    concluded: {
+      title: 'SYNERGY CIRCLE 2026',
+      badge: 'Event Successfully Concluded',
+      subtitle: "See y'all soon next year!",
+      quote: '“Chase the vision, not the money; the money will end up following you.”',
+      author: 'Tony Hsieh',
     },
     guidelines: {
       homeButton: 'Home',
@@ -676,6 +692,13 @@ export const translations: Record<Language, Translations> = {
       backToTop: 'ඉහළට යන්න',
       allRights: 'සියලු හිමිකම් ඇවිරිණි.',
     },
+    concluded: {
+      title: 'SYNERGY CIRCLE 2026',
+      badge: 'වැඩසටහන සාර්ථකව නිම විය',
+      subtitle: 'ලබන වසරේ නැවත හමුවෙමු!',
+      quote: '“අරමුණ පසුපස හඹා යන්න, මුදල් පසුපස නොවේ; එවිට මුදල් ඔබ පසුපස පැමිණෙනු ඇත.”',
+      author: 'ටෝනි ෂේ',
+    },
     guidelines: {
       homeButton: 'මුල් පිටුව',
       downloadPdf: 'PDF බාගන්න',
@@ -950,6 +973,13 @@ export const translations: Record<Language, Translations> = {
       inquiries: 'விசாரணைகள்',
       backToTop: 'மேலே செல்',
       allRights: 'அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை.',
+    },
+    concluded: {
+      title: 'SYNERGY CIRCLE 2026',
+      badge: 'நிகழ்வு வெற்றிகரமாக முடிந்தது',
+      subtitle: 'அடுத்த ஆண்டு மீண்டும் சந்திப்போம்!',
+      quote: '“தொலைநோக்குப் பார்வையைத் தொடருங்கள், பணத்தை அல்ல; பணம் தானாகவே உங்களைத் தொடரும்.”',
+      author: 'டோனி ஷீ',
     },
     guidelines: {
       homeButton: 'முகப்பு',

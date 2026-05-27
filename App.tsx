@@ -13,6 +13,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Guidelines from './components/Guidelines';
 import MarqueeStrip from './components/MarqueeStrip';
 import Loader from './components/Loader';
+import EventConcludedOverlay from './components/EventConcludedOverlay';
 import { useAnimations } from './hooks/useAnimations';
 
 const App: React.FC = () => {
@@ -68,6 +69,7 @@ const App: React.FC = () => {
   return (
     <>
       {loading && <Loader onComplete={() => setLoading(false)} />}
+      <EventConcludedOverlay />
     <div className="flex flex-col min-h-screen relative overflow-x-hidden">
       {/* Global Watermark Elements */}
       <div className="fixed inset-0 pointer-events-none select-none z-0 overflow-hidden">
