@@ -114,7 +114,16 @@ const Registration: React.FC = () => {
 
           {/* RIGHT — Synergy Circle Registration */}
           <SlideRight delay={0.2} className="h-full">
-            <div className="bg-[#005bb7] rounded-3xl p-8 md:p-10 shadow-2xl shadow-[#005bb7]/30 flex flex-col h-full relative overflow-hidden">
+            <div className="bg-[#005bb7] rounded-3xl p-8 md:p-10 shadow-2xl shadow-[#005bb7]/30 flex flex-col h-full relative overflow-hidden group">
+              
+              {/* OVERLAY: Successfully Concluded */}
+              <div className="absolute inset-0 z-30 bg-slate-900/60 backdrop-blur-[2px] flex items-center justify-center pointer-events-none rounded-3xl">
+                 <div className="bg-emerald-500 text-white px-6 py-3 rounded-full font-black uppercase tracking-[0.2em] text-sm shadow-2xl shadow-emerald-500/40 rotate-[-8deg] border-2 border-white/20">
+                   Successfully Concluded
+                 </div>
+              </div>
+
+              <div className="relative z-10 opacity-40 grayscale pointer-events-none h-full flex flex-col">
 
               {/* Decorative watermark */}
               <div className="absolute -bottom-6 -right-6 text-[140px] font-black text-white/[0.04] leading-none select-none pointer-events-none">SC</div>
@@ -188,6 +197,7 @@ const Registration: React.FC = () => {
                 </motion.a>
               </div>
 
+              </div>
             </div>
           </SlideRight>
 
