@@ -147,6 +147,7 @@ export interface Translations {
     subtitle: string;
     quote: string;
     author: string;
+    enterSite: string;
   };
 
   // Guidelines Page
@@ -415,6 +416,7 @@ export const translations: Record<Language, Translations> = {
       subtitle: "See y'all soon next year!",
       quote: '“Chase the vision, not the money; the money will end up following you.”',
       author: 'Tony Hsieh',
+      enterSite: 'Enter Website',
     },
     guidelines: {
       homeButton: 'Home',
@@ -698,6 +700,7 @@ export const translations: Record<Language, Translations> = {
       subtitle: 'ලබන වසරේ නැවත හමුවෙමු!',
       quote: '“අරමුණ පසුපස හඹා යන්න, මුදල් පසුපස නොවේ; එවිට මුදල් ඔබ පසුපස පැමිණෙනු ඇත.”',
       author: 'ටෝනි ෂේ',
+      enterSite: 'වෙබ් අඩවියට පිවිසෙන්න',
     },
     guidelines: {
       homeButton: 'මුල් පිටුව',
@@ -980,6 +983,7 @@ export const translations: Record<Language, Translations> = {
       subtitle: 'அடுத்த ஆண்டு மீண்டும் சந்திப்போம்!',
       quote: '“தொலைநோக்குப் பார்வையைத் தொடருங்கள், பணத்தை அல்ல; பணம் தானாகவே உங்களைத் தொடரும்.”',
       author: 'டோனி ஷீ',
+      enterSite: 'வலைத்தளத்திற்குள் நுழைய',
     },
     guidelines: {
       homeButton: 'முகப்பு',

@@ -18,6 +18,7 @@ import { useAnimations } from './hooks/useAnimations';
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
+  const [showOverlay, setShowOverlay] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
   const [currentPage, setCurrentPage] = useState<'home' | 'guidelines'>('home');
@@ -69,7 +70,7 @@ const App: React.FC = () => {
   return (
     <>
       {loading && <Loader onComplete={() => setLoading(false)} />}
-      <EventConcludedOverlay />
+      {showOverlay && <EventConcludedOverlay onClose={() => setShowOverlay(false)} />}
     <div className="flex flex-col min-h-screen relative overflow-x-hidden">
       {/* Global Watermark Elements */}
       <div className="fixed inset-0 pointer-events-none select-none z-0 overflow-hidden">

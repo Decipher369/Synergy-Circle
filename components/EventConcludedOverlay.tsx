@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../i18n/LanguageContext';
 
-const EventConcludedOverlay: React.FC = () => {
+interface EventConcludedOverlayProps {
+  onClose?: () => void;
+}
+
+const EventConcludedOverlay: React.FC<EventConcludedOverlayProps> = ({ onClose }) => {
   const { language, setLanguage, t } = useLanguage();
 
   const LANGS = [
@@ -149,6 +153,22 @@ const EventConcludedOverlay: React.FC = () => {
               — {t.concluded.author}
             </p>
           </motion.div>
+
+          {onClose && (
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="mt-8 sm:mt-12"
+            >
+              <button
+                onClick={onClose}
+                className="px-8 py-3 rounded-full bg-white/[0.05] hover:bg-[#005bb7] border border-white/[0.1] hover:border-[#005bb7] text-white font-bold text-sm tracking-widest uppercase transition-all duration-300 shadow-[0_0_20px_rgba(0,91,183,0)] hover:shadow-[0_0_20px_rgba(0,91,183,0.5)] cursor-pointer select-auto pointer-events-auto"
+              >
+                {t.concluded.enterSite}
+              </button>
+            </motion.div>
+          )}
         </motion.div>
       </div>
 
