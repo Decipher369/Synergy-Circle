@@ -66,10 +66,17 @@ const Phases: React.FC<PhasesProps> = ({ onNavigateGuidelines }) => {
 
           {/* Phase 2 */}
           <StaggerItem>
-            <div className="group relative overflow-hidden bg-white/[0.08] backdrop-blur-2xl border border-white/10 p-12 rounded-[48px] hover:shadow-2xl hover:shadow-[#005bb7]/20 transition-all duration-500 shadow-2xl shadow-black/40">
-               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent pointer-events-none"></div>
+            <div className="group relative overflow-hidden bg-white/[0.03] backdrop-blur-2xl border border-white/10 p-12 rounded-[48px] transition-all duration-500 shadow-2xl shadow-black/20">
+               {/* OVERLAY: Successfully Concluded */}
+               <div className="absolute inset-0 z-30 bg-slate-900/70 backdrop-blur-[4px] flex flex-col items-center justify-center rounded-[48px] pointer-events-none">
+                 <div className="bg-emerald-500/90 text-white px-8 py-4 rounded-full font-black uppercase tracking-[0.2em] text-sm shadow-2xl shadow-emerald-500/30 rotate-[-10deg] border border-white/20 backdrop-blur-md">
+                   Successfully Concluded
+                 </div>
+               </div>
+
+               <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent pointer-events-none z-0"></div>
                
-               <div className="relative z-10">
+               <div className="relative z-10 opacity-40 grayscale select-none pointer-events-none">
                  <div className="mono text-white/50 text-sm font-black mb-8 tracking-[0.3em]">{t.phases.phase2Label}</div>
                  <h3 className="text-4xl font-black text-white mb-4 tracking-tight">{t.phases.phase2Title}</h3>
                  <p className="text-white/50 font-black uppercase text-xs tracking-widest mb-8">{t.phases.phase2Subtitle}</p>
